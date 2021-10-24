@@ -1,44 +1,38 @@
-/** @jsxImportSource @emotion/react */
 import React, {useEffect} from 'react'
 import $ from 'jquery'
-import './BaseTemplate.css'
 import {css} from '@emotion/react';
-import UploadCircuitPage from "./UploadCircuitPage";
-
-import {AppState} from "../appState";
 
 const anchor_position_shift = (window: Window) =>
 {
+    // TODO fix typescript/jquery problems. Use react refs instead?
+    var anchor_elements: any;
     // @ts-ignore
     if ($(window).width() > 991)
     {
-        const anchor_elements = $(".anchor-mob");
-        anchor_elements.toggleClass("anchor-mob anchor-pc");
+        anchor_elements = $(".anchor-mob");
+        // @ts-ignore
+        anchor_elements.switchClass("anchor-mob", "anchor-pc");
     } else
     {
-        const anchor_elements = $(".anchor-pc");
-        anchor_elements.toggleClass("anchor-pc anchor-mob")
+        anchor_elements = $(".anchor-pc");
+        // @ts-ignore
+        anchor_elements.switchClass("anchor-pc", "anchor-mob")
     }
 };
 
 const BaseTemplate = () =>
 {
-    // This section handles the state of the web application, either in circuit upload or in lattice view.
-    // TODO handle with Redux
-    const [appState , setAppState] = React.useState( new AppState() )
 
-    // Script that runs after render (like adding to a $(document).read() in <script> tag)
-    // In this case it does to things: handle nav bar collapsing set a window on scroll event
     useEffect(() =>
     {
         // When the user scrolls down 80px from the top of the document, resize the navbar's padding and the logo's font size
         // Collapse Mobile Navbar after link click
         $('.navbar-collapse a').click(function ()
         {
-            // Can't find collapse method, looks like might be injectetby jquery ui. Got to find out how (TODO)
-            // The page seems to be fine wthout it though
-            //$(".navbar-collapse").collapse('hide');
+            // @ts-ignore
+            $(".navbar-collapse").collapse('hide');
         });
+        // When mobile navbar is enabled,
 
         window.onscroll = () =>
         {
@@ -52,8 +46,8 @@ const BaseTemplate = () =>
                 Compiler</h1>
         </div>
         <div css={css`background-color: black`}>
-            <div className="container" css={css`background-color: white;min-height:500px;`}>
-                <div className="sticky-top" css={css`margin:-12px`}>
+            <div className="container" css={`background-color: white;min-height:500px;`}>
+                <div className="sticky-top" css={`margin:-12px`}>
                     <nav id="the-navbar" className="navbar navbar-expand-lg navbar-dark bg-dark">
                         <div className="container-fluid">
                             <button className="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -78,8 +72,8 @@ const BaseTemplate = () =>
                         </div>
                     </nav>
                 </div>
-                <UploadCircuitPage appState={appState} setAppState={setAppState} />
-                <footer className="foot-bg" css={css`margin:-12px;`}>
+                [Body]
+                <footer className="foot-bg" css={`margin:-12px;`}>
                     <div className="container">
                         <div className="flex-container justify-content-center">
                             <div>
