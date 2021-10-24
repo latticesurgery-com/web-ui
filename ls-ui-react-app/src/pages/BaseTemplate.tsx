@@ -1,22 +1,21 @@
+/** @jsxImportSource @emotion/react */
 import React, {useEffect} from 'react'
 import $ from 'jquery'
+import './BaseTemplate.css'
 import {css} from '@emotion/react';
+import UploadCircuitPage from "./UploadCircuitPage";
 
 const anchor_position_shift = (window: Window) =>
 {
-    // TODO fix typescript/jquery problems. Use react refs instead?
-    var anchor_elements: any;
     // @ts-ignore
     if ($(window).width() > 991)
     {
-        anchor_elements = $(".anchor-mob");
-        // @ts-ignore
-        anchor_elements.switchClass("anchor-mob", "anchor-pc");
+        const anchor_elements = $(".anchor-mob");
+        anchor_elements.toggleClass("anchor-mob anchor-pc");
     } else
     {
-        anchor_elements = $(".anchor-pc");
-        // @ts-ignore
-        anchor_elements.switchClass("anchor-pc", "anchor-mob")
+        const anchor_elements = $(".anchor-pc");
+        anchor_elements.toggleClass("anchor-pc anchor-mob")
     }
 };
 
@@ -29,8 +28,9 @@ const BaseTemplate = () =>
         // Collapse Mobile Navbar after link click
         $('.navbar-collapse a').click(function ()
         {
-            // @ts-ignore
-            $(".navbar-collapse").collapse('hide');
+            // Can't find collapse method, looks like might be injectetby jquery ui. Got to find out how (TODO)
+            // The page seems to be fine wthout it though
+            //$(".navbar-collapse").collapse('hide');
         });
         // When mobile navbar is enabled,
 
@@ -46,8 +46,8 @@ const BaseTemplate = () =>
                 Compiler</h1>
         </div>
         <div css={css`background-color: black`}>
-            <div className="container" css={`background-color: white;min-height:500px;`}>
-                <div className="sticky-top" css={`margin:-12px`}>
+            <div className="container" css={css`background-color: white;min-height:500px;`}>
+                <div className="sticky-top" css={css`margin:-12px`}>
                     <nav id="the-navbar" className="navbar navbar-expand-lg navbar-dark bg-dark">
                         <div className="container-fluid">
                             <button className="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -72,8 +72,8 @@ const BaseTemplate = () =>
                         </div>
                     </nav>
                 </div>
-                [Body]
-                <footer className="foot-bg" css={`margin:-12px;`}>
+                <UploadCircuitPage />
+                <footer className="foot-bg" css={css`margin:-12px;`}>
                     <div className="container">
                         <div className="flex-container justify-content-center">
                             <div>

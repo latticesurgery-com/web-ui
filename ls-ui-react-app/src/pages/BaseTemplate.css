@@ -1,7 +1,7 @@
 @font-face {
   font-family: Aquire;
   src: local(Aquire),
-       url('re-BW0ox.otf') format("opentype");
+       url('fonts/Aquire-BW0ox.otf') format("opentype");
 }
 .aquire {
   font-family: Aquire;
