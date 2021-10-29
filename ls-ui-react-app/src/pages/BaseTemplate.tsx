@@ -5,6 +5,8 @@ import './BaseTemplate.css'
 import {css} from '@emotion/react';
 import UploadCircuitPage from "./UploadCircuitPage";
 
+import {AppState} from "../appState";
+
 const anchor_position_shift = (window: Window) =>
 {
     // @ts-ignore
@@ -21,7 +23,12 @@ const anchor_position_shift = (window: Window) =>
 
 const BaseTemplate = () =>
 {
+    // This section handles the state of the web application, either in circuit upload or in lattice view.
+    // TODO handle with Redux
+    const [appState , setAppState] = React.useState( new AppState() )
 
+    // Script that runs after render (like adding to a $(document).read() in <script> tag)
+    // In this case it does to things: handle nav bar collapsing set a window on scroll event
     useEffect(() =>
     {
         // When the user scrolls down 80px from the top of the document, resize the navbar's padding and the logo's font size
@@ -32,7 +39,6 @@ const BaseTemplate = () =>
             // The page seems to be fine wthout it though
             //$(".navbar-collapse").collapse('hide');
         });
-        // When mobile navbar is enabled,
 
         window.onscroll = () =>
         {
@@ -72,7 +78,7 @@ const BaseTemplate = () =>
                         </div>
                     </nav>
                 </div>
-                <UploadCircuitPage />
+                <UploadCircuitPage appState={appState} setAppState={setAppState} />
                 <footer className="foot-bg" css={css`margin:-12px;`}>
                     <div className="container">
                         <div className="flex-container justify-content-center">
