@@ -1,5 +1,15 @@
 import React from 'react';
+import {Slices} from "../slices";
 
-const LatticeView = () => {return <div>ok</div>;};
+type LatticeViewProps = {
+    slices: Slices
+    compilation_text: string
+}
+
+const LatticeView = ({slices} : LatticeViewProps) => {
+    return <pre>{JSON.stringify(slices)}</pre>;
+};
+
+
 
 export default LatticeView;

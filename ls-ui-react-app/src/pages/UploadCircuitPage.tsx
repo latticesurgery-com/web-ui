@@ -1,25 +1,85 @@
 import React from "react";
 import {css} from "@emotion/react";
-import {AppState, AppStateProps} from "../appState";
+import {AppStateProps} from "../appState";
+import LatticeView from "../components/LatticeView";
+import axios from "axios"
+import {CompilationResult, EdgeType, Orientation, Slices} from "../slices";
+import queryString from "query-string"
 
-const UploadACircuit = ( {setAppState} : AppStateProps ) => <p>
-    Upload an OpenQASM circuit.
-    <form>
-        <div className="input-group">
-            <input id="circuit" className="form-control circuit" name="circuit" type="file"/>
-            <div className="input-group-append">
-                <input type="submit" className="btn btn-primary" value="Go!"/>
+
+const UploadACircuit = ( {appState, setAppState} : AppStateProps ) => {
+    const [doLitinskiTransform, setDoLitinskiTransform] = React.useState(true)
+
+    const [circuitStr, setCircuitStr] = React.useState<string | null>(null)
+
+    const readCircuitFile = (file : File | undefined | null) =>
+    {
+        if(!file){
+            setCircuitStr(null)
+            return
+        }
+
+        const fileReader = new FileReader();
+        fileReader.onloadend = (e) => setCircuitStr(fileReader.result as string)
+        fileReader.readAsText(file)
+    }
+
+    const submitCompileRequest = () =>
+    {
+        const queryStringMap = queryString.parse(window.location.search)
+
+        const apiUrl = queryStringMap.localapi
+            ? `http://localhost:${queryStringMap.port || 9876}/compile`
+            : "https://api.latticesurgery.com/compile"
+
+        console.log(apiUrl);
+        axios.post(apiUrl,{
+            'circuit_source': 'str',
+            'circuit': circuitStr,
+            'apply_litinski_transform': doLitinskiTransform
+        }).then( (response ) => {
+            const responseJson = JSON.parse(response.data) as CompilationResult
+            setAppState({
+                ...appState,
+                compilationResult: responseJson
+            })
+        }).catch( (error) => {
+            console.error(error)
+            setAppState({...appState, errorMsg: error.toString()})
+        })
+    }
+
+    return <p>
+        Upload an OpenQASM circuit.
+        <form>
+            <div className="input-group">
+                <input
+                    id="circuit"
+                    className="form-control circuit"
+                    name="circuit"
+                    type="file"
+                    onChange={(e) => readCircuitFile(e?.target?.files && e.target.files[0])}
+                />
+                <div className="input-group-append">
+                    <input className="btn btn-primary" value="Go!" onClick={(e) => submitCompileRequest()}/>
+                </div>
             </div>
-        </div>
-        <div className="form-check">
-            <input type="checkbox" className="form-check-input" id="litinski_check1" name='litinski'
-                   value='true' checked/>
-            <label className="form-check-label" htmlFor="litinski_check1">Litinski
-                Transform</label>
-        </div>
-    </form>
-</p>
+            <div className="form-check">
+                <input type="checkbox"
+                       className="form-check-input"
+                       id="litinski_check1"
+                       name='litinski'
+                       checked={doLitinskiTransform}
+                       onChange={(event) => setDoLitinskiTransform(event.target.checked)} />
+                <label className="form-check-label" htmlFor="litinski_check1">Litinski
+                    Transform</label>
+            </div>
+        </form>
+    </p>
+}
 
+// TODO implement default circuits by pulling them from assets
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const SelectSampleCircuit = ({setAppState} : AppStateProps) => <p>
     Or choose from the following example circuits:
     <form>
@@ -33,7 +93,6 @@ const SelectSampleCircuit = ({setAppState} : AppStateProps) => <p>
             </div>
             <input type="hidden" name="localcircuit" value="yes"/>
         </div>
-
         <div className="form-check">
             <input type="checkbox" className="form-check-input" id="litinski_check1" name='litinski'
                    value='true' checked/>
@@ -47,7 +106,7 @@ const CompilerInputCircuitSelection = ({appState, setAppState} : AppStateProps) 
     <h2 id="get-started" className='anchor-mob'>Get Started - Upload a circuit</h2>
     <hr/>
     <UploadACircuit setAppState={setAppState} appState={appState}/>
-    <SelectSampleCircuit setAppState={setAppState} appState={appState}/>
+    {/*<SelectSampleCircuit setAppState={setAppState} appState={appState}/> */}
 </>;
 
 
@@ -125,6 +184,10 @@ const UploadCircuitPage = ( {appState, setAppState} : AppStateProps)  =>
             <section>
                 <div>
                     <CompilerInputCircuitSelection appState={appState} setAppState={setAppState} />
+                    { appState.compilationResult &&
+                        <LatticeView
+                            slices={appState.compilationResult.slices}
+                            compilation_text={appState.compilationResult.compilationText} />}
                     <AboutText/>
                     <SurfaceCodesText/>
                     <hr/>
