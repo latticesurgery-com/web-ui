@@ -1,9 +1,10 @@
+/** @jsxImportSource @emotion/react */
 import React from "react";
 import {css} from "@emotion/react";
 import {AppStateProps} from "../appState";
 import LatticeView from "../components/LatticeView";
 import axios from "axios"
-import {CompilationResult, EdgeType, Orientation, Slices} from "../slices";
+import {CompilationResult} from "../slices";
 import queryString from "query-string"
 
 
@@ -185,9 +186,7 @@ const UploadCircuitPage = ( {appState, setAppState} : AppStateProps)  =>
                 <div>
                     <CompilerInputCircuitSelection appState={appState} setAppState={setAppState} />
                     { appState.compilationResult &&
-                        <LatticeView
-                            slices={appState.compilationResult.slices}
-                            compilation_text={appState.compilationResult.compilationText} />}
+                        <LatticeView compilationResult={appState.compilationResult} />}
                     <AboutText/>
                     <SurfaceCodesText/>
                     <hr/>
