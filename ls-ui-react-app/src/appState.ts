@@ -1,15 +1,12 @@
 import React from "react";
+import {CompilationResult} from "./slices";
 
 
-enum PageChoice {
-    UploadCircuit,
-        LatticeView
-}
-
+// State representing the the state of the whole page. It has two optional values, on for each view of the page.
+//
 class AppState {
-    pageChoice : PageChoice = PageChoice.UploadCircuit;
-    slices? : any
-    errorMsg? : string
+    compilationResult? : CompilationResult
+    errorMsg? : string // An optional error message to show to the user
 }
 
 interface AppStateProps {
@@ -17,6 +14,6 @@ interface AppStateProps {
     setAppState : React.Dispatch<AppState>
 }
 
-export {PageChoice, AppState}
+export { AppState }
 export type { AppStateProps }
 
