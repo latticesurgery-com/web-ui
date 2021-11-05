@@ -7,6 +7,7 @@ import {CompilationResult} from "./slices";
 class AppState {
     compilationResult? : CompilationResult
     errorMsg? : string // An optional error message to show to the user
+    compilationIsLoading : boolean = false
 }
 
 interface AppStateProps {

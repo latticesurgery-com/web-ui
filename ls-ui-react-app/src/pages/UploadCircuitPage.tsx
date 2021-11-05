@@ -33,7 +33,12 @@ const UploadACircuit = ( {appState, setAppState} : AppStateProps ) => {
             ? `http://localhost:${queryStringMap.port || 9876}/compile`
             : "https://api.latticesurgery.com/compile"
 
-        console.log(apiUrl);
+        setAppState({
+            ...appState,
+            compilationIsLoading: true,
+            compilationResult: undefined
+        })
+
         axios.post(apiUrl,{
             'circuit_source': 'str',
             'circuit': circuitStr,
@@ -42,11 +47,12 @@ const UploadACircuit = ( {appState, setAppState} : AppStateProps ) => {
             const responseJson = JSON.parse(response.data) as CompilationResult
             setAppState({
                 ...appState,
-                compilationResult: responseJson
+                compilationResult: responseJson,
+                compilationIsLoading: false
             })
         }).catch( (error) => {
             console.error(error)
-            setAppState({...appState, errorMsg: error.toString()})
+            setAppState({...appState, errorMsg: error.toString(), compilationIsLoading: false})
         })
     }
 
@@ -62,7 +68,12 @@ const UploadACircuit = ( {appState, setAppState} : AppStateProps ) => {
                     onChange={(e) => readCircuitFile(e?.target?.files && e.target.files[0])}
                 />
                 <div className="input-group-append">
-                    <input className="btn btn-primary" value="Go!" onClick={(e) => submitCompileRequest()}/>
+                    <input
+                        className="btn btn-primary"
+                        value="Go!"
+                        onClick={(e) => submitCompileRequest()}
+                        disabled={appState.compilationIsLoading}
+                    />
                 </div>
             </div>
             <div className="form-check">
@@ -185,6 +196,7 @@ const UploadCircuitPage = ( {appState, setAppState} : AppStateProps)  =>
             <section>
                 <div>
                     <CompilerInputCircuitSelection appState={appState} setAppState={setAppState} />
+                    { appState.compilationIsLoading && <b>Loading ... </b> }
                     { appState.compilationResult &&
                         <LatticeView compilationResult={appState.compilationResult} />}
                     <AboutText/>
