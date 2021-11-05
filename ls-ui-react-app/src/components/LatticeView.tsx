@@ -2,7 +2,7 @@
 import React from 'react';
 import {CompilationResult, Slice, VisualArrayCell} from "../slices";
 import {css} from "@emotion/react";
-import $ from "jquery"
+// import $ from "jquery"
 
 
 const cellFontSize = (cell : VisualArrayCell) =>

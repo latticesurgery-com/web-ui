@@ -48,7 +48,7 @@ const BaseTemplate = () =>
 
     return <>
         <div css={css`background-color: black; padding:10px`}>
-            <h1 className='aquire' css={css`color:#E0E0E0;text-align: center;`}>Lattice Surgery Quantum Error Correction
+            <h1 className='aquire' css={css`color:#f0f0f0;text-align: center;`}>Lattice Surgery Quantum Error Correction
                 Compiler</h1>
         </div>
         <div css={css`background-color: black`}>
