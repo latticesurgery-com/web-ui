@@ -59,7 +59,7 @@ const UploadACircuit = ( {appState, setAppState} : AppStateProps ) => {
         })
     }
 
-    return <div>
+    return <div className="mb-3">
         Upload an OpenQASM circuit.
         <form>
             <div className="input-group">
@@ -136,6 +136,7 @@ const CompilerInputCircuitSelection = ({appState, setAppState} : AppStateProps) 
 
 const AboutText = () => <>
     <h2 id="about" className='anchor-mob'>About</h2>
+    <hr/>
     <p>
         This compiler accepts a quantum circuit and compiles it to a computation expressed in terms
         of lattice surgery operations on a surface code lattice.

@@ -2,6 +2,7 @@
 import React, {useEffect} from 'react'
 import $ from 'jquery'
 import './BaseTemplate.css'
+import './LatticeViewPage.css'
 import {css} from '@emotion/react';
 import UploadCircuitPage from "./UploadCircuitPage";
 
