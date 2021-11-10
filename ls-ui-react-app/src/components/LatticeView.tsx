@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import React from 'react';
-import {CompilationResult, Slice, VisualArrayCell, Edges} from "../slices";
+import {CompilationResult, Slice, VisualArrayCell} from "../slices";
 import {PatchType,Orientation,EdgeType,ActivityType} from "../slices";
 import {css} from "@emotion/react";
 // import $ from "jquery"
@@ -70,7 +70,7 @@ const CellViewer = ({cell, row_idx, col_idx}: CellViewerProps) => {
                 border-style: solid;
                 text-align: center;
            
-                ${ cell!==null && cell.patch_type==PatchType.Ancilla ?
+                ${ cell!==null && cell.patch_type===PatchType.Ancilla ?
                 "border-color: white" : "border-color: transparent" };
 
                 ${ cell!==null && 
@@ -169,7 +169,7 @@ const LatticeView = ({compilationResult} : LatticeViewProps) => {
         </div>
 
         <div className='p-3'>
-            <a href="{% url 'lattice_main-uploadcircuit' %}" className="btn btn-info p-2"> New Circuit </a>
+            <a href="/" className="btn btn-info p-2"> New Circuit </a>
         </div>
         
         <div id="draggable-container" className="mt-5">
