@@ -3,6 +3,7 @@ import React from "react";
 import {css} from "@emotion/react";
 import {AppStateProps} from "../appState";
 import LatticeView from "../components/LatticeView";
+import Loader from "../components/Loader";
 import axios from "axios"
 import {CompilationResult} from "../slices";
 import queryString from "query-string"
@@ -33,12 +34,14 @@ const UploadACircuit = ( {appState, setAppState} : AppStateProps ) => {
             ? `http://localhost:${queryStringMap.port || 9876}/compile`
             : "https://api.latticesurgery.com/compile"
 
+        // Modify State on Compile Request Submit
         setAppState({
             ...appState,
             compilationIsLoading: true,
             compilationResult: undefined
         })
 
+        // Async JS HTTP request to API endpoint, apiUrl
         axios.post(apiUrl,{
             'circuit_source': 'str',
             'circuit': circuitStr,
@@ -56,9 +59,9 @@ const UploadACircuit = ( {appState, setAppState} : AppStateProps ) => {
         })
     }
 
-    return <p>
+    return <div className="mb-3">
         Upload an OpenQASM circuit.
-        <form>
+        <form method="POST" encType="multipart/form-data">
             <div className="input-group">
                 <input
                     id="circuit"
@@ -68,12 +71,19 @@ const UploadACircuit = ( {appState, setAppState} : AppStateProps ) => {
                     onChange={(e) => readCircuitFile(e?.target?.files && e.target.files[0])}
                 />
                 <div className="input-group-append">
-                    <input
+                    <button 
+                        css={css`width:100px`}
+                        type="submit"
                         className="btn btn-primary"
-                        value="Go!"
+                        disabled={appState.compilationIsLoading === true}
                         onClick={(e) => submitCompileRequest()}
-                        disabled={appState.compilationIsLoading}
-                    />
+                    >
+                        {
+                            (appState.compilationIsLoading === true) ?
+                            <Loader size={20} color="white"/> : "Go!"
+                        }
+                    </button>
+
                 </div>
             </div>
             <div className="form-check">
@@ -87,21 +97,23 @@ const UploadACircuit = ( {appState, setAppState} : AppStateProps ) => {
                     Transform</label>
             </div>
         </form>
-    </p>
+    </div>
 }
 
 // TODO implement default circuits by pulling them from assets
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const SelectSampleCircuit = ({setAppState} : AppStateProps) => <p>
     Or choose from the following example circuits:
-    <form>
+    <form> 
         <div className="input-group">
             <select className="form-select" name="circuit" css={css`max-width:250px`}>
                 <option value='' disabled selected> Select a Circuit</option>
                 <option value="{{ circuit }}">circuit</option>
             </select>
             <div className="input-group-append">
-                <input type="submit" className="btn btn-info" value="Go!"/>
+                {/* <input type="submit" className="btn btn-info" value="Go!"/> */}
+                {/* When implemented, will be a button with onClick rather than html input */}
+                <button type="submit" className="btn btn-info">Go!</button>
             </div>
             <input type="hidden" name="localcircuit" value="yes"/>
         </div>
@@ -124,6 +136,7 @@ const CompilerInputCircuitSelection = ({appState, setAppState} : AppStateProps) 
 
 const AboutText = () => <>
     <h2 id="about" className='anchor-mob'>About</h2>
+    <hr/>
     <p>
         This compiler accepts a quantum circuit and compiles it to a computation expressed in terms
         of lattice surgery operations on a surface code lattice.
@@ -196,7 +209,7 @@ const UploadCircuitPage = ( {appState, setAppState} : AppStateProps)  =>
             <section>
                 <div>
                     <CompilerInputCircuitSelection appState={appState} setAppState={setAppState} />
-                    { appState.compilationIsLoading && <b>Loading ... </b> }
+                    { appState.compilationIsLoading && <b> Loading... </b> }
                     { appState.compilationResult &&
                         <LatticeView compilationResult={appState.compilationResult} />}
                     <AboutText/>

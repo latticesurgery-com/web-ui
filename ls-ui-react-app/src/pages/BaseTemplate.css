@@ -76,47 +76,35 @@ a {
 }
 
 
-/* lattice view styles */
-
-
-/*html, body{
-  height: 100%;
-  padding: 0;
-  margin: 0;
-  white-space: nowrap;
-  overflow: hidden;
-}*/
-#lattice-view-output {
-  /*Hacky way to make sure footer stays at the bottom when there isn't much page content*/
-  min-height: 90vh;
-}
-
-#toolbar{
-    /* Make it independent of zoom */
-  height: 10%;
-  line-height: 10vh;
-  font-size: 5vh;
-  /* Keep it above the lattice */
-  z-index: 100;
-  position: relative;
-  /* style */
-  background-color: lavender;
-  border-bottom: solid darkgrey 1.5vh;
-}
-#draggable-container{
-  font-size: 0;
-  z-index: 10;
-}
-
-.lattice-cell{
-  border: 0.5px solid #a2abae;
-  height: 50pt;
-  width: 50pt;
+/* Pure CSS spinner... more at https://loading.io/css/ */
+.lds-hourglass {
   display: inline-block;
   position: relative;
-  font-size:9px;
+  width: 80px;
+  height: 80px;
 }
-
-.qubit-state{
-  line-height: 1;
+.lds-hourglass:after {
+  content: " ";
+  display: block;
+  border-radius: 50%;
+  width: 0;
+  height: 0;
+  margin: 8px;
+  box-sizing: border-box;
+  border: 32px solid #fff;
+  border-color: #fff transparent #fff transparent;
+  animation: lds-hourglass 1.2s infinite;
+}
+@keyframes lds-hourglass {
+  0% {
+    transform: rotate(0);
+    animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+  }
+  50% {
+    transform: rotate(900deg);
+    animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+  }
+  100% {
+    transform: rotate(1800deg);
+  }
 }

@@ -1,6 +1,3 @@
-
-
-
 // These types mirror the ones used by lsqecc.lattice_array and are used to interpret the calls to
 // lsqecc.pipeline.json_pipeline (i.e. what you get by calling api.latticesurgery.com/compile).
 // The reason for this exact mirroring is so that the output json can be generated directly from the internal python
@@ -51,16 +48,16 @@ type QubitActivity = {
 }
 
 // Auxiliary Type representing an object mapping from Orientation to edge type (as in VisualArrayCell)
-type Edge = {
+type Edges = {
     [key in Orientation]: EdgeType
 }
 
 // Type mirroring VisualArrayCell in lsqecc.lattice_array
 type VisualArrayCell = {
-    edges: Edge
+    edges: Edges
     patch_type: PatchType
     text: string
-    activity?: QubitActivity
+    activity: QubitActivity
 }
 
 // 2D array of visual cells. These are the sqares on the grid. Outer array is Rows, inner is cell.
@@ -74,4 +71,6 @@ type CompilationResult = {
     compilationText: string
 }
 
-export type {Slice,Slices,PatchType,Edge,EdgeType,ActivityType,QubitActivity,PauliOperator,VisualArrayCell,Orientation,CompilationResult}
+export type {Slice,Slices,Edges,QubitActivity,PauliOperator,VisualArrayCell,CompilationResult}
+
+export {Orientation, EdgeType, PatchType, ActivityType}
