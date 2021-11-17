@@ -118,7 +118,9 @@ const SliceViewer = ({slice} : SliceViewerProps) =>
         {slice.map((row, row_idx) =>
             <div className="lattice-row" key={row_idx}>
                 {row.map((cell, col_idx) =>
-                    <CellViewer cell={cell} row_idx={row_idx} col_idx={row_idx} key={col_idx}/>
+                    <div className="lattice-cell" key={col_idx}>
+                        <CellViewer cell={cell} row_idx={row_idx} col_idx={row_idx} key={col_idx}/>
+                    </div>
                 )}
             </div>
         )}
