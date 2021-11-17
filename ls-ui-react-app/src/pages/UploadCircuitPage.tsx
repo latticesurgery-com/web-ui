@@ -61,7 +61,7 @@ const UploadACircuit = ( {appState, setAppState} : AppStateProps ) => {
 
     return <div className="mb-3">
         Upload an OpenQASM circuit.
-        <form>
+        <form method="POST" encType="multipart/form-data">
             <div className="input-group">
                 <input
                     id="circuit"
