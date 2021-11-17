@@ -61,7 +61,7 @@ const UploadACircuit = ( {appState, setAppState} : AppStateProps ) => {
 
     return <div className="mb-3">
         Upload an OpenQASM circuit.
-        <form method="POST" encType="multipart/form-data">
+        <>
             <div className="input-group">
                 <input
                     id="circuit"
@@ -73,13 +73,12 @@ const UploadACircuit = ( {appState, setAppState} : AppStateProps ) => {
                 <div className="input-group-append">
                     <button 
                         css={css`width:100px`}
-                        type="submit"
                         className="btn btn-primary"
-                        disabled={appState.compilationIsLoading === true}
+                        disabled={appState.compilationIsLoading}
                         onClick={(e) => submitCompileRequest()}
                     >
                         {
-                            (appState.compilationIsLoading === true) ?
+                            appState.compilationIsLoading ?
                             <Loader size={20} color="white"/> : "Go!"
                         }
                     </button>
@@ -96,7 +95,7 @@ const UploadACircuit = ( {appState, setAppState} : AppStateProps ) => {
                 <label className="form-check-label" htmlFor="litinski_check1">Litinski
                     Transform</label>
             </div>
-        </form>
+        </>
     </div>
 }
 
