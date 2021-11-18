@@ -209,7 +209,10 @@ const UploadCircuitPage = ( {appState, setAppState} : AppStateProps)  =>
                 <div>
                     <CompilerInputCircuitSelection appState={appState} setAppState={setAppState} />
                     { appState.compilationIsLoading && 
-                        <div className="spinner-border text-success" role="status"></div>
+                        <div className="g-flex">
+                            <div className="spinner-border text-success" role="status"></div>
+                            <b>Loading...</b>
+                        </div>
                     }
                     { appState.compilationResult &&
                         <LatticeView compilationResult={appState.compilationResult} />}
