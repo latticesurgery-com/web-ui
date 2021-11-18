@@ -38,11 +38,9 @@
 
 .lattice-cell{
   border: 0.5px solid #a2abae;
-  /* height: fit-content; */
   min-width: 50px;
   max-width:130px;
   width: 12vw;
-  /* display: inline-block; */
   position: relative;
   font-size:18px;
 }
