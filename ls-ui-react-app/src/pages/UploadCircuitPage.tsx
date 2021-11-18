@@ -208,7 +208,9 @@ const UploadCircuitPage = ( {appState, setAppState} : AppStateProps)  =>
             <section>
                 <div>
                     <CompilerInputCircuitSelection appState={appState} setAppState={setAppState} />
-                    { appState.compilationIsLoading && <b> Loading... </b> }
+                    { appState.compilationIsLoading && 
+                        <div className="spinner-border text-success" role="status"></div>
+                    }
                     { appState.compilationResult &&
                         <LatticeView compilationResult={appState.compilationResult} />}
                     <AboutText/>
