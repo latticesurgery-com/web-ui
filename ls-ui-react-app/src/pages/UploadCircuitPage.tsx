@@ -218,7 +218,7 @@ const UploadCircuitPage = ( {appState, setAppState} : AppStateProps)  =>
                             <b>Processing...</b>
                         </div>
                     }
-                    { (appState.request == true && appState.compilationIsLoading == false && appState.compilationResult == undefined) &&
+                    { (appState.request === true && appState.compilationIsLoading === false && appState.compilationResult === undefined) &&
                         <div><b>Error Proccessing Request</b></div>
                     }
                     { appState.compilationResult &&
