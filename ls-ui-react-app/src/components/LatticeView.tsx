@@ -49,8 +49,8 @@ const styles_map_activity_color: StylesMapActivityColorType = {
 
 const cellFontSize = (cell : VisualArrayCell) =>
     cell.text.length > 20
-        ? "7"
-        : cell.text.length > 7 ? "9" : "15"
+        ? "14"
+        : cell.text.length > 7 ? "18" : "30"
 
 type CellViewerProps = {
     cell: VisualArrayCell
