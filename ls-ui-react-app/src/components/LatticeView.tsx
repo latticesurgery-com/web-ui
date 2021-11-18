@@ -49,8 +49,8 @@ const styles_map_activity_color: StylesMapActivityColorType = {
 
 const cellFontSize = (cell : VisualArrayCell) =>
     cell.text.length > 20
-        ? "7"
-        : cell.text.length > 7 ? "9" : "15"
+        ? "14"
+        : cell.text.length > 7 ? "18" : "30"
 
 type CellViewerProps = {
     cell: VisualArrayCell
@@ -62,8 +62,8 @@ const CellViewer = ({cell, row_idx, col_idx}: CellViewerProps) => {
     return <div
             className="lattice-cell-inside"
             css={css`
-                height: 50pt;
-                width: 50pt;
+                height:100%;
+                width:100%;
                 vertical-align: middle;
                 display: inline-block;
                 border-width: 4pt;
@@ -114,11 +114,13 @@ type SliceViewerProps = {
     slice: Slice
 }
 const SliceViewer = ({slice} : SliceViewerProps) =>
-    <div className="slice">
+    <div className="slice grid">
         {slice.map((row, row_idx) =>
-            <div className="lattice-row" key={row_idx}>
+            <div className="lattice-row row flex-nowrap" key={row_idx}>
                 {row.map((cell, col_idx) =>
-                    <CellViewer cell={cell} row_idx={row_idx} col_idx={row_idx} key={col_idx}/>
+                    <div className="lattice-cell ratio ratio-1x1 col" key={col_idx}>
+                        <CellViewer cell={cell} row_idx={row_idx} col_idx={row_idx} key={col_idx}/>
+                    </div>
                 )}
             </div>
         )}
@@ -172,7 +174,7 @@ const LatticeView = ({compilationResult} : LatticeViewProps) => {
             <a href="/" className="btn btn-info p-2"> New Circuit </a>
         </div>
         
-        <div id="draggable-container" className="mt-5">
+        <div id="draggable-container" className="mt-1">
             <SliceViewer slice={slices[selectedSliceNumber]} />
         </div>
     </div>
