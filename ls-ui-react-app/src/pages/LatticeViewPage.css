@@ -1,13 +1,5 @@
 /* lattice view styles */
 
-/*html, body{
-  height: 100%;
-  padding: 0;
-  margin: 0;
-  white-space: nowrap;
-  overflow: hidden;
-}*/
-
 .lattice-card{
   border: 2px solid black;
   border-radius: 15px;
@@ -20,7 +12,8 @@
 
 #lattice-view-output {
   /*Hacky way to make sure footer stays at the bottom when there isn't much page content*/
-  min-height: 90vh;
+  /* min-height:80vh; */
+  margin-bottom: 20px;
 }
 
 #toolbar{
@@ -40,11 +33,18 @@
   z-index: 10;
 }
 
+.lattice-row {
+  width:100%;
+  margin: auto;
+}
+
 .lattice-cell{
   border: 0.5px solid #a2abae;
-  height: 50pt;
-  width: 50pt;
-  display: inline-block;
+  /* height: fit-content; */
+  min-width: 50px;
+  max-width:100px;
+  width: 12vw;
+  /* display: inline-block; */
   position: relative;
   font-size:9px;
 }
@@ -52,3 +52,12 @@
 .qubit-state{
   line-height: 1;
 }
+
+.col {
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+/* @media (mix-width:700px) {
+
+} */
