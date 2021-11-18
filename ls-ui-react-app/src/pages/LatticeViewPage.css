@@ -11,7 +11,6 @@
 }
 
 #lattice-view-output {
-  /*Hacky way to make sure footer stays at the bottom when there isn't much page content*/
   margin-bottom: 20px;
 }
 
