@@ -8,6 +8,7 @@ class AppState {
     compilationResult? : CompilationResult
     errorMsg? : string // An optional error message to show to the user
     compilationIsLoading : boolean = false
+    request? : boolean = false
 }
 
 interface AppStateProps {

@@ -2,8 +2,10 @@
 import React from "react";
 import {css} from "@emotion/react";
 import {AppStateProps} from "../appState";
+
 import LatticeView from "../components/LatticeView";
 import Loader from "../components/Loader";
+
 import axios from "axios"
 import {CompilationResult} from "../slices";
 import queryString from "query-string"
@@ -38,7 +40,8 @@ const UploadACircuit = ( {appState, setAppState} : AppStateProps ) => {
         setAppState({
             ...appState,
             compilationIsLoading: true,
-            compilationResult: undefined
+            compilationResult: undefined,
+            request: false,
         })
 
         // Async JS HTTP request to API endpoint, apiUrl
@@ -51,11 +54,12 @@ const UploadACircuit = ( {appState, setAppState} : AppStateProps ) => {
             setAppState({
                 ...appState,
                 compilationResult: responseJson,
-                compilationIsLoading: false
+                compilationIsLoading: false,
+                request: true,
             })
         }).catch( (error) => {
             console.error(error)
-            setAppState({...appState, errorMsg: error.toString(), compilationIsLoading: false})
+            setAppState({...appState, errorMsg: error.toString(), compilationIsLoading: false, compilationResult:undefined, request:true})
         })
     }
 
@@ -209,13 +213,18 @@ const UploadCircuitPage = ( {appState, setAppState} : AppStateProps)  =>
                 <div>
                     <CompilerInputCircuitSelection appState={appState} setAppState={setAppState} />
                     { appState.compilationIsLoading && 
-                        <div className="g-flex">
+                        <div>
                             <div className="spinner-border text-success" role="status"></div>
-                            <b>Loading...</b>
+                            <b>Processing...</b>
                         </div>
                     }
+                    { (appState.request == true && appState.compilationIsLoading == false && appState.compilationResult == undefined) &&
+                        <div><b>Error Proccessing Request</b></div>
+                    }
                     { appState.compilationResult &&
-                        <LatticeView compilationResult={appState.compilationResult} />}
+                        <LatticeView compilationResult={appState.compilationResult}/>
+                    }
+
                     <AboutText/>
                     <SurfaceCodesText/>
                     <hr/>
