@@ -41,8 +41,6 @@ const UploadACircuit = ( {appState, setAppState} : AppStateProps ) => {
             ...appState,
             compilationIsLoading: true,
             compilationResult: undefined,
-            request: false,
-            apiResponse: undefined,
             errorMsg: undefined
         })
 
@@ -55,21 +53,28 @@ const UploadACircuit = ( {appState, setAppState} : AppStateProps ) => {
             // split setAppState because parsing JSON response may fail
             setAppState({
                 ...appState,
-                request: true,
                 apiResponse: response,
             })
-            const responseJson = JSON.parse(response.data) as CompilationResult
-            // if parsing JSON succeeds, clear errorMsg and assign responseJSON to compilationResult
-            setAppState({
-                ...appState,
-                compilationResult: responseJson,
-                errorMsg: undefined
-            })
+            try {
+                const responseJson = JSON.parse(response.data) as CompilationResult
+                setAppState({
+                    ...appState,
+                    compilationResult: responseJson,
+                    errorMsg: undefined
+                })
+            } catch (error) {
+                console.log("Browser rendered error:",error)
+                setAppState({
+                    ...appState,
+                    errorMsg: (error as Error).toString()
+                })
+            }
+
         // Catch Axios Errors
         }).catch( (error) => {
             // API errors: timeout, error compiling
             // Browser errors: parsing JSON reponse
-            console.error(error)
+            console.error("AXIOS error:",error)
             setAppState({...appState, errorMsg: error.toString(), compilationIsLoading: false})
         })
     }  
@@ -218,6 +223,7 @@ const SurfaceCodesText = () => <>
 
 const UploadCircuitPage = ( {appState, setAppState} : AppStateProps)  =>
 {
+    console.log(appState.apiResponse)
     return <>
         <div className='main'>
             <section>
