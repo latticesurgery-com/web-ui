@@ -42,6 +42,7 @@ const UploadACircuit = ( {appState, setAppState} : AppStateProps ) => {
             compilationIsLoading: true,
             compilationResult: undefined,
             request: false,
+            apiResponse: undefined
         })
 
         // Async JS HTTP request to API endpoint, apiUrl
@@ -50,18 +51,29 @@ const UploadACircuit = ( {appState, setAppState} : AppStateProps ) => {
             'circuit': circuitStr,
             'apply_litinski_transform': doLitinskiTransform
         }).then( (response ) => {
-            const responseJson = JSON.parse(response.data) as CompilationResult
+            console.log(response)
             setAppState({
                 ...appState,
-                compilationResult: responseJson,
-                compilationIsLoading: false,
                 request: true,
+                apiResponse: response,
             })
+            try {
+                const responseJson = JSON.parse(response.data) as CompilationResult
+                setAppState({
+                    ...appState,
+                    compilationResult: responseJson,
+                })
+            }
+            // catch errors due to parsing JSON
+            catch(err) {
+                console.log("JSON Parsing Error")
+            }
+        // Catch Axios Errors, ie API timeout
         }).catch( (error) => {
             console.error(error)
-            setAppState({...appState, errorMsg: error.toString(), compilationIsLoading: false, compilationResult:undefined, request:true})
+            setAppState({...appState, errorMsg: error.toString(), compilationIsLoading: false, compilationResult:undefined, request:true ,apiResponse:undefined})
         })
-    }
+    }  
 
     return <div className="mb-3">
         Upload an OpenQASM circuit.
@@ -211,6 +223,7 @@ const UploadCircuitPage = ( {appState, setAppState} : AppStateProps)  =>
         <div className='main'>
             <section>
                 <div>
+                    {/* Indicate loading/calculating with a spinner and text */}
                     <CompilerInputCircuitSelection appState={appState} setAppState={setAppState} />
                     { appState.compilationIsLoading && 
                         <div>
@@ -218,9 +231,39 @@ const UploadCircuitPage = ( {appState, setAppState} : AppStateProps)  =>
                             <b>Processing...</b>
                         </div>
                     }
-                    { (appState.request === true && appState.compilationIsLoading === false && appState.compilationResult === undefined) &&
-                        <div><b>Error Proccessing Request</b></div>
+
+                    {/* If a request has been made, and compilation has finished, and compilation is still undefined, indicate error message */}
+                    { (appState.request === true && appState.compilationIsLoading === false && appState.compilationResult === undefined) && 
+                        <div>
+                            
+                            {/* AXIOS error, ie, no response*/}
+                            {appState.errorMsg && <div className="alert alert-danger">
+                                <div>{appState.errorMsg}</div>
+                            </div>}
+                            
+                            {/* RESPONSE returned, but non-200 */}
+                            { (appState.apiResponse.status  && appState.apiResponse.status !=200) &&
+                                <div className="alert alert-danger" role="alert">
+                                    <div>API Status: {appState.apiResponse.status}</div>
+                                </div>
+                            }
+
+                            {/* Response 200, but Compiler Error */}
+                            { appState.apiResponse.data && 
+                                <div className="alert alert-danger">
+                                    {appState.apiResponse.data.errorType + ": " + appState.apiResponse.data.errorMessage}
+                                </div>
+                            }
+
+                            {/* <div className={"alert alert-" + (appState.apiResponse.status == 200 ? 'success':'danger')} role="alert">
+                                <div>API Status: {appState.apiResponse.status}</div>
+                            </div> */}
+
+                        </div>
+                        
                     }
+
+                    {/* If compilationResult changes from undefined to true (instanciated), render result in Lattice View */}
                     { appState.compilationResult &&
                         <LatticeView compilationResult={appState.compilationResult}/>
                     }
