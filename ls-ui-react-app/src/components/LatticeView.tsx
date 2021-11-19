@@ -58,7 +58,7 @@ type CellViewerProps = {
     col_idx: number
 }
 const CellViewer = ({cell, row_idx, col_idx}: CellViewerProps) => {
-    // console.log(cell)
+    
     return <div
             className="lattice-cell-inside"
             css={css`

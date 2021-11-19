@@ -51,7 +51,6 @@ const UploadACircuit = ( {appState, setAppState} : AppStateProps ) => {
             'circuit': circuitStr,
             'apply_litinski_transform': doLitinskiTransform
         }).then( (response ) => {
-            console.log(response)
             setAppState({
                 ...appState,
                 request: true,
@@ -66,7 +65,7 @@ const UploadACircuit = ( {appState, setAppState} : AppStateProps ) => {
             }
             // catch errors due to parsing JSON
             catch(err) {
-                console.log("JSON Parsing Error")
+                // JSON parsing error
             }
         // Catch Axios Errors, ie API timeout
         }).catch( (error) => {
