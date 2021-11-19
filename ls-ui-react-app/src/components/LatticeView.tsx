@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import React from 'react';
+import React, { useRef } from 'react'
 import {CompilationResult, Slice, VisualArrayCell} from "../slices";
 import {PatchType,Orientation,EdgeType,ActivityType} from "../slices";
 import {css} from "@emotion/react";
@@ -58,7 +58,7 @@ type CellViewerProps = {
     col_idx: number
 }
 const CellViewer = ({cell, row_idx, col_idx}: CellViewerProps) => {
-    // console.log(cell)
+    
     return <div
             className="lattice-cell-inside"
             css={css`
@@ -142,8 +142,13 @@ const LatticeView = ({compilationResult} : LatticeViewProps) => {
         "next": selectedSliceNumber===slices_len-1 
     }
 
+    const latticeRef = useRef<HTMLInputElement>(null);
+    React.useEffect(() => {
+        latticeRef.current && latticeRef!.current!.scrollIntoView();
+    })
+
     return <div id="lattice-view-output">
-        <h2> Lattice Viewer </h2>
+        <h2 ref={latticeRef}> Lattice Viewer </h2>
         <hr/>
 
         {/* Updated Toolbar */}
@@ -177,6 +182,7 @@ const LatticeView = ({compilationResult} : LatticeViewProps) => {
         <div id="draggable-container" className="mt-1">
             <SliceViewer slice={slices[selectedSliceNumber]} />
         </div>
+
     </div>
 };
 
