@@ -8,7 +8,8 @@ class AppState {
     compilationResult? : CompilationResult
     compilationIsLoading : boolean = false
     apiResponse : any
-    errorMsg? : string // An optional error message to show to the user
+    apiError? : string
+    jsonParseError? : string
 }
 
 interface AppStateProps {

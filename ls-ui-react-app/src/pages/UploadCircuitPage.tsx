@@ -41,7 +41,9 @@ const UploadACircuit = ( {appState, setAppState} : AppStateProps ) => {
             ...appState,
             compilationIsLoading: true,
             compilationResult: undefined,
-            errorMsg: undefined
+            apiError: undefined,
+            jsonParseError: undefined,
+            apiResponse: undefined
         })
 
         // Async JS HTTP request to API endpoint, apiUrl
@@ -50,32 +52,32 @@ const UploadACircuit = ( {appState, setAppState} : AppStateProps ) => {
             'circuit': circuitStr,
             'apply_litinski_transform': doLitinskiTransform
         }).then( (response ) => {
-            // split setAppState because parsing JSON response may fail
-            setAppState({
-                ...appState,
-                apiResponse: response,
-            })
+
             try {
-                const responseJson = JSON.parse(response.data) as CompilationResult
+                const responseJson = JSON.parse(response.data) as CompilationResult;
+                console.log("YPIUPUPU")
                 setAppState({
                     ...appState,
+                    apiResponse: response,
                     compilationResult: responseJson,
-                    errorMsg: undefined
+                    jsonParseError: undefined
                 })
             } catch (error) {
                 console.log("Browser rendered error:",error)
                 setAppState({
                     ...appState,
-                    errorMsg: (error as Error).toString()
+                    apiResponse: response,
+                    jsonParseError: (error as Error).toString()
                 })
             }
+
 
         // Catch Axios Errors
         }).catch( (error) => {
             // API errors: timeout, error compiling
             // Browser errors: parsing JSON reponse
             console.error("AXIOS error:",error)
-            setAppState({...appState, errorMsg: error.toString(), compilationIsLoading: false})
+            setAppState({...appState, apiError: error.toString(), compilationIsLoading: false})
         })
     }  
 
@@ -223,7 +225,7 @@ const SurfaceCodesText = () => <>
 
 const UploadCircuitPage = ( {appState, setAppState} : AppStateProps)  =>
 {
-    console.log(appState.apiResponse)
+    console.log(appState.jsonParseError)
     return <>
         <div className='main'>
             <section>
@@ -236,27 +238,38 @@ const UploadCircuitPage = ( {appState, setAppState} : AppStateProps)  =>
                             <b>Processing...</b>
                         </div>
                     }
-                            
-                    {/* All Axios Errors */}
-                    {appState.errorMsg &&
-                        <div className="alert alert-danger">
-                            {/* RESPONSE returned*/}
-                            {appState.apiResponse && 
+                    
+                    {/* No response errors */}
+                    { appState.apiError && 
+                        <div>
+                        
+                        </div>
+                    }
+
+                    {/* If no apiError, check for JSON parsing errors */}
+                    { !appState.apiError &&
+                        <div>
+                            { appState.apiResponse &&
                                 <div>
                                     {/* Response !=200 */}
                                     {(appState.apiResponse.status  && appState.apiResponse.status !==200) &&
-                                        <div>{"API Status: " + appState.apiResponse.status}</div>
-                                    }
-                                    {/* Response 200, but Compiler Error */}
-                                    { appState.apiResponse.data && 
+                                        <div className="alert alert-danger">
+                                            <div>{"API Status: " + appState.apiResponse.status}</div>
                                             <div>
                                                 {appState.apiResponse.data.errorType + ": " + appState.apiResponse.data.errorMessage}
                                             </div>
+                                        </div>
                                     }
                                 </div>
                             }
-                            <div>{appState.errorMsg}</div>
-                        </div>                 
+                        </div>
+                    } 
+
+                    { appState.jsonParseError && 
+                        <div className="alert alert-danger">
+                            <div>{"LS-API Status: " + appState.apiResponse.status }</div>
+                            <div>{ appState.jsonParseError } </div>
+                        </div>
                     }
                     
                     {/* If compilationResult changes from undefined to true (instanciated), render result in Lattice View */}
