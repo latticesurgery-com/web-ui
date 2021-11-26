@@ -51,7 +51,6 @@ const UploadACircuit = ( {appState, setAppState} : AppStateProps ) => {
             'circuit': circuitStr,
             'apply_litinski_transform': doLitinskiTransform
         }).then( (response ) => {
-            console.log("Response:",response)
             
             if (response.data.errorMessage) {
                 const errortype = response.data.errorType;
@@ -69,7 +68,6 @@ const UploadACircuit = ( {appState, setAppState} : AppStateProps ) => {
                         compilationIsLoading: false
                     })
                 } catch (error) {
-                    console.log("Browser rendered error:",error)
                     setAppState({
                         apiResponse: new JsonParseError((error as Error).toString()),
                         compilationIsLoading: false,
@@ -251,7 +249,6 @@ const SurfaceCodesText = () => <>
 
 const UploadCircuitPage = ( {appState, setAppState} : AppStateProps)  =>
 {
-    console.log(appState.apiResponse)
     return <>
         <div className='main'>
             <section>
