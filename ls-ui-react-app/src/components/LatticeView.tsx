@@ -158,7 +158,7 @@ const LatticeView = ({compilationResult} : LatticeViewProps) => {
 
         {/* Updated Toolbar */}
         <div className="d-flex"> 
-            <div id="slice-toolbar" className="lattice-card shadow" css={css`flex-grow:0;flex-shrink:0;`}>
+            <div id="slice-toolbar" className="lattice-card shadow" css={css`flex-grow:0;flex-shrink:0;align-self: flex-start;`}>
                 <div className="card-body center">
                     <h5 className="card-title center">Select Time Slice </h5>
                     <div className="card-text center">Slice {selectedSliceNumber+1} / {slices_len}</div>
@@ -170,19 +170,15 @@ const LatticeView = ({compilationResult} : LatticeViewProps) => {
                         <div className="btn-group me-2" role="group">
                             <button disabled={disable["next"]} onClick={() => changeSlice(+1)} className="btn btn-primary">Next</button>
                         </div>
-                    </div>
-                    
-
+                    </div>                    
                 </div>
+
+
+                
             </div>
 
-            <div className="p-4 vertical-center">
-                <div className="form-check form-switch">
-                    <input 
-                        className="form-check-input lg-checkbox" type="checkbox" id="flexSwitchCheckDefault" onChange={handleChange}>
-                    </input>
-                    <label className="form-check-label p-1">Display Compilation</label>
-                </div>
+            <div className="p-3 vertical-center">
+
 
                 <div>
                     {checked ? 
@@ -192,18 +188,24 @@ const LatticeView = ({compilationResult} : LatticeViewProps) => {
                         </div> : <div></div>
                     }
                 </div>
-            </div>
 
+            </div>
 
         </div>
 
+        <div className="form-check form-switch">
+            <label className="form-check-label p-1" htmlFor="flexSwitchCheckDefault">Display Compilation</label>
+            <input 
+                className="form-check-input lg-checkbox" type="checkbox" id="flexSwitchCheckDefault" onChange={handleChange}>
+            </input>
+        </div>
+        
+        <div id="draggable-container" className="mt-4">
+            <SliceViewer slice={slices[selectedSliceNumber]} />
+        </div>
 
         <div className='p-3'>
             <a href="/" className="btn btn-info p-2"> New Circuit </a>
-        </div>
-        
-        <div id="draggable-container" className="mt-1">
-            <SliceViewer slice={slices[selectedSliceNumber]} />
         </div>
 
     </div>

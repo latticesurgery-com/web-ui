@@ -10,10 +10,10 @@
   text-align:center;
 }
 
-.vertical-center{
+/* .vertical-center{
   display: flex;
   align-items: center;
-}
+} */
 
 #lattice-view-output {
   margin-bottom: 20px;
