@@ -23,9 +23,10 @@ function CompilationSwitch({compilation_text}:CompilationSwitchProps) {
       </div>
 
       {checked ? 
-        <div id="compilation-text" css={css`display: block`}>
-              <pre>{compilation_text}</pre>
-        </div> : <div></div>
+        <div id="compilation-text">
+              {compilation_text}
+              Comp text goes here
+        </div> : <div>Nothing</div>
       }
       
     </div> 
