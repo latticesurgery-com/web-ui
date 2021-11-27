@@ -1,10 +1,10 @@
 /** @jsxImportSource @emotion/react */
 import React, { useRef } from 'react'
+import {useState} from 'react'; 
 import {CompilationResult, Slice, VisualArrayCell} from "../slices";
 import {PatchType,Orientation,EdgeType,ActivityType} from "../slices";
-import CompilationSwitch from "./CompilationSwitch"
+// import CompilationSwitch from "./CompilationSwitch"
 import {css} from "@emotion/react";
-// import $ from "jquery"
 
 type StylesMapType = {
     [key in (Orientation | PatchType | EdgeType)]: string;
@@ -132,10 +132,9 @@ type LatticeViewProps = {
     compilationResult : CompilationResult
 }
 const LatticeView = ({compilationResult} : LatticeViewProps) => {
-    console.log(compilationResult)
     const [selectedSliceNumber, setSelectedSliceNumber] = React.useState<number>(0);
     const changeSlice = (delta: number) => setSelectedSliceNumber(selectedSliceNumber+delta)
-    const {compilationText, slices} = compilationResult
+    const {compilation_text, slices} = compilationResult
     const slices_len = slices.length
     // JS object that returns boolean when "previous" or "next" buttons need to be disabled
     const disable = {
@@ -148,13 +147,18 @@ const LatticeView = ({compilationResult} : LatticeViewProps) => {
         latticeRef.current && latticeRef!.current!.scrollIntoView();
     })
 
+    const [checked, setChecked] = useState(false); 
+    const handleChange = () => { 
+      setChecked(!checked); 
+    }; 
+
     return <div id="lattice-view-output">
         <h2 ref={latticeRef}> Lattice Viewer </h2>
         <hr/>
 
         {/* Updated Toolbar */}
         <div className="d-flex"> 
-            <div id="slice-toolbar" className="lattice-card shadow">
+            <div id="slice-toolbar" className="lattice-card shadow" css={css`flex-grow:0;flex-shrink:0;`}>
                 <div className="card-body center">
                     <h5 className="card-title center">Select Time Slice </h5>
                     <div className="card-text center">Slice {selectedSliceNumber+1} / {slices_len}</div>
@@ -173,8 +177,21 @@ const LatticeView = ({compilationResult} : LatticeViewProps) => {
             </div>
 
             <div className="p-4 vertical-center">
-                {/* {console.log(compilationText)} */}
-                <CompilationSwitch compilation_text={compilationText}/>
+                <div className="form-check form-switch">
+                    <input 
+                        className="form-check-input lg-checkbox" type="checkbox" id="flexSwitchCheckDefault" onChange={handleChange}>
+                    </input>
+                    <label className="form-check-label p-1">Display Compilation</label>
+                </div>
+
+                <div>
+                    {checked ? 
+                        <div id="compilation-text">
+                            {/* {console.log("comp text",compilation_text)} */}
+                            {compilation_text}
+                        </div> : <div></div>
+                    }
+                </div>
             </div>
 
 

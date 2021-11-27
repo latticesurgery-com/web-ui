@@ -30,10 +30,10 @@ class CompilerError {
 
 class CompilationResultSuccess {
   slices: Slices
-  compilationText: string
-  constructor(slices : Slices, compilationText : string) {
+  compilation_text: string
+  constructor(slices : Slices, compilation_text : string) {
     this.slices = slices
-    this.compilationText = compilationText
+    this.compilation_text = compilation_text
   }
 }
 

@@ -1,4 +1,5 @@
-import React, {useState} from 'react'; 
+/** @jsxImportSource @emotion/react */
+import {useState} from 'react'; 
 import {css} from "@emotion/react";
 
 type CompilationSwitchProps = {
@@ -11,10 +12,10 @@ function CompilationSwitch({compilation_text}:CompilationSwitchProps) {
   const handleChange = () => { 
     setChecked(!checked); 
   }; 
-  
+  // console.log("comp text",compilation_text)
   return ( 
     
-    <div> 
+    <div>
       <div className="form-check form-switch">
         <input 
             className="form-check-input lg-checkbox" type="checkbox" id="flexSwitchCheckDefault" onChange={handleChange}>
@@ -22,15 +23,15 @@ function CompilationSwitch({compilation_text}:CompilationSwitchProps) {
         <label className="form-check-label p-1">Display Compilation</label>
       </div>
 
+
       {checked ? 
-        <div id="compilation-text">
+        <div id="compilation-text" css={css`width:50%`}>
+              {/* {console.log("comp text",compilation_text)} */}
               {compilation_text}
-              Comp text goes here
-        </div> : <div>Nothing</div>
+        </div> : <div></div>
       }
-      
-    </div> 
-    
+    </div>
+
   ); 
   
 }; 

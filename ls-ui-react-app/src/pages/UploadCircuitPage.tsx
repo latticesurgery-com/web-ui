@@ -51,7 +51,7 @@ const UploadACircuit = ( {appState, setAppState} : AppStateProps ) => {
             'circuit': circuitStr,
             'apply_litinski_transform': doLitinskiTransform
         }).then( (response ) => {
-            console.log(response.data)
+            // console.log("AXIOS RESPONSE",response.data)
             if (response.data.errorMessage) {
                 const errortype = response.data.errorType;
                 const msg = response.data.errorMessage;
@@ -63,8 +63,9 @@ const UploadACircuit = ( {appState, setAppState} : AppStateProps ) => {
             else{
                 try {
                     const responseJson = JSON.parse(response.data) as CompilationResult;
+                    console.log("R_JSON",responseJson)
                     setAppState({
-                        apiResponse: new CompilationResultSuccess(responseJson.slices,responseJson.compilationText),
+                        apiResponse: new CompilationResultSuccess(responseJson.slices,responseJson.compilation_text),
                         compilationIsLoading: false
                     })
                 } catch (error) {

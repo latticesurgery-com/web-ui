@@ -1,5 +1,5 @@
 import { Roller } from 'react-css-spinners'
-import React from 'react';
+// import React from 'react';
 import PropTypes from "prop-types"
 
 type LoaderProps = {
