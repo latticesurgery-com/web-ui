@@ -178,7 +178,7 @@ const LatticeView = ({compilationResult} : LatticeViewProps) => {
             <div>
                 {checked ? 
                     <div id="compilation-text" className="mb-3"css={css`margin-left:10px`}>
-                        {compilation_text}
+                        <pre>{compilation_text}</pre>
                     </div> : null
                 }
             </div>
