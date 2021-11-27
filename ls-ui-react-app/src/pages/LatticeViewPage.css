@@ -10,6 +10,11 @@
   text-align:center;
 }
 
+.vertical-center{
+  display: flex;
+  align-items: center;
+}
+
 #lattice-view-output {
   margin-bottom: 20px;
 }
@@ -52,4 +57,9 @@
 .col {
   padding-left: 0px;
   padding-right: 0px;
+}
+
+.lg-checkbox {
+  transform: scale(1.6);
+  margin-right: 5px;
 }

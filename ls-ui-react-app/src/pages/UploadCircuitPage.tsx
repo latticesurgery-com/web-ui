@@ -51,7 +51,7 @@ const UploadACircuit = ( {appState, setAppState} : AppStateProps ) => {
             'circuit': circuitStr,
             'apply_litinski_transform': doLitinskiTransform
         }).then( (response ) => {
-            
+            console.log(response.data)
             if (response.data.errorMessage) {
                 const errortype = response.data.errorType;
                 const msg = response.data.errorMessage;
@@ -294,6 +294,7 @@ const UploadCircuitPage = ( {appState, setAppState} : AppStateProps)  =>
                     }
                     
                     {/* If compilationResult changes from undefined to true (instanciated), render result in Lattice View */}
+                    {console.log("API response",appState.apiResponse)}
                     { appState.apiResponse instanceof CompilationResultSuccess &&
                         <LatticeView compilationResult={appState.apiResponse}/>
                     }

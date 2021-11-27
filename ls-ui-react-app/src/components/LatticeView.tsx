@@ -2,6 +2,7 @@
 import React, { useRef } from 'react'
 import {CompilationResult, Slice, VisualArrayCell} from "../slices";
 import {PatchType,Orientation,EdgeType,ActivityType} from "../slices";
+import CompilationSwitch from "./CompilationSwitch"
 import {css} from "@emotion/react";
 // import $ from "jquery"
 
@@ -58,7 +59,7 @@ type CellViewerProps = {
     col_idx: number
 }
 const CellViewer = ({cell, row_idx, col_idx}: CellViewerProps) => {
-    
+
     return <div
             className="lattice-cell-inside"
             css={css`
@@ -131,10 +132,10 @@ type LatticeViewProps = {
     compilationResult : CompilationResult
 }
 const LatticeView = ({compilationResult} : LatticeViewProps) => {
+    console.log(compilationResult)
     const [selectedSliceNumber, setSelectedSliceNumber] = React.useState<number>(0);
     const changeSlice = (delta: number) => setSelectedSliceNumber(selectedSliceNumber+delta)
     const {compilationText, slices} = compilationResult
-    
     const slices_len = slices.length
     // JS object that returns boolean when "previous" or "next" buttons need to be disabled
     const disable = {
@@ -152,28 +153,33 @@ const LatticeView = ({compilationResult} : LatticeViewProps) => {
         <hr/>
 
         {/* Updated Toolbar */}
-        <div id="slice-toolbar" className="lattice-card shadow">
-            <div className="card-body center">
-                <h5 className="card-title center">Select Time Slice </h5>
-                <div className="card-text center">Slice {selectedSliceNumber+1} / {slices_len}</div>
-                {/* <hr css={css`width:100px; margin: auto`}/> */}
-                <div className="btn-toolbar" role="toolbar" css={css`justify-content:center;`}>
-                    <div className="btn-group me-2" role="group">
-                        <button disabled={disable["prev"]} onClick={() => changeSlice(-1)} className="btn btn-primary">Prev</button>
+        <div className="d-flex"> 
+            <div id="slice-toolbar" className="lattice-card shadow">
+                <div className="card-body center">
+                    <h5 className="card-title center">Select Time Slice </h5>
+                    <div className="card-text center">Slice {selectedSliceNumber+1} / {slices_len}</div>
+                    {/* <hr css={css`width:100px; margin: auto`}/> */}
+                    <div className="btn-toolbar" role="toolbar" css={css`justify-content:center;`}>
+                        <div className="btn-group me-2" role="group">
+                            <button disabled={disable["prev"]} onClick={() => changeSlice(-1)} className="btn btn-primary">Prev</button>
+                        </div>
+                        <div className="btn-group me-2" role="group">
+                            <button disabled={disable["next"]} onClick={() => changeSlice(+1)} className="btn btn-primary">Next</button>
+                        </div>
                     </div>
-                    <div className="btn-group me-2" role="group">
-                        <button disabled={disable["next"]} onClick={() => changeSlice(+1)} className="btn btn-primary">Next</button>
-                    </div>
-                    {/* {selectedSliceNumber} */}
+                    
+
                 </div>
-                
-                {/* <button className="btn btn-primary">Compilation Text</button> */}
             </div>
+
+            <div className="p-4 vertical-center">
+                {/* {console.log(compilationText)} */}
+                <CompilationSwitch compilation_text={compilationText}/>
+            </div>
+
+
         </div>
 
-        <div id="compilation-text" css={css`display: none`}>
-            <pre>{compilationText}</pre>
-        </div>
 
         <div className='p-3'>
             <a href="/" className="btn btn-info p-2"> New Circuit </a>
