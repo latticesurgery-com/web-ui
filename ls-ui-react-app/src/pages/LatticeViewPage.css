@@ -60,6 +60,10 @@
 }
 
 .lg-checkbox {
-  transform: scale(1.6);
+  transform: scale(1.5);
   margin-right: 5px;
+}
+
+.scroll-margin {
+  scroll-margin: 58px;
 }

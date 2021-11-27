@@ -133,7 +133,10 @@ type LatticeViewProps = {
 }
 const LatticeView = ({compilationResult} : LatticeViewProps) => {
     const [selectedSliceNumber, setSelectedSliceNumber] = React.useState<number>(0);
-    const changeSlice = (delta: number) => setSelectedSliceNumber(selectedSliceNumber+delta)
+    const changeSlice = (delta: number) => {
+        setSelectedSliceNumber(selectedSliceNumber+delta)
+        scrollToLattice()
+    }
     const {compilation_text, slices} = compilationResult
     const slices_len = slices.length
     // JS object that returns boolean when "previous" or "next" buttons need to be disabled
@@ -142,22 +145,47 @@ const LatticeView = ({compilationResult} : LatticeViewProps) => {
         "next": selectedSliceNumber===slices_len-1 
     }
 
-    const latticeRef = useRef<HTMLInputElement>(null);
+    // scroll into Lattice View Section, one time, after compilation is completed
+    const latticeSection = useRef<HTMLInputElement>(null);
     React.useEffect(() => {
-        latticeRef.current && latticeRef!.current!.scrollIntoView();
-    })
+        latticeSection.current && latticeSection!.current!.scrollIntoView();
+    },[])
 
+    // scroll into Lattice View, after slice navigation buttons pressed
+    const lattice = useRef<HTMLInputElement>(null);
+    const scrollToLattice = () => {
+        lattice.current && lattice!.current!.scrollIntoView();
+    }
+
+    // set state of checkbox switch
     const [checked, setChecked] = useState(false); 
     const handleChange = () => { 
       setChecked(!checked); 
     }; 
 
     return <div id="lattice-view-output">
-        <h2 ref={latticeRef}> Lattice Viewer </h2>
+        <h2 ref={latticeSection} className="scroll-margin"> Lattice Viewer </h2>
         <hr/>
 
+        <div className="form-check form-switch p-1">
+            <div className="form-check form-switch">
+                <input className="form-check-input lg-checkbox" type="checkbox" role="switch" id="flexSwitchCheckDefault" onChange={handleChange}/>
+                <label className="form-check-label" htmlFor="flexSwitchCheckDefault">View Compilation</label>
+            </div>
+        </div>
+
+        <div className="p-1 vertical-center">
+            <div>
+                {checked ? 
+                    <div id="compilation-text" className="mb-3"css={css`margin-left:10px`}>
+                        {compilation_text}
+                    </div> : null
+                }
+            </div>
+        </div>
+
         {/* Updated Toolbar */}
-        <div className="d-flex"> 
+        <div className="d-flex mt-1 scroll-margin" ref={lattice}> 
             <div id="slice-toolbar" className="lattice-card shadow" css={css`flex-grow:0;flex-shrink:0;align-self: flex-start;`}>
                 <div className="card-body center">
                     <h5 className="card-title center">Select Time Slice </h5>
@@ -177,30 +205,11 @@ const LatticeView = ({compilationResult} : LatticeViewProps) => {
                 
             </div>
 
-            <div className="p-3 vertical-center">
 
 
-                <div>
-                    {checked ? 
-                        <div id="compilation-text">
-                            {/* {console.log("comp text",compilation_text)} */}
-                            {compilation_text}
-                        </div> : <div></div>
-                    }
-                </div>
-
-            </div>
-
-        </div>
-
-        <div className="form-check form-switch">
-            <label className="form-check-label p-1" htmlFor="flexSwitchCheckDefault">Display Compilation</label>
-            <input 
-                className="form-check-input lg-checkbox" type="checkbox" id="flexSwitchCheckDefault" onChange={handleChange}>
-            </input>
         </div>
         
-        <div id="draggable-container" className="mt-4">
+        <div id="draggable-container" className="mt-2">
             <SliceViewer slice={slices[selectedSliceNumber]} />
         </div>
 
