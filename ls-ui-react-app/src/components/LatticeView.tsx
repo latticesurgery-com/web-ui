@@ -152,15 +152,15 @@ const LatticeView = ({compilationResult} : LatticeViewProps) => {
     },[])
 
     // scroll into Lattice View, after slice navigation buttons pressed
-    const lattice = useRef<HTMLInputElement>(null);
+    const latticeSlices= useRef<HTMLInputElement>(null);
     const scrollToLattice = () => {
-        lattice.current && lattice!.current!.scrollIntoView();
+        latticeSlices.current && latticeSlices!.current!.scrollIntoView();
     }
 
     // set state of checkbox switch
-    const [checked, setChecked] = useState(false); 
+    const [showCompilationText, setCompilationText] = useState(false); 
     const handleChange = () => { 
-      setChecked(!checked); 
+      setCompilationText(!showCompilationText); 
     }; 
 
     return <div id="lattice-view-output">
@@ -176,7 +176,7 @@ const LatticeView = ({compilationResult} : LatticeViewProps) => {
 
         <div className="p-1 vertical-center">
             <div>
-                {checked ? 
+                {showCompilationText ? 
                     <div id="compilation-text" className="mb-3"css={css`margin-left:10px`}>
                         <pre>{compilation_text}</pre>
                     </div> : null
@@ -185,7 +185,7 @@ const LatticeView = ({compilationResult} : LatticeViewProps) => {
         </div>
 
         {/* Updated Toolbar */}
-        <div className="d-flex mt-1 scroll-margin" ref={lattice}> 
+        <div className="d-flex mt-1 scroll-margin" ref={latticeSlices}> 
             <div id="slice-toolbar" className="lattice-card shadow" css={css`flex-grow:0;flex-shrink:0;align-self: flex-start;`}>
                 <div className="card-body center">
                     <h5 className="card-title center">Select Time Slice </h5>
