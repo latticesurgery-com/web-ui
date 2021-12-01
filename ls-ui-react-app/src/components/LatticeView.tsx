@@ -1,9 +1,10 @@
 /** @jsxImportSource @emotion/react */
 import React, { useRef } from 'react'
+import {useState} from 'react'; 
 import {CompilationResult, Slice, VisualArrayCell} from "../slices";
 import {PatchType,Orientation,EdgeType,ActivityType} from "../slices";
+// import CompilationSwitch from "./CompilationSwitch"
 import {css} from "@emotion/react";
-// import $ from "jquery"
 
 type StylesMapType = {
     [key in (Orientation | PatchType | EdgeType)]: string;
@@ -58,7 +59,7 @@ type CellViewerProps = {
     col_idx: number
 }
 const CellViewer = ({cell, row_idx, col_idx}: CellViewerProps) => {
-    
+
     return <div
             className="lattice-cell-inside"
             css={css`
@@ -132,9 +133,11 @@ type LatticeViewProps = {
 }
 const LatticeView = ({compilationResult} : LatticeViewProps) => {
     const [selectedSliceNumber, setSelectedSliceNumber] = React.useState<number>(0);
-    const changeSlice = (delta: number) => setSelectedSliceNumber(selectedSliceNumber+delta)
-    const {compilationText, slices} = compilationResult
-    
+    const changeSlice = (delta: number) => {
+        setSelectedSliceNumber(selectedSliceNumber+delta)
+        scrollToLattice()
+    }
+    const {compilation_text, slices} = compilationResult
     const slices_len = slices.length
     // JS object that returns boolean when "previous" or "next" buttons need to be disabled
     const disable = {
@@ -142,45 +145,76 @@ const LatticeView = ({compilationResult} : LatticeViewProps) => {
         "next": selectedSliceNumber===slices_len-1 
     }
 
-    const latticeRef = useRef<HTMLInputElement>(null);
+    // scroll into Lattice View Section, one time, after compilation is completed
+    const latticeSection = useRef<HTMLInputElement>(null);
     React.useEffect(() => {
-        latticeRef.current && latticeRef!.current!.scrollIntoView();
-    })
+        latticeSection.current && latticeSection!.current!.scrollIntoView();
+    },[])
+
+    // scroll into Lattice View, after slice navigation buttons pressed
+    const latticeSlices= useRef<HTMLInputElement>(null);
+    const scrollToLattice = () => {
+        latticeSlices.current && latticeSlices!.current!.scrollIntoView();
+    }
+
+    // set state of checkbox switch
+    const [showCompilationText, setCompilationText] = useState(false); 
+    const handleChange = () => { 
+      setCompilationText(!showCompilationText); 
+    }; 
 
     return <div id="lattice-view-output">
-        <h2 ref={latticeRef}> Lattice Viewer </h2>
+        <h2 ref={latticeSection} className="scroll-margin"> Lattice Viewer </h2>
         <hr/>
 
-        {/* Updated Toolbar */}
-        <div id="slice-toolbar" className="lattice-card shadow">
-            <div className="card-body center">
-                <h5 className="card-title center">Select Time Slice </h5>
-                <div className="card-text center">Slice {selectedSliceNumber+1} / {slices_len}</div>
-                {/* <hr css={css`width:100px; margin: auto`}/> */}
-                <div className="btn-toolbar" role="toolbar" css={css`justify-content:center;`}>
-                    <div className="btn-group me-2" role="group">
-                        <button disabled={disable["prev"]} onClick={() => changeSlice(-1)} className="btn btn-primary">Prev</button>
-                    </div>
-                    <div className="btn-group me-2" role="group">
-                        <button disabled={disable["next"]} onClick={() => changeSlice(+1)} className="btn btn-primary">Next</button>
-                    </div>
-                    {/* {selectedSliceNumber} */}
-                </div>
-                
-                {/* <button className="btn btn-primary">Compilation Text</button> */}
+        <div className="form-check form-switch p-1">
+            <div className="form-check form-switch">
+                <input className="form-check-input lg-checkbox" type="checkbox" role="switch" id="flexSwitchCheckDefault" onChange={handleChange}/>
+                <label className="form-check-label" htmlFor="flexSwitchCheckDefault">View Compilation</label>
             </div>
         </div>
 
-        <div id="compilation-text" css={css`display: none`}>
-            <pre>{compilationText}</pre>
+        <div className="p-1 vertical-center">
+            <div>
+                {showCompilationText ? 
+                    <div id="compilation-text" className="mb-3"css={css`margin-left:10px`}>
+                        <pre>{compilation_text}</pre>
+                    </div> : null
+                }
+            </div>
+        </div>
+
+        {/* Updated Toolbar */}
+        <div className="d-flex mt-1 scroll-margin" ref={latticeSlices}> 
+            <div id="slice-toolbar" className="lattice-card shadow" css={css`flex-grow:0;flex-shrink:0;align-self: flex-start;`}>
+                <div className="card-body center">
+                    <h5 className="card-title center">Select Time Slice </h5>
+                    <div className="card-text center">Slice {selectedSliceNumber+1} / {slices_len}</div>
+                    {/* <hr css={css`width:100px; margin: auto`}/> */}
+                    <div className="btn-toolbar" role="toolbar" css={css`justify-content:center;`}>
+                        <div className="btn-group me-2" role="group">
+                            <button disabled={disable["prev"]} onClick={() => changeSlice(-1)} className="btn btn-primary">Prev</button>
+                        </div>
+                        <div className="btn-group me-2" role="group">
+                            <button disabled={disable["next"]} onClick={() => changeSlice(+1)} className="btn btn-primary">Next</button>
+                        </div>
+                    </div>                    
+                </div>
+
+
+                
+            </div>
+
+
+
+        </div>
+        
+        <div id="draggable-container" className="mt-2">
+            <SliceViewer slice={slices[selectedSliceNumber]} />
         </div>
 
         <div className='p-3'>
             <a href="/" className="btn btn-info p-2"> New Circuit </a>
-        </div>
-        
-        <div id="draggable-container" className="mt-1">
-            <SliceViewer slice={slices[selectedSliceNumber]} />
         </div>
 
     </div>

@@ -68,7 +68,7 @@ type Slices = Array<Slice>
 
 type CompilationResult = {
     slices: Slices
-    compilationText: string
+    compilation_text: string
 }
 
 export type {Slice,Slices,Edges,QubitActivity,PauliOperator,VisualArrayCell,CompilationResult}
