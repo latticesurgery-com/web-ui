@@ -4,6 +4,7 @@
 ```
 $ cd ls-ui-react-app
 $ npm install
+$ echo ESLINT_NO_DEV_ERRORS=true >> .env
 ```
 Run the dev server with 
 
