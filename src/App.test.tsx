@@ -5,6 +5,6 @@ import App from "./App"
 // TODO this needs to be populated with real tests
 test("renders learn react link", () => {
     render(<App />)
-    const linkElement = screen.getByText(/learn react/i)
+    const linkElement = screen.getByText("Lattice Surgery Quantum Error Correction Compiler")
     expect(linkElement).toBeInTheDocument()
 })
