@@ -6,7 +6,7 @@ type LoaderProps = {
     size: number
     // className: string
 }
-const Loader = ({ size = 70, color = "#00a105" }: LoaderProps) => {
+const Loader = ({ size = 70, color = "#00a105" }: LoaderProps): JSX.Element => {
     return (
         /* Pass props like color and size (more in demo) */
         <Roller color={color} size={size} className="loader" />
