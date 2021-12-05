@@ -9,8 +9,8 @@ import UploadCircuitPage from "./UploadCircuitPage"
 import { AppState } from "../appState"
 
 const anchor_position_shift = (window: Window) => {
-    // @ts-ignore
-    if ($(window).width() > 991) {
+    const windowWidth = $(window).width() ?? 1000 // Default width
+    if (windowWidth > 991) {
         const anchor_elements = $(".anchor-mob")
         anchor_elements.toggleClass("anchor-mob anchor-pc")
     } else {
