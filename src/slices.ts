@@ -43,7 +43,7 @@ enum ActivityType {
 
 // Type mirroring QubitActivity in lsqecc.simulation.qubit_state
 type QubitActivity = {
-    op: PauliOperator,
+    op: PauliOperator
     activity_type: ActivityType
 }
 
@@ -71,6 +71,14 @@ type CompilationResult = {
     compilation_text: string
 }
 
-export type {Slice,Slices,Edges,QubitActivity,PauliOperator,VisualArrayCell,CompilationResult}
+export type {
+    Slice,
+    Slices,
+    Edges,
+    QubitActivity,
+    PauliOperator,
+    VisualArrayCell,
+    CompilationResult,
+}
 
-export {Orientation, EdgeType, PatchType, ActivityType}
+export { Orientation, EdgeType, PatchType, ActivityType }
