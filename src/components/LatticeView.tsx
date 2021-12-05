@@ -154,13 +154,13 @@ const LatticeView = ({ compilationResult }: LatticeViewProps) => {
     // scroll into Lattice View Section, one time, after compilation is completed
     const latticeSection = useRef<HTMLInputElement>(null)
     React.useEffect(() => {
-        latticeSection.current && latticeSection!.current!.scrollIntoView()
+        latticeSection.current && latticeSection.current?.scrollIntoView()
     }, [])
 
     // scroll into Lattice View, after slice navigation buttons pressed
     const latticeSlices = useRef<HTMLInputElement>(null)
     const scrollToLattice = () => {
-        latticeSlices.current && latticeSlices!.current!.scrollIntoView()
+        latticeSlices.current && latticeSlices.current?.scrollIntoView()
     }
 
     // set state of checkbox switch
