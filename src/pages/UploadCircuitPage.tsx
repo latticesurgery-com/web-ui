@@ -29,7 +29,7 @@ const UploadACircuit = ({ appState, setAppState }: AppStateProps) => {
         }
 
         const fileReader = new FileReader()
-        fileReader.onloadend = (e) => setCircuitStr(fileReader.result as string)
+        fileReader.onloadend = () => setCircuitStr(fileReader.result as string)
         fileReader.readAsText(file)
     }
 
@@ -128,7 +128,7 @@ const UploadACircuit = ({ appState, setAppState }: AppStateProps) => {
                             `}
                             className="btn btn-primary"
                             disabled={appState.compilationIsLoading}
-                            onClick={(e) => submitCompileRequest()}
+                            onClick={() => submitCompileRequest()}
                         >
                             {appState.compilationIsLoading ? (
                                 <Loader size={20} color="white" />
@@ -233,10 +233,10 @@ const AboutText = () => (
         <p>
             The output of the compiler is a computation is expressed in terms of <em>patches</em> of
             a surface code lattice. Each patch is associated with quantum states. The states are
-            tracked and "evolved", so that one can view what the lattice surgery operations are
-            doing to the quantum states. When compilation terminates, the user is presented with a
-            viewer (in figure) to explore this computation. Additionally one can choose to display
-            the intermediate stages, expressed as quantum circuits.
+            tracked and &ldquo;evolved&rdquo;, so that one can view what the lattice surgery
+            operations are doing to the quantum states. When compilation terminates, the user is
+            presented with a viewer (in figure) to explore this computation. Additionally one can
+            choose to display the intermediate stages, expressed as quantum circuits.
         </p>
         <p>
             This tool is the result of a project aimed at exploring the challenges involved with
@@ -246,7 +246,7 @@ const AboutText = () => (
             can run on a real device.
         </p>
         <p>
-            A great deal of inspiration was taken from Daniel Litinski's Game of Surface codes{" "}
+            A great deal of inspiration was taken from Daniel Litinski&apos;s Game of Surface codes{" "}
             <a href="https://arxiv.org/abs/1911.05759">[1]</a> of which we follow the formulation of
             a lattice surgery computation in terms of patches and the pre processing of quantum
             circuits as Pauli rotations. Additionally we have an option to remove the stabilizer
@@ -278,8 +278,8 @@ const SurfaceCodesText = () => (
             Surface codes are a family of QECCs that aims at improving computation fidelity by
             entangling many quantum mechanical entities in a two dimensional lattice. Our technique
             of choice for operating on this lattice is a protocol known as lattice surgery, which
-            stores logical qubits in portions of the surface code's lattice patches and performs
-            logical operations by merging and splitting patches{" "}
+            stores logical qubits in portions of the surface code&apos;s lattice patches and
+            performs logical operations by merging and splitting patches{" "}
             <a href="https://iopscience.iop.org/article/10.1088/1367-2630/14/12/123011/meta">[4]</a>
             .
         </p>
