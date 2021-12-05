@@ -137,7 +137,7 @@ const SliceViewer = ({ slice }: SliceViewerProps) => (
 type LatticeViewProps = {
     compilationResult: CompilationResult
 }
-const LatticeView = ({ compilationResult }: LatticeViewProps) => {
+const LatticeView = ({ compilationResult }: LatticeViewProps): JSX.Element => {
     const [selectedSliceNumber, setSelectedSliceNumber] = React.useState<number>(0)
     const changeSlice = (delta: number) => {
         setSelectedSliceNumber(selectedSliceNumber + delta)

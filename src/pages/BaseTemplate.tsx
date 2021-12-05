@@ -19,7 +19,7 @@ const anchor_position_shift = (window: Window) => {
     }
 }
 
-const BaseTemplate = () => {
+const BaseTemplate = (): JSX.Element => {
     // This section handles the state of the web application, either in circuit upload or in lattice view.
     // TODO handle with Redux
     const [appState, setAppState] = React.useState(new AppState())

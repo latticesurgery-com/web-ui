@@ -1,0 +1,47 @@
+name: Preview Teardown 
+
+on:
+  pull_request:
+    types: [ closed ]
+    paths-ignore:
+      - '**.md'
+
+jobs:
+  teardown:
+    name: Teardown preview on Surge
+    runs-on: ubuntu-latest
+    if: github.repository_owner == 'latticesurgery-com'
+    env:
+      SURGE_DOMAIN: ${{ format('https://{0}-{1}-pr{2}-preview.surge.sh', github.repository_owner, 
+        github.event.repository.name, github.event.pull_request.number) }}
+
+    steps:
+    - name: Setup Node JS
+      uses: actions/setup-node@v2
+      with:
+        node-version: '16'
+
+    - name: Install Surge
+      run: npm install --global surge
+
+    - name: Find deploy comment
+      uses: peter-evans/find-comment@v1
+      id: fc
+      with:
+        issue-number: ${{ github.event.pull_request.number }}
+        comment-author: 'github-actions[bot]'
+        body-includes: Preview is deployed to 
+
+    - name: Teardown preview on Surge
+      if: ${{ steps.fc.outputs.comment-id != 0 }}
+      continue-on-error: true
+      run: surge teardown ${{ env.SURGE_DOMAIN }} --token ${{ secrets.SURGE_TOKEN }}
+
+    - name: Update previous deploy comment
+      uses: peter-evans/create-or-update-comment@v1
+      with:
+        comment-id: ${{ steps.fc.outputs.comment-id }}
+        issue-number: ${{ github.event.pull_request.number }}
+        body: |
+          *Preview is no longer available for this pull request.*
+        edit-mode: replace

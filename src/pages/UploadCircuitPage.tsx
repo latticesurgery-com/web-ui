@@ -293,7 +293,7 @@ const SurfaceCodesText = () => (
     </>
 )
 
-const UploadCircuitPage = ({ appState, setAppState }: AppStateProps) => {
+const UploadCircuitPage = ({ appState, setAppState }: AppStateProps): JSX.Element => {
     return (
         <>
             <div className="main">
