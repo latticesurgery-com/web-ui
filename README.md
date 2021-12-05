@@ -2,8 +2,8 @@
 
 ### Setup
 ```
-$ cd ls-ui-react-app
-$ npm install
+$ npm ci
+$ echo ESLINT_NO_DEV_ERRORS=true >> .env
 ```
 Run the dev server with 
 
