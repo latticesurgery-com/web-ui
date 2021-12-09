@@ -22,6 +22,11 @@ If the error messages are very concise, try dumping the stdout to a file to read
 ```npm start > errmsg.txt || cat errmsg.txt``` 
 
 I've only had this happen when messing with the dependencies.
+### Development
+When code is ready to be integrated with repo, run linter:
+
+npm run lint:fix
+
 ### Deploy
 
 
