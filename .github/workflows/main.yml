@@ -122,8 +122,9 @@ jobs:
     runs-on: ubuntu-latest
     if: github.repository_owner == 'latticesurgery-com' && github.event_name == 'push'
     needs: [build]
-    environment: Staging
-    url: https://dev.lattice-surgery.com
+    environment: 
+      name: Staging
+      url: 'https://dev.lattice-surgery.com'
     
     steps:
     - name: Configure AWS Credentials
