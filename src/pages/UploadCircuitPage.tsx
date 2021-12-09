@@ -287,8 +287,8 @@ const SurfaceCodesText = () => (
             This program handles a portion of the logical to physical compilation. It takes a
             quantum circuit and translates it to a representation of lattice surgery operations,
             which are in direct correspondence with the physical error corrected circuit, up to code
-            distance. The project comes with a visualizer tool (in figure), that shows the state of the
-            surface code lattice state in between surgery operations.
+            distance. The project comes with a visualizer tool (in figure), that shows the state of
+            the surface code lattice state in between surgery operations.
         </p>
     </>
 )
