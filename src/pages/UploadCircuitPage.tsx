@@ -204,7 +204,7 @@ const SelectSampleCircuit = ({ setAppState }: AppStateProps) => (
 
 const CompilerInputCircuitSelection = ({ appState, setAppState }: AppStateProps) => (
     <>
-        <h2 id="get-started" className="anchor-mob">
+        <h2 id="get-started" className="scroll-offset">
             Get Started - Upload a circuit
         </h2>
         <hr />
@@ -215,7 +215,7 @@ const CompilerInputCircuitSelection = ({ appState, setAppState }: AppStateProps)
 
 const AboutText = () => (
     <>
-        <h2 id="about" className="anchor-mob">
+        <h2 id="about" className="scroll-offset">
             About
         </h2>
         <hr />
@@ -258,7 +258,7 @@ const AboutText = () => (
 
 const SurfaceCodesText = () => (
     <>
-        <h1 id="surface-codes" className="anchor-mob">
+        <h1 id="surface-codes" className="scroll-offset">
             {" "}
             Surface Codes and Lattice Surgery{" "}
         </h1>
