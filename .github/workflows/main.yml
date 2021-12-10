@@ -98,7 +98,10 @@ jobs:
       run: npm install --global surge
       
     - name: Deploy to Surge
-      run: surge ./ ${{ env.SURGE_DOMAIN }} --token ${{ secrets.SURGE_TOKEN }}
+      run: surge ./ ${{ env.SURGE_DOMAIN }}
+      env:
+        SURGE_LOGIN: ${{ secrets.SURGE_LOGIN }}
+        SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
       
     - name: Check if deploy comment exists
       uses: peter-evans/find-comment@v1
