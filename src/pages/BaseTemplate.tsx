@@ -1,7 +1,6 @@
 /** @jsxImportSource @emotion/react */
-import React, { useEffect } from "react"
-import {Navbar, Container, Nav, NavDropdown} from 'react-bootstrap';
-import $ from "jquery"
+import React from "react"
+import { Navbar, Container, Nav } from "react-bootstrap"
 import "./BaseTemplate.css"
 import "./LatticeViewPage.css"
 import { css } from "@emotion/react"
@@ -31,28 +30,34 @@ const BaseTemplate = (): JSX.Element => {
                 >
                     Lattice Surgery Quantum Error Correction Compiler
                 </h1>
-            
-            
-                <div className="container p-0" css={css`background-color: white;`}>
+
+                <div
+                    className="container p-0"
+                    css={css`
+                        background-color: white;
+                    `}
+                >
                     <Navbar bg="dark" variant="dark" expand="lg" className="the-navbar">
-                    <Container>
-                        <Navbar.Brand href="#title">LSC</Navbar.Brand>
-                        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                        <Navbar.Collapse id="basic-navbar-nav">
-                        <Nav className="me-auto">
-                            <Nav.Link href="#get-started">Get Started</Nav.Link>
-                            <Nav.Link href="#about">About</Nav.Link>
-                            <Nav.Link href="#surface-codes">Surface Codes and Lattice Surgery</Nav.Link>
-                            {/* <NavDropdown title="Dropdown" id="basic-nav-dropdown"> */}
-                            {/* <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item> */}
-                            {/* <NavDropdown.Divider /> */}
-                            {/* <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item> */}
-                            {/* </NavDropdown> */}
-                        </Nav>
-                        </Navbar.Collapse>
-                    </Container>
+                        <Container>
+                            <Navbar.Brand href="#title">LSC</Navbar.Brand>
+                            <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                            <Navbar.Collapse id="basic-navbar-nav">
+                                <Nav className="me-auto">
+                                    <Nav.Link href="#get-started">Get Started</Nav.Link>
+                                    <Nav.Link href="#about">About</Nav.Link>
+                                    <Nav.Link href="#surface-codes">
+                                        Surface Codes and Lattice Surgery
+                                    </Nav.Link>
+                                    {/* <NavDropdown title="Dropdown" id="basic-nav-dropdown"> */}
+                                    {/* <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item> */}
+                                    {/* <NavDropdown.Divider /> */}
+                                    {/* <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item> */}
+                                    {/* </NavDropdown> */}
+                                </Nav>
+                            </Navbar.Collapse>
+                        </Container>
                     </Navbar>
-                
+
                     <div className="px-3">
                         <UploadCircuitPage appState={appState} setAppState={setAppState} />
                     </div>
@@ -74,14 +79,8 @@ const BaseTemplate = (): JSX.Element => {
                             </div>
                         </footer>
                     </div>
-                    
-
                 </div>
-
-
-
             </div>
-               
         </>
     )
 }
