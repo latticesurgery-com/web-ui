@@ -18,39 +18,25 @@
   height: 150px;
 }
 
-.anchor-pc {
-    display:block;
-    padding-top:70px;
-    margin-top:-70px;
-}
-.anchor-mob{
-    display:block;
-    padding-top:180px;
-    margin-top:-180px;
+.the-navbar {
+  font-size: 18px;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  z-index: 9;
 }
 
-#the-navbar {
-  padding:5px 5px;
-  font-size: 18px;
+.scroll-offset {
+  scroll-margin: 75px;
 }
 
 .circuit {
   max-width: 250px;
 }
 
-/*select {
-  max-width: 250px;
-}*/
-
 /* Add some top padding to the page content to prevent sudden quick movement (as the navigation bar gets a new position at the top of the page (position:fixed and top:0) */
 .main {
-  padding-top: 30px;
-}
-
-a {
-/*  color:blue;
-  text-decoration: none;
-  color: inherit;*/
+  padding-top: 20px;
 }
 
 .fas, .fab {
