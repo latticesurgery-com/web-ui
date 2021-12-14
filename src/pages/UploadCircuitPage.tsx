@@ -5,6 +5,7 @@ import { AppStateProps } from "../appState"
 
 import LatticeView from "../components/LatticeView"
 import Loader from "../components/Loader"
+import SelectExampleCircuit from "../components/SelectExampleCircuit"
 
 import axios from "axios"
 import { CompilationResult } from "../slices"
@@ -18,6 +19,8 @@ import {
 import queryString from "query-string"
 
 const UploadACircuit = ({ appState, setAppState }: AppStateProps) => {
+    const [uploadIsLoading, setUploadIsLoading] = React.useState(false)
+
     const [doLitinskiTransform, setDoLitinskiTransform] = React.useState(true)
 
     const [circuitStr, setCircuitStr] = React.useState<string | null>(null)
@@ -35,7 +38,9 @@ const UploadACircuit = ({ appState, setAppState }: AppStateProps) => {
 
     // To Do: forbid compile request submit with empty circuit
     const submitCompileRequest = () => {
+        setUploadIsLoading(true)
         const queryStringMap = queryString.parse(window.location.search)
+        // console.log("qs",queryStringMap)
 
         const apiUrl = queryStringMap.localapi
             ? `http://localhost:${queryStringMap.port || 9876}/compile`
@@ -47,6 +52,7 @@ const UploadACircuit = ({ appState, setAppState }: AppStateProps) => {
             compilationIsLoading: true,
             apiResponse: null,
         })
+        console.log("CS",circuitStr)
 
         // Async JS HTTP request to API endpoint, apiUrl
         axios
@@ -63,6 +69,7 @@ const UploadACircuit = ({ appState, setAppState }: AppStateProps) => {
                         apiResponse: new CompilerError(errortype, msg),
                         compilationIsLoading: false,
                     })
+                    setUploadIsLoading(false)
                 } else {
                     try {
                         const responseJson = JSON.parse(response.data) as CompilationResult
@@ -73,11 +80,13 @@ const UploadACircuit = ({ appState, setAppState }: AppStateProps) => {
                             ),
                             compilationIsLoading: false,
                         })
+                        setUploadIsLoading(false)
                     } catch (error) {
                         setAppState({
                             apiResponse: new JsonParseError((error as Error).toString()),
                             compilationIsLoading: false,
                         })
+                        setUploadIsLoading(false)
                     }
                 }
 
@@ -99,14 +108,17 @@ const UploadACircuit = ({ appState, setAppState }: AppStateProps) => {
                         apiResponse: new ApiHttpError(error_code, error_data, error_headers),
                         compilationIsLoading: false,
                     })
+                    setUploadIsLoading(false)
                 } else {
                     setAppState({
                         // apiResponse: new ApiHttpError((error as Error).toString()),
                         apiResponse: new NoServerResponse("Server did not respond"),
                         compilationIsLoading: false,
                     })
+                    setUploadIsLoading(false)
                 }
             })
+        
     }
 
     return (
@@ -130,7 +142,7 @@ const UploadACircuit = ({ appState, setAppState }: AppStateProps) => {
                             disabled={appState.compilationIsLoading}
                             onClick={() => submitCompileRequest()}
                         >
-                            {appState.compilationIsLoading ? (
+                            {(appState.compilationIsLoading && uploadIsLoading) ? (
                                 <Loader size={20} color="white" />
                             ) : (
                                 "Go!"
@@ -156,52 +168,6 @@ const UploadACircuit = ({ appState, setAppState }: AppStateProps) => {
     )
 }
 
-// TODO implement default circuits by pulling them from assets
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const SelectSampleCircuit = ({ setAppState }: AppStateProps) => (
-    <p>
-        Or choose from the following example circuits:
-        <form>
-            <div className="input-group">
-                <select
-                    className="form-select"
-                    name="circuit"
-                    css={css`
-                        max-width: 250px;
-                    `}
-                >
-                    <option value="" disabled selected>
-                        {" "}
-                        Select a Circuit
-                    </option>
-                    <option value="{{ circuit }}">circuit</option>
-                </select>
-                <div className="input-group-append">
-                    {/* <input type="submit" className="btn btn-info" value="Go!"/> */}
-                    {/* When implemented, will be a button with onClick rather than html input */}
-                    <button type="submit" className="btn btn-info">
-                        Go!
-                    </button>
-                </div>
-                <input type="hidden" name="localcircuit" value="yes" />
-            </div>
-            <div className="form-check">
-                <input
-                    type="checkbox"
-                    className="form-check-input"
-                    id="litinski_check1"
-                    name="litinski"
-                    value="true"
-                    checked
-                />
-                <label className="form-check-label" htmlFor="litinski_check1">
-                    Litinski Transform
-                </label>
-            </div>
-        </form>
-    </p>
-)
-
 const CompilerInputCircuitSelection = ({ appState, setAppState }: AppStateProps) => (
     <>
         <h2 id="get-started" className="scroll-offset">
@@ -209,13 +175,13 @@ const CompilerInputCircuitSelection = ({ appState, setAppState }: AppStateProps)
         </h2>
         <hr />
         <UploadACircuit setAppState={setAppState} appState={appState} />
-        {/*<SelectSampleCircuit setAppState={setAppState} appState={appState}/> */}
+        <SelectExampleCircuit setAppState={setAppState} appState={appState} />
     </>
 )
 
 const AboutText = () => (
     <>
-        <h2 id="about" className="scroll-offset">
+        <h2 id="about" className="scroll-offset mt-2">
             About
         </h2>
         <hr />

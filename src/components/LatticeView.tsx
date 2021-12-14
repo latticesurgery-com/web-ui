@@ -261,8 +261,7 @@ const LatticeView = ({ compilationResult }: LatticeViewProps): JSX.Element => {
 
             <div className="p-3">
                 <a href="/" className="btn btn-info p-2">
-                    {" "}
-                    New Circuit{" "}
+                    New Circuit
                 </a>
             </div>
         </div>
