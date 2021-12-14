@@ -16,7 +16,7 @@ import queryString from "query-string"
 import Loader from "./Loader"
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-const SelectExampleCircuit = ({ appState, setAppState }: AppStateProps) => {
+const SelectExampleCircuit = ({ appState, setAppState }: AppStateProps): JSX.Element => {
     const [exampleIsLoading, setExampleIsLoading] = React.useState(false)
 
     const [doLitinskiTransform, setDoLitinskiTransform] = React.useState(true)
