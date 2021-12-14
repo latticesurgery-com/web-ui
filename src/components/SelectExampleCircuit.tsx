@@ -32,7 +32,6 @@ const SelectExampleCircuit = ({ appState, setAppState }: AppStateProps) => {
         readCircuitFile(value)
     }
 
-
     // set circuitStr to the selected Example Circuit
     const readCircuitFile = (filename: string) => {
         const file_url = `${process.env.PUBLIC_URL}/assets/demo_circuits/${filename}`
