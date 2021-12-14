@@ -40,7 +40,6 @@ const UploadACircuit = ({ appState, setAppState }: AppStateProps) => {
     const submitCompileRequest = () => {
         setUploadIsLoading(true)
         const queryStringMap = queryString.parse(window.location.search)
-        // console.log("qs",queryStringMap)
 
         const apiUrl = queryStringMap.localapi
             ? `http://localhost:${queryStringMap.port || 9876}/compile`
@@ -52,7 +51,6 @@ const UploadACircuit = ({ appState, setAppState }: AppStateProps) => {
             compilationIsLoading: true,
             apiResponse: null,
         })
-        console.log("CS",circuitStr)
 
         // Async JS HTTP request to API endpoint, apiUrl
         axios
@@ -118,7 +116,6 @@ const UploadACircuit = ({ appState, setAppState }: AppStateProps) => {
                     setUploadIsLoading(false)
                 }
             })
-        
     }
 
     return (
@@ -142,7 +139,7 @@ const UploadACircuit = ({ appState, setAppState }: AppStateProps) => {
                             disabled={appState.compilationIsLoading}
                             onClick={() => submitCompileRequest()}
                         >
-                            {(appState.compilationIsLoading && uploadIsLoading) ? (
+                            {appState.compilationIsLoading && uploadIsLoading ? (
                                 <Loader size={20} color="white" />
                             ) : (
                                 "Go!"

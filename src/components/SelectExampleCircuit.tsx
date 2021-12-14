@@ -17,9 +17,8 @@ import Loader from "./Loader"
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const SelectExampleCircuit = ({ appState, setAppState }: AppStateProps) => {
-    
     const [exampleIsLoading, setExampleIsLoading] = React.useState(false)
-    
+
     const [doLitinskiTransform, setDoLitinskiTransform] = React.useState(true)
 
     const [circuitStr, setCircuitStr] = React.useState<string | null>(null)
@@ -32,23 +31,21 @@ const SelectExampleCircuit = ({ appState, setAppState }: AppStateProps) => {
         setExampleCircuit(value)
         readCircuitFile(value)
     }
-    // console.log(exampleCircuit)
+
 
     // set circuitStr to the selected Example Circuit
     const readCircuitFile = (filename: string) => {
         const file_url = `${process.env.PUBLIC_URL}/assets/demo_circuits/${filename}`
-        console.log(file_url)
         fetch(file_url)
-            .then(function(response) {
-              return response.text();
+            .then(function (response) {
+                return response.text()
             })
-            .then(function(data){
-              // console.log("D",data)
-              setCircuitStr(data)
+            .then(function (data) {
+                setCircuitStr(data)
             })
     }
     readCircuitFile(exampleCircuit)
-    
+
     // To Do: forbid compile request submit with empty circuit
     const submitCompileRequest = () => {
         setExampleIsLoading(true)
@@ -160,7 +157,7 @@ const SelectExampleCircuit = ({ appState, setAppState }: AppStateProps) => {
                             disabled={appState.compilationIsLoading}
                             onClick={() => submitCompileRequest()}
                         >
-                            {(appState.compilationIsLoading && exampleIsLoading) ? (
+                            {appState.compilationIsLoading && exampleIsLoading ? (
                                 <Loader size={20} color="white" />
                             ) : (
                                 "Go!"
