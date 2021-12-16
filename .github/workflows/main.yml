@@ -145,7 +145,10 @@ jobs:
     
     - name: Upload to S3 
       run: aws s3 sync . ${{ secrets.S3_BUCKET_PATH }} --delete
-
+      
+    - name: Invalidate CloudFront cache 
+      run: aws cloudfront create-invalidation --distribution-id ${{ secrets.CF_DISTRIBUTION_ID }} --paths '/index.html'
+  
   deploy-prod:
     name: Deploy to production
     runs-on: ubuntu-latest
@@ -170,3 +173,6 @@ jobs:
     
     - name: Upload to S3 
       run: aws s3 sync . ${{ secrets.S3_BUCKET_PATH }} --delete
+      
+    - name: Invalidate CloudFront cache 
+      run: aws cloudfront create-invalidation --distribution-id ${{ secrets.CF_DISTRIBUTION_ID }} --paths '/index.html'
