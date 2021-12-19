@@ -33,7 +33,6 @@ jobs:
         body-includes: Preview is deployed to 
 
     - name: Teardown preview on Surge
-      if: ${{ steps.fc.outputs.comment-id != 0 }}
       continue-on-error: true
       run: surge teardown ${{ env.SURGE_DOMAIN }}
       env:
