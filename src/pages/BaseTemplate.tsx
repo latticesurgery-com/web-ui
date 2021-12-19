@@ -2,7 +2,6 @@
 import React from "react"
 import { Navbar, Container, Nav } from "react-bootstrap"
 import "./BaseTemplate.css"
-import "./LatticeViewPage.css"
 import { css } from "@emotion/react"
 import UploadCircuitPage from "./UploadCircuitPage"
 
