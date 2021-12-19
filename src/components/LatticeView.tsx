@@ -5,7 +5,7 @@ import { CompilationResult, Slice, VisualArrayCell } from "../slices"
 import { PatchType, Orientation, EdgeType, ActivityType } from "../slices"
 // import CompilationSwitch from "./CompilationSwitch"
 import { css } from "@emotion/react"
-import "./LatticeViewPage.css"
+import "./LatticeView.css"
 
 type StylesMapType = {
     [key in Orientation | PatchType | EdgeType]: string
