@@ -142,7 +142,6 @@ const LatticeView = ({ compilationResult }: LatticeViewProps): JSX.Element => {
     const [selectedSliceNumber, setSelectedSliceNumber] = React.useState<number>(0)
     const changeSlice = (delta: number) => {
         setSelectedSliceNumber(selectedSliceNumber + delta)
-        scrollToLattice()
     }
     const { compilation_text, slices } = compilationResult
     const slices_len = slices.length
@@ -157,12 +156,6 @@ const LatticeView = ({ compilationResult }: LatticeViewProps): JSX.Element => {
     React.useEffect(() => {
         latticeSection.current && latticeSection.current?.scrollIntoView()
     }, [])
-
-    // scroll into Lattice View, after slice navigation buttons pressed
-    const latticeSlices = useRef<HTMLInputElement>(null)
-    const scrollToLattice = () => {
-        latticeSlices.current && latticeSlices.current?.scrollIntoView()
-    }
 
     // set state of checkbox switch
     const [showCompilationText, setCompilationText] = useState(false)
@@ -210,7 +203,7 @@ const LatticeView = ({ compilationResult }: LatticeViewProps): JSX.Element => {
             </div>
 
             {/* Updated Toolbar */}
-            <div className="d-flex mt-1 scroll-margin" ref={latticeSlices}>
+            <div className="d-flex mt-1 scroll-margin">
                 <div
                     id="slice-toolbar"
                     className="lattice-card shadow"
