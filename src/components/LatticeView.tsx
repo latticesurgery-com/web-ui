@@ -127,7 +127,7 @@ const SliceViewer = ({ slice }: SliceViewerProps) => (
             <div className="lattice-row row flex-nowrap" key={row_idx}>
                 {row.map((cell, col_idx) => (
                     <div className="lattice-cell ratio ratio-1x1 col" key={col_idx}>
-                        <CellViewer cell={cell} row_idx={row_idx} col_idx={row_idx} key={col_idx} />
+                        <CellViewer cell={cell} row_idx={row_idx} col_idx={col_idx} key={col_idx} />
                     </div>
                 ))}
             </div>
@@ -166,8 +166,7 @@ const LatticeView = ({ compilationResult }: LatticeViewProps): JSX.Element => {
     return (
         <div id="lattice-view-output">
             <h2 ref={latticeSection} className="scroll-margin">
-                {" "}
-                Lattice Viewer{" "}
+                Lattice Viewer
             </h2>
             <hr />
 
