@@ -98,7 +98,7 @@ const CellViewer = ({ cell, row_idx, col_idx }: CellViewerProps) => {
                     color: #686c6d;
                 `}
             >
-                ({col_idx},{row_idx})
+                ({row_idx},{col_idx})
             </span>
             <br />
             <span>
