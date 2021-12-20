@@ -80,6 +80,8 @@ jobs:
     runs-on: ubuntu-latest
     if: github.repository_owner == 'latticesurgery-com' && github.event_name == 'pull_request'
     needs: [build]
+    permissions:
+      pull-requests: write 
     env:
       SURGE_DOMAIN: ${{ format('https://{0}-{1}-pr{2}-preview.surge.sh', github.repository_owner, 
         github.event.repository.name, github.event.pull_request.number) }}
