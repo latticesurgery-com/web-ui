@@ -16,11 +16,11 @@ How to Reproduce
 ----------------
 
 
-If possible, please provide us with the steps that lead to the behavior that you are seeing, and include the snippet of the code that generates the error as well as the error message from python below. 
+If possible, please provide us with the steps that lead to the behavior that you are seeing, and include the snippet of the code that generates the error as well as the error message from the browser's or node's console below. 
 
 ### Code Snippet
 
-```python
+```ts
 Include a snippet of the code that produces the error here.
 ```
 
