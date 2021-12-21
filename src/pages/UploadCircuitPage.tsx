@@ -186,13 +186,6 @@ const AboutText = () => (
             This compiler accepts a quantum circuit and compiles it to a computation expressed in
             terms of lattice surgery operations on a surface code lattice.
         </p>
-        <img
-            src="lattice_view_example.png"
-            css={css`
-                width: 100%;
-            `}
-            alt="Lattice Viewer"
-        />
         <p>
             The output of the compiler is a computation is expressed in terms of <em>patches</em> of
             a surface code lattice. Each patch is associated with quantum states. The states are
