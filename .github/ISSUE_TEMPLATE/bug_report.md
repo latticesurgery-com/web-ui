@@ -15,26 +15,23 @@ Insert a short description of the bug here, along with what you expected the beh
 How to Reproduce
 ----------------
 
-
-If possible, please provide us with the steps that lead to the behavior that you are seeing, and include the snippet of the code that generates the error as well as the error message from the browser's or node's console below. 
+If possible, please provide us with the steps that lead to the behavior that you are seeing, and instructions and/or the snippet of the code that generates the error. 
 
 ### Code Snippet
 
 ```ts
-Include a snippet of the code that produces the error here.
+//Include a snippet of the code that produces the error here.
 ```
 
 ### Error Output
 
-```
-Additionally, please copy and paste the output of the above code here.
-```
+Please add here a screenshot of the error or paste the error message from the browser's or node's console
 
 Environment Context
 -------------------
 
-Please add information about your operating system, python version and dependencies here. 
+Please add information about your browser, such as version and relevant extensions.
 
 ```
-Copy and paste the output of pip freeze or conda list here.
+E.g. Firefox 92.0.1 64bit Mozzilla Firefox for Arch Linux 1.0
 ```
