@@ -178,7 +178,7 @@ const CompilerInputCircuitSelection = ({ appState, setAppState }: AppStateProps)
 
 const AboutText = () => (
     <>
-        <h2 id="about" className="scroll-offset mt-2">
+        <h2 id="about" className="scroll-offset mt-4">
             About
         </h2>
         <hr />

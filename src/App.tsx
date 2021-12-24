@@ -1,7 +1,5 @@
-import React from "react"
+import MainPage from "./pages/MainPage"
 
-import BaseTemplate from "./pages/BaseTemplate"
-
-const App = (): JSX.Element => <BaseTemplate />
+const App = (): JSX.Element => <MainPage />
 
 export default App
