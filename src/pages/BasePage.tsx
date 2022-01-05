@@ -1,11 +1,13 @@
 /** @jsxImportSource @emotion/react */
 import React from "react"
 import { Navbar, Container, Nav } from "react-bootstrap"
-import "./MainPage.css"
+import "./BasePage.css"
 import { css } from "@emotion/react"
-import UploadCircuitPage from "./UploadCircuitPage"
 
 import { AppState } from "../appState"
+import HomePage from "./HomePage"
+
+// Base Page Includes Navbar, footer, and Main Content
 
 const MainPage = (): JSX.Element => {
     // This section handles the state of the web application, either in circuit upload or in lattice view.
@@ -58,7 +60,7 @@ const MainPage = (): JSX.Element => {
                     </Navbar>
 
                     <div className="px-3">
-                        <UploadCircuitPage appState={appState} setAppState={setAppState} />
+                        <HomePage appState={appState} setAppState={setAppState} />
                     </div>
                     <div className="px-0">
                         <footer

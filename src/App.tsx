@@ -1,5 +1,5 @@
-import MainPage from "./pages/MainPage"
+import BasePage from "./pages/BasePage"
 
-const App = (): JSX.Element => <MainPage />
+const App = (): JSX.Element => <BasePage />
 
 export default App

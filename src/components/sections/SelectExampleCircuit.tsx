@@ -1,19 +1,19 @@
-import { AppStateProps } from "../appState"
+import { AppStateProps } from "../../appState"
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react"
 import React from "react"
 import axios from "axios"
 
-import { CompilationResult } from "../slices"
+import { CompilationResult } from "../../slices"
 import {
     JsonParseError,
     ApiHttpError,
     CompilationResultSuccess,
     NoServerResponse,
     CompilerError,
-} from "../apiResponses"
+} from "../../apiResponses"
 import queryString from "query-string"
-import Loader from "./Loader"
+import Loader from "../Loader"
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const SelectExampleCircuit = ({ appState, setAppState }: AppStateProps): JSX.Element => {
