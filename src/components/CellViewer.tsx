@@ -2,7 +2,6 @@
 import { css } from "@emotion/react"
 import { PatchType, Orientation, EdgeType, ActivityType } from "../slices"
 import { VisualArrayCell } from "../slices"
-// import CompilationSwitch from "./CompilationSwitch"
 
 type StylesMapType = {
     [key in Orientation | PatchType | EdgeType]: string
