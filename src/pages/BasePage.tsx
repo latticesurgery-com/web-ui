@@ -1,13 +1,15 @@
 /** @jsxImportSource @emotion/react */
 import React from "react"
 import { Navbar, Container, Nav } from "react-bootstrap"
-import "./BaseTemplate.css"
+import "./BasePage.css"
 import { css } from "@emotion/react"
-import UploadCircuitPage from "./UploadCircuitPage"
 
 import { AppState } from "../appState"
+import HomePage from "./HomePage"
 
-const BaseTemplate = (): JSX.Element => {
+// Base Page Includes Navbar, footer, and Main Content
+
+const MainPage = (): JSX.Element => {
     // This section handles the state of the web application, either in circuit upload or in lattice view.
     // TODO handle with Redux
     const [appState, setAppState] = React.useState(new AppState())
@@ -58,7 +60,7 @@ const BaseTemplate = (): JSX.Element => {
                     </Navbar>
 
                     <div className="px-3">
-                        <UploadCircuitPage appState={appState} setAppState={setAppState} />
+                        <HomePage appState={appState} setAppState={setAppState} />
                     </div>
                     <div className="px-0">
                         <footer
@@ -83,4 +85,4 @@ const BaseTemplate = (): JSX.Element => {
         </>
     )
 }
-export default BaseTemplate
+export default MainPage
