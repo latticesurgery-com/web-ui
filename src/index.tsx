@@ -6,7 +6,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom"
 import "./index.css"
 import BasePage from "./pages/BasePage"
 import reportWebVitals from "./reportWebVitals"
-import About from "./pages/About"
+import AboutUs from "./pages/AboutUs"
 import theme from "./styles/theme"
 
 ReactDOM.render(
@@ -16,6 +16,7 @@ ReactDOM.render(
             <BrowserRouter>
                 <Routes>
                     <Route path="/" element={<BasePage />} />
+                    <Route path="/about-us" element={<AboutUs />} />
                 </Routes>
             </BrowserRouter>
         </ChakraProvider>
