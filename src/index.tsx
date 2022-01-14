@@ -1,14 +1,18 @@
 import React from "react"
 import ReactDOM from "react-dom"
-import { ChakraProvider } from "@chakra-ui/react"
+import { ChakraProvider, ColorModeScript } from "@chakra-ui/react"
 import { BrowserRouter, Route, Routes } from "react-router-dom"
+
 import "./index.css"
 import BasePage from "./pages/BasePage"
 import reportWebVitals from "./reportWebVitals"
+import About from "./pages/About"
+import theme from "./styles/theme"
 
 ReactDOM.render(
     <React.StrictMode>
         <ChakraProvider>
+            <ColorModeScript initialColorMode={theme.config.initialColorMode} />
             <BrowserRouter>
                 <Routes>
                     <Route path="/" element={<BasePage />} />
