@@ -46,7 +46,7 @@ const LatticeView = ({ compilationResult }: LatticeViewProps): JSX.Element => {
     }, [])
 
     // set state of checkbox switch
-    const [showCompilationText, setCompilationText] = useState(false)
+    const [showCompilationText, setCompilationText] = useState(true)
     const handleChange = () => {
         setCompilationText(!showCompilationText)
     }
@@ -66,6 +66,7 @@ const LatticeView = ({ compilationResult }: LatticeViewProps): JSX.Element => {
                         role="switch"
                         id="flexSwitchCheckDefault"
                         onChange={handleChange}
+                        defaultChecked={true}
                     />
                     <label className="form-check-label" htmlFor="flexSwitchCheckDefault">
                         View Compilation
