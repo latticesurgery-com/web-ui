@@ -1,9 +1,11 @@
 import { Avatar, Flex, Box, Heading, Text, Icon, Link, Container } from "@chakra-ui/react"
 import { FaGithub, FaLinkedin } from "react-icons/fa"
+import Navbar from "../components/UI/Navbar"
 
 const AboutUs = (): JSX.Element => {
     return (
         <Container maxW="container.xl">
+            <Navbar />
             <Heading as="h1" size="2xl" my={4} textAlign={"center"}>
                 Our Team
             </Heading>
