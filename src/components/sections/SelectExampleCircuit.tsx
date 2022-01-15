@@ -64,7 +64,14 @@ const SelectExampleCircuit = ({ appState, setAppState }: AppStateProps): JSX.Ele
                             `}
                             className="btn btn-primary"
                             disabled={appState.compilationIsLoading}
-                            onClick={() => submitCompileRequest({appState, setAppState}, circuitStr as string,setExampleIsLoading, doLitinskiTransform)}
+                            onClick={() =>
+                                submitCompileRequest(
+                                    { appState, setAppState },
+                                    circuitStr as string,
+                                    setExampleIsLoading,
+                                    doLitinskiTransform
+                                )
+                            }
                         >
                             {appState.compilationIsLoading && exampleIsLoading ? (
                                 <Loader size={20} color="white" />

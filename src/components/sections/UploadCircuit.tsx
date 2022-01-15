@@ -8,7 +8,6 @@ import Loader from "../../components/Loader"
 import SelectExampleCircuit from "./SelectExampleCircuit"
 import submitCompileRequest from "../submitCompileRequest"
 
-
 const UploadACircuit = ({ appState, setAppState }: AppStateProps) => {
     const [uploadIsLoading, setUploadIsLoading] = React.useState(false)
 
@@ -29,7 +28,6 @@ const UploadACircuit = ({ appState, setAppState }: AppStateProps) => {
 
     // To Do: forbid compile request submit with empty circuit
 
-
     return (
         <div className="mb-3">
             Upload an OpenQASM circuit.
@@ -49,7 +47,14 @@ const UploadACircuit = ({ appState, setAppState }: AppStateProps) => {
                             `}
                             className="btn btn-primary"
                             disabled={appState.compilationIsLoading}
-                            onClick={() => submitCompileRequest({ appState, setAppState}, circuitStr as string,setUploadIsLoading, doLitinskiTransform)}
+                            onClick={() =>
+                                submitCompileRequest(
+                                    { appState, setAppState },
+                                    circuitStr as string,
+                                    setUploadIsLoading,
+                                    doLitinskiTransform
+                                )
+                            }
                         >
                             {appState.compilationIsLoading && uploadIsLoading ? (
                                 <Loader size={20} color="white" />
