@@ -5,6 +5,7 @@ import { CompilationResult, Slice } from "../../slices"
 import CellViewer from "../CellViewer"
 import { css } from "@emotion/react"
 import "./LatticeView.css"
+import Draggable from 'react-draggable'; // The default
 
 type SliceViewerProps = {
     slice: Slice
@@ -136,10 +137,12 @@ const LatticeView = ({ compilationResult }: LatticeViewProps): JSX.Element => {
                     </div>
                 </div>
             </div>
-
-            <div id="draggable-container" className="mt-2">
-                <SliceViewer slice={slices[selectedSliceNumber]} />
-            </div>
+            
+            <Draggable>
+                <div id="draggable-container" className="mt-2">
+                        <SliceViewer slice={slices[selectedSliceNumber]} />
+                </div>
+            </Draggable>
 
             <div className="p-3">
                 <a href="/" className="btn btn-info p-2">
