@@ -28,8 +28,7 @@ jobs:
       run: npm ci
     
     - name: Run ESLint & Prettier
-      run: |
-        npm run lint
+      run: npm run lint
 
   build:
     name: Build
@@ -82,7 +81,9 @@ jobs:
       run: npm install --global surge
       
     - name: Deploy to Surge
-      run: surge ./ ${{ env.SURGE_DOMAIN }}
+      run: |
+        cp index.html 200.html
+        surge ./ ${{ env.SURGE_DOMAIN }}
       env:
         SURGE_LOGIN: ${{ secrets.SURGE_LOGIN }}
         SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
