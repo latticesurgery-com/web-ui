@@ -8,8 +8,9 @@ import {
     useDisclosure,
     useColorModeValue,
     Stack,
+    LinkProps as ChakraLinkProps,
 } from "@chakra-ui/react"
-import { Link as RouterLink, useLocation } from "react-router-dom"
+import { Link as RouterLink, LinkProps as RouterLinkProps, useLocation } from "react-router-dom"
 import { IoMdMenu, IoIosClose, IoMdSunny, IoMdMoon } from "react-icons/io"
 
 import logo from "../../assets/logo.svg"
@@ -23,7 +24,7 @@ interface LinkItem {
 const Links: Array<LinkItem> = [
     { name: "Home", href: "/" },
     { name: "Page 1", href: "/" },
-    { name: "Page 2", href: "/" },
+    { name: "Docs", href: "https://lattice-surgery-compiler.readthedocs.io/en/latest/" },
     { name: "About Us", href: "/about-us" },
 ]
 
@@ -33,23 +34,37 @@ interface NavLinkProps {
     isActive: boolean
 }
 
-const NavLink = ({ name, href, isActive }: NavLinkProps) => (
-    <Link
-        px={2}
-        py={1}
-        rounded={"md"}
-        _hover={{
-            textDecoration: "none",
-            color: "unset",
-            bg: useColorModeValue("gray.100", "gray.700"),
-        }}
-        fontWeight={isActive ? 600 : "normal"}
-        as={RouterLink}
-        to={href}
-    >
-        {name}
-    </Link>
-)
+const NavLink = ({ name, href, isActive }: NavLinkProps) => {
+    const isExternal =
+        typeof href === "string" && (href.indexOf("http") === 0 || href.indexOf("mailto:") === 0)
+
+    let LinkProps: RouterLinkProps | ChakraLinkProps = {}
+
+    if (isExternal) {
+        LinkProps = { href: href, isExternal }
+    } else {
+        LinkProps = {
+            fontWeight: isActive ? 600 : "normal",
+            as: RouterLink,
+            to: href,
+        }
+    }
+    return (
+        <Link
+            px={2}
+            py={1}
+            rounded={"md"}
+            _hover={{
+                textDecoration: "none",
+                color: "unset",
+                bg: useColorModeValue("gray.100", "gray.700"),
+            }}
+            {...LinkProps}
+        >
+            {name}
+        </Link>
+    )
+}
 
 const Navbar = () => {
     const { isOpen, onOpen, onClose } = useDisclosure()
