@@ -4,10 +4,11 @@ import { ChakraProvider, ColorModeScript } from "@chakra-ui/react"
 import { BrowserRouter, Route, Routes } from "react-router-dom"
 
 import "./index.css"
-import BasePage from "./pages/BasePage"
 import reportWebVitals from "./reportWebVitals"
-import AboutUs from "./pages/AboutUs"
 import theme from "./styles/theme"
+import BasePage from "./pages/BasePage"
+import AboutUs from "./pages/AboutUs"
+import NotFound from "./pages/NotFound"
 
 ReactDOM.render(
     <React.StrictMode>
@@ -17,6 +18,7 @@ ReactDOM.render(
                 <Routes>
                     <Route path="/" element={<BasePage />} />
                     <Route path="/about-us" element={<AboutUs />} />
+                    <Route path="*" element={<NotFound />} />
                 </Routes>
             </BrowserRouter>
         </ChakraProvider>
