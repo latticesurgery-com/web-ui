@@ -9,6 +9,7 @@ import theme from "./styles/theme"
 import BasePage from "./pages/BasePage"
 import AboutUs from "./pages/AboutUs"
 import NotFound from "./pages/NotFound"
+import Overview from "./pages/Overview"
 
 ReactDOM.render(
     <React.StrictMode>
@@ -17,6 +18,7 @@ ReactDOM.render(
             <BrowserRouter>
                 <Routes>
                     <Route path="/" element={<BasePage />} />
+                    <Route path="/overview" element={<Overview />} />
                     <Route path="/about-us" element={<AboutUs />} />
                     <Route path="*" element={<NotFound />} />
                 </Routes>

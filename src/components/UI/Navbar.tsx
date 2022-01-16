@@ -23,8 +23,9 @@ interface LinkItem {
 
 const Links: Array<LinkItem> = [
     { name: "Home", href: "/" },
-    { name: "Page 1", href: "/" },
+    { name: "Overview", href: "/overview" },
     { name: "Docs", href: "https://lattice-surgery-compiler.readthedocs.io/en/latest/" },
+    { name: "GitHub", href: "https://github.com/latticesurgery-com/" },
     { name: "About Us", href: "/about-us" },
 ]
 

@@ -1,8 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { AppStateProps } from "../appState"
 import LatticeView from "../components/sections/LatticeView"
-import AboutText from "../components/sections/AboutText"
-import SurfaceCodesText from "../components/sections/SurfaceCodesText"
 import UploadCircuit from "../components/sections/UploadCircuit"
 import {
     JsonParseError,
@@ -60,10 +58,6 @@ const HomePage = ({ appState, setAppState }: AppStateProps): JSX.Element => {
                         {appState.apiResponse instanceof CompilationResultSuccess && (
                             <LatticeView compilationResult={appState.apiResponse} />
                         )}
-
-                        <AboutText />
-                        <SurfaceCodesText />
-                        <hr />
                     </div>
                 </section>
             </div>
