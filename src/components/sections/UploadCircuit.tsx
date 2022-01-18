@@ -37,6 +37,9 @@ const UploadACircuit = ({ appState, setAppState }: AppStateProps) => {
                         id="circuit"
                         className="form-control circuit"
                         name="circuit"
+                        css={css`
+                            max-width: 500px;
+                        `}
                         type="file"
                         onChange={(e) => readCircuitFile(e?.target?.files && e.target.files[0])}
                     />

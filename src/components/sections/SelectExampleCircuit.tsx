@@ -44,7 +44,7 @@ const SelectExampleCircuit = ({ appState, setAppState }: AppStateProps): JSX.Ele
                     <select
                         className="form-select"
                         css={css`
-                            max-width: 250px;
+                            max-width: 500px;
                         `}
                         name="circuit"
                         onChange={handleChange}

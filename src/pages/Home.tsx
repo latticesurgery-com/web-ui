@@ -1,5 +1,6 @@
 import { Container, Stack, Heading, Text, Button, Link, Image, Flex } from "@chakra-ui/react"
 import { FaGithub } from "react-icons/fa"
+import { Link as RouterLink } from "react-router-dom"
 
 import Navbar from "../components/UI/Navbar"
 
@@ -25,7 +26,9 @@ const Home = (): JSX.Element => {
                     operations on a surface code lattice.
                 </Text>
                 <Flex gap={6} direction={"row"} wrap={"wrap"} justify={"center"}>
-                    <Button size={"lg"}>Test out the visualizer</Button>
+                    <Button size={"lg"} as={RouterLink} to={"/online-compiler"}>
+                        Test out the compiler
+                    </Button>
                     <Button
                         variant={"outline"}
                         size={"lg"}

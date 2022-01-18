@@ -7,6 +7,7 @@ import "./index.css"
 import reportWebVitals from "./reportWebVitals"
 import theme from "./styles/theme"
 import Home from "./pages/Home"
+import CompilerPage from "./pages/Compiler"
 import AboutUs from "./pages/AboutUs"
 import NotFound from "./pages/NotFound"
 import Overview from "./pages/Overview"
@@ -18,6 +19,7 @@ ReactDOM.render(
             <BrowserRouter>
                 <Routes>
                     <Route path="/" element={<Home />} />
+                    <Route path="/online-compiler" element={<CompilerPage />} />
                     <Route path="/overview" element={<Overview />} />
                     <Route path="/about-us" element={<AboutUs />} />
                     <Route path="*" element={<NotFound />} />
