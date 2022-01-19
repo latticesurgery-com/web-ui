@@ -1,7 +1,6 @@
 import { useState } from "react"
 import { AppState } from "../appState"
 import LatticeView from "../components/sections/LatticeView"
-import UploadCircuit from "../components/sections/UploadCircuit"
 import {
     JsonParseError,
     ApiHttpError,
@@ -9,8 +8,9 @@ import {
     NoServerResponse,
     CompilerError,
 } from "../apiResponses"
-import { Container, Stack } from "@chakra-ui/react"
+import { Container, Stack, Box } from "@chakra-ui/react"
 import Navbar from "../components/UI/Navbar"
+import CircuitSelect from "../components/sections/CircuitSelect"
 
 const CompilerPage = (): JSX.Element => {
     const [appState, setAppState] = useState(new AppState())
@@ -18,16 +18,11 @@ const CompilerPage = (): JSX.Element => {
         <>
             <Container maxW="container.xl">
                 <Navbar />
+                <Box mt={10}>
+                    <CircuitSelect appState={appState} setAppState={setAppState} />
+                </Box>
             </Container>
             <Stack mt={10} spacing={5} px={10}>
-                <UploadCircuit appState={appState} setAppState={setAppState} />
-                {appState.compilationIsLoading && (
-                    <div>
-                        <div className="spinner-border text-success" role="status"></div>
-                        <b>Processing...</b>
-                    </div>
-                )}
-
                 {appState.apiResponse instanceof ApiHttpError && (
                     <div className="alert alert-danger">
                         <div>{"API Status: " + appState.apiResponse.code}</div>
