@@ -9,16 +9,12 @@ import {
     NoServerResponse,
     CompilerError,
 } from "../apiResponses"
-import React from "react"
 
 const submitCompileRequest = (
     { appState, setAppState }: AppStateProps,
     circuitStr: string,
-    setIsLoading: React.Dispatch<boolean>,
     doLitinskiTransform: boolean
 ) => {
-    setIsLoading(true)
-
     const queryStringMap = queryString.parse(window.location.search)
 
     const apiUrl = queryStringMap.localapi
@@ -47,7 +43,6 @@ const submitCompileRequest = (
                     apiResponse: new CompilerError(errortype, msg),
                     compilationIsLoading: false,
                 })
-                setIsLoading(false)
             } else {
                 try {
                     const responseJson = JSON.parse(response.data) as CompilationResult
@@ -58,13 +53,11 @@ const submitCompileRequest = (
                         ),
                         compilationIsLoading: false,
                     })
-                    setIsLoading(false)
                 } catch (error) {
                     setAppState({
                         apiResponse: new JsonParseError((error as Error).toString()),
                         compilationIsLoading: false,
                     })
-                    setIsLoading(false)
                 }
             }
 
@@ -86,14 +79,12 @@ const submitCompileRequest = (
                     apiResponse: new ApiHttpError(error_code, error_data, error_headers),
                     compilationIsLoading: false,
                 })
-                setIsLoading(false)
             } else {
                 setAppState({
                     // apiResponse: new ApiHttpError((error as Error).toString()),
                     apiResponse: new NoServerResponse("Server did not respond"),
                     compilationIsLoading: false,
                 })
-                setIsLoading(false)
             }
         })
 }

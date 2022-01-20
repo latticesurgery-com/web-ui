@@ -1,12 +1,33 @@
 import React from "react"
 import ReactDOM from "react-dom"
-import "./index.css"
-import App from "./App"
+import { ChakraProvider, ColorModeScript } from "@chakra-ui/react"
+import { BrowserRouter, Route, Routes } from "react-router-dom"
+
 import reportWebVitals from "./reportWebVitals"
+import theme from "./styles/theme"
+
+const Home = React.lazy(() => import("./pages/Home"))
+const CompilerPage = React.lazy(() => import("./pages/Compiler"))
+const AboutUs = React.lazy(() => import("./pages/AboutUs"))
+const Overview = React.lazy(() => import("./pages/Overview"))
+const NotFound = React.lazy(() => import("./pages/NotFound"))
 
 ReactDOM.render(
     <React.StrictMode>
-        <App />
+        <ChakraProvider theme={theme}>
+            <ColorModeScript initialColorMode={theme.config.initialColorMode} />
+            <BrowserRouter>
+                <React.Suspense fallback={<></>}>
+                    <Routes>
+                        <Route path="/" element={<Home />} />
+                        <Route path="/online-compiler" element={<CompilerPage />} />
+                        <Route path="/overview" element={<Overview />} />
+                        <Route path="/about-us" element={<AboutUs />} />
+                        <Route path="*" element={<NotFound />} />
+                    </Routes>
+                </React.Suspense>
+            </BrowserRouter>
+        </ChakraProvider>
     </React.StrictMode>,
     document.getElementById("root")
 )
