@@ -16,11 +16,11 @@ const Overview = (): JSX.Element => {
                 <Text mb={8}>
                     The output of the compiler is a computation is expressed in terms of{" "}
                     <Text as="em">patches</Text> of a surface code lattice. Each patch is associated
-                    with quantum states. The states are tracked and &ldquo;evolved&rdquo;, so that
+                    with a quantum state. The states are tracked and &ldquo;evolved&rdquo;, so that
                     one can view what the lattice surgery operations are doing to the quantum
                     states. When compilation terminates, the user is presented with a viewer (in
-                    figure) to explore this computation. Additionally one can choose to display the
-                    intermediate stages, expressed as quantum circuits.
+                    figure) to explore this computation. One can choose to display the intermediate
+                    stages, expressed as quantum circuits.
                 </Text>
                 <Text mb={4}>
                     This tool is the result of a project aimed at exploring the challenges involved
@@ -31,36 +31,39 @@ const Overview = (): JSX.Element => {
                 </Text>
                 <Text mb={8}>
                     A great deal of inspiration was taken from Daniel Litinski&apos;s Game of
-                    Surface codes{" "}
+                    Surface Codes{" "}
                     <Link
-                        as="sub"
+                        as="sup"
                         color="teal.500"
                         href="https://arxiv.org/abs/1911.05759"
                         isExternal
                     >
                         [1]
-                    </Link>{" "}
-                    of which we follow the formulation of a lattice surgery computation in terms of
-                    patches and the pre processing of quantum circuits as Pauli rotations.
-                    Additionally we have an option to remove the stabilizer part of the circuit from
-                    the quantum computation with an algorithm outlined in the same paper. It is
-                    available with the name Litinski Transform.
+                    </Link>
+                    . We follow Litinski’s formulation of lattice surgery patch computation and the
+                    pre processing of quantum circuits as Pauli rotations. We have also an option to
+                    remove the stabilizer part of the circuit from the quantum computation with an
+                    algorithm outlined in the same paper. This algorithm is available in this
+                    project as the &ldquo;Litinski Transform&rdquo;.
                 </Text>
                 <Heading as="h2" size="lg" mb={8} textAlign={"center"}>
                     Surface Codes and Lattice Surgery
                 </Heading>
                 <Text mb={4}>
-                    A proposed solution to mitigate the occurrence of errors in quantum computers
-                    are the so-called quantum error correcting codes (QECC). Specifically we focus
-                    on the protocol of lattice surgery, which is based on the prominent methodology
-                    of surface codes. A natural question relates to how these techniques can be
-                    employed to systematically obtain fault tolerant logical qubits from less
-                    reliable ones. Recent work has focused on building compilers that translate a
-                    logical quantum circuit to a much larger error corrected one, with the output
-                    circuit performing the computation specified by the logical circuit with QECCs{" "}
+                    Quantum Error correcting codes (QECC) are a proposed solution to mitigate the
+                    occurrence of errors in quantum computers. Surface codes are a prominent family
+                    of QECCs that operates on a square lattice. We focus on a protocol for operating
+                    surface codes named of lattice surgery, which is based on
+                    &ldquo;splitting&rdquo; and &ldquo;merging&rdquo; portions (the patches) of a
+                    surface code lattice. A natural question is how can these techniques be employed
+                    to systematically. In particular, we look at going from a logical input circuit
+                    (as quantum programmer would express it) to a fault tolerant one. The goal is
+                    for the output circuit to perform the same computation specified by the input
+                    circuit. Recent work has focused on building compilers that translate a logical
+                    quantum circuit to a much larger error corrected one, by adopting QECCs{" "}
                     <Link
                         color="teal.500"
-                        as="sub"
+                        as="sup"
                         href="https://arxiv.org/abs/1906.07994"
                         isExternal
                     >
@@ -68,7 +71,7 @@ const Overview = (): JSX.Element => {
                     </Link>
                     <Link
                         color="teal.500"
-                        as="sub"
+                        as="sup"
                         href="https://arxiv.org/abs/1911.05759"
                         isExternal
                     >
@@ -83,7 +86,7 @@ const Overview = (): JSX.Element => {
                     surgery, which stores logical qubits in portions of the surface code&apos;s
                     lattice patches and performs logical operations by merging and splitting patches{" "}
                     <Link
-                        as="sub"
+                        as="sup"
                         color="teal.500"
                         href="https://iopscience.iop.org/article/10.1088/1367-2630/14/12/123011/meta"
                         isExternal
@@ -96,9 +99,8 @@ const Overview = (): JSX.Element => {
                     This program handles a portion of the logical to physical compilation. It takes
                     a quantum circuit and translates it to a representation of lattice surgery
                     operations, which are in direct correspondence with the physical error corrected
-                    circuit, up to code distance. The project comes with a visualizer tool (in
-                    figure), that shows the state of the surface code lattice state in between
-                    surgery operations.
+                    circuit, up to code distance. The project comes with a visualizer tool, that
+                    shows the state of the surface code lattice state in between surgery operations.
                 </Text>
             </Box>
         </Container>
