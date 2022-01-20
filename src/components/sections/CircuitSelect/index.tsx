@@ -68,7 +68,11 @@ const CircuitSelect = ({ appState, setAppState }: AppStateProps) => {
                 onFileAccepted={onFileAccepted}
                 isLoading={appState.compilationIsLoading}
             />
-            <Checkbox isChecked={doTransform} onChange={(e) => setDoTransform(e.target.checked)}>
+            <Checkbox
+                isChecked={doTransform}
+                onChange={(e) => setDoTransform(e.target.checked)}
+                isDisabled={appState.compilationIsLoading}
+            >
                 <Text as={"span"}>Litinski Transform</Text>
             </Checkbox>
         </Flex>

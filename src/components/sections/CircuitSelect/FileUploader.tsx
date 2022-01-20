@@ -35,7 +35,7 @@ const FileUploader = ({ onFileAccepted, isLoading }: FileUploaderProps): JSX.Ele
     return (
         <Center
             p={10}
-            cursor={"pointer"}
+            cursor={!isLoading ? "pointer" : "not-allowed"}
             transition={"background-color 0.2s ease"}
             borderRadius={4}
             bg={isDragActive ? activeBg : "transparent"}
