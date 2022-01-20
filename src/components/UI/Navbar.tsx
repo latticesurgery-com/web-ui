@@ -9,9 +9,11 @@ import {
     useColorModeValue,
     Stack,
     LinkProps as ChakraLinkProps,
+    Icon,
 } from "@chakra-ui/react"
 import { Link as RouterLink, LinkProps as RouterLinkProps, useLocation } from "react-router-dom"
-import { IoMdMenu, IoIosClose, IoMdSunny, IoMdMoon } from "react-icons/io"
+import { IoMenu, IoClose, IoSunny, IoMoon } from "react-icons/io5"
+import { BiLinkExternal } from "react-icons/bi"
 
 import logo from "../../assets/logo.svg"
 import logoDark from "../../assets/logo-dark.svg"
@@ -53,8 +55,8 @@ const NavLink = ({ name, href, isActive }: NavLinkProps) => {
     }
     return (
         <Link
-            px={2}
-            py={1}
+            px={3}
+            py={2}
             rounded={"md"}
             _hover={{
                 textDecoration: "none",
@@ -64,6 +66,7 @@ const NavLink = ({ name, href, isActive }: NavLinkProps) => {
             {...LinkProps}
         >
             {name}
+            {isExternal && <Icon as={BiLinkExternal} ml={2} />}
         </Link>
     )
 }
@@ -78,9 +81,9 @@ const Navbar = () => {
             <Flex h={16} alignItems={"center"} justifyContent={"space-between"} gap={1}>
                 <IconButton
                     size={"md"}
-                    icon={isOpen ? <IoIosClose /> : <IoMdMenu />}
+                    icon={isOpen ? <IoClose /> : <IoMenu />}
                     aria-label={"Open Menu"}
-                    display={{ md: "none" }}
+                    display={{ lg: "none" }}
                     onClick={isOpen ? onClose : onOpen}
                     p={"auto"}
                 />
@@ -88,7 +91,7 @@ const Navbar = () => {
                     <Box as={RouterLink} to={"/"}>
                         <img src={useColorModeValue(logo, logoDark)} alt={"logo"} />
                     </Box>
-                    <HStack as={"nav"} spacing={4} display={{ base: "none", md: "flex" }}>
+                    <HStack as={"nav"} spacing={4} display={{ base: "none", lg: "flex" }}>
                         {Links.map((link) => (
                             <NavLink
                                 key={link.name}
@@ -102,13 +105,13 @@ const Navbar = () => {
                 <IconButton
                     onClick={toggleColorMode}
                     size={"md"}
-                    icon={colorMode === "light" ? <IoMdMoon /> : <IoMdSunny />}
+                    icon={colorMode === "light" ? <IoMoon /> : <IoSunny />}
                     aria-label={"Toggle Color Mode"}
                 />
             </Flex>
 
             {isOpen ? (
-                <Box pb={4} display={{ md: "none" }}>
+                <Box pb={4} display={{ lg: "none" }}>
                     <Stack as={"nav"} spacing={4}>
                         {Links.map((link) => (
                             <NavLink

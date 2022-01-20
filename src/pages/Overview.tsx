@@ -31,7 +31,7 @@ const Overview = (): JSX.Element => {
                 </Text>
                 <Text mb={8}>
                     A great deal of inspiration was taken from Daniel Litinski&apos;s Game of
-                    Surface codes
+                    Surface codes{" "}
                     <Link
                         as="sub"
                         color="teal.500"
@@ -57,7 +57,7 @@ const Overview = (): JSX.Element => {
                     employed to systematically obtain fault tolerant logical qubits from less
                     reliable ones. Recent work has focused on building compilers that translate a
                     logical quantum circuit to a much larger error corrected one, with the output
-                    circuit performing the computation specified by the logical circuit with QECCs
+                    circuit performing the computation specified by the logical circuit with QECCs{" "}
                     <Link
                         color="teal.500"
                         as="sub"
@@ -81,7 +81,7 @@ const Overview = (): JSX.Element => {
                     by entangling many quantum mechanical entities in a two dimensional lattice. Our
                     technique of choice for operating on this lattice is a protocol known as lattice
                     surgery, which stores logical qubits in portions of the surface code&apos;s
-                    lattice patches and performs logical operations by merging and splitting patches
+                    lattice patches and performs logical operations by merging and splitting patches{" "}
                     <Link
                         as="sub"
                         color="teal.500"

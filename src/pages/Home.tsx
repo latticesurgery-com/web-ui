@@ -26,19 +26,29 @@ const Home = (): JSX.Element => {
                     operations on a surface code lattice.
                 </Text>
                 <Flex gap={6} direction={"row"} wrap={"wrap"} justify={"center"}>
-                    <Button size={"lg"} as={RouterLink} to={"/online-compiler"}>
-                        Test out the compiler
+                    <Button size={"lg"}>
+                        <Link
+                            as={RouterLink}
+                            to={"/online-compiler"}
+                            _hover={{ textDecoration: "none", color: "inherit" }}
+                        >
+                            Test out the compiler
+                        </Link>
                     </Button>
                     <Button
                         variant={"outline"}
                         size={"lg"}
-                        as={Link}
-                        href="https://github.com/latticesurgery-com/"
-                        isExternal
-                        _hover={{ textDecoration: "none", color: "inherit" }}
                         rightIcon={<FaGithub />}
+                        borderWidth={2}
+                        _hover={{ borderColor: "gray.500" }}
                     >
-                        Visit us on GitHub
+                        <Link
+                            _hover={{ textDecoration: "none", color: "inherit" }}
+                            isExternal
+                            href="https://github.com/latticesurgery-com/"
+                        >
+                            Visit us on GitHub
+                        </Link>
                     </Button>
                 </Flex>
             </Stack>
