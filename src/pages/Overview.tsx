@@ -1,10 +1,9 @@
-import { Container, Heading, Text, Box, Link } from "@chakra-ui/react"
-import Navbar from "../components/UI/Navbar"
+import { Heading, Text, Box, Link } from "@chakra-ui/react"
+import Base from "./Base"
 
 const Overview = (): JSX.Element => {
     return (
-        <Container maxW="container.xl">
-            <Navbar />
+        <Base>
             <Heading as="h1" size="2xl" mt={4} mb={10} textAlign={"center"}>
                 Overview
             </Heading>
@@ -103,7 +102,7 @@ const Overview = (): JSX.Element => {
                     shows the state of the surface code lattice state in between surgery operations.
                 </Text>
             </Box>
-        </Container>
+        </Base>
     )
 }
 

@@ -1,15 +1,13 @@
-import { Container, Stack, Heading, Text, Button, Link, Image, Flex } from "@chakra-ui/react"
+import { Stack, Heading, Text, Button, Link, Image, Flex } from "@chakra-ui/react"
 import { FaGithub } from "react-icons/fa"
 import { Link as RouterLink } from "react-router-dom"
 import SFULogo from "../assets/SFU_horizontal_logo_rgb.png"
 import AaltoLogo from "../assets/AaltoLogo.png"
-
-import Navbar from "../components/UI/Navbar"
+import Base from "./Base"
 
 const Home = (): JSX.Element => {
     return (
-        <Container maxW="container.xl">
-            <Navbar />
+        <Base>
             <Stack
                 textAlign={"center"}
                 align={"center"}
@@ -70,7 +68,7 @@ const Home = (): JSX.Element => {
                     </Link>
                 </Flex>
             </Stack>
-        </Container>
+        </Base>
     )
 }
 

@@ -1,11 +1,10 @@
 import { Box, Heading, Text, Button, Container, Link } from "@chakra-ui/react"
 import { Link as Routerlink } from "react-router-dom"
-import Navbar from "../components/UI/Navbar"
+import Base from "./Base"
 
 const NotFound = (): JSX.Element => {
     return (
-        <Container maxW="container.xl">
-            <Navbar />
+        <Base>
             <Box textAlign={"center"} mt={"20vh"}>
                 <Heading as="h1" size="2xl" mb={4} textAlign={"center"}>
                     Page Not Found
@@ -23,7 +22,7 @@ const NotFound = (): JSX.Element => {
                     </Link>
                 </Button>
             </Box>
-        </Container>
+        </Base>
     )
 }
 
