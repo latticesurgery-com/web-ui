@@ -1,6 +1,8 @@
 import { Container, Stack, Heading, Text, Button, Link, Image, Flex } from "@chakra-ui/react"
 import { FaGithub } from "react-icons/fa"
 import { Link as RouterLink } from "react-router-dom"
+import SFULogo from "../assets/SFU_horizontal_logo_rgb.png"
+import AaltoLogo from "../assets/AaltoLogo.png"
 
 import Navbar from "../components/UI/Navbar"
 
@@ -56,11 +58,17 @@ const Home = (): JSX.Element => {
                 <Text fontSize={"lg"} letterSpacing={3} fontWeight={500}>
                     SUPPORTED AND BACKED BY
                 </Text>
-                <Stack spacing={10} direction={"row"} justify={"center"}>
+                <Flex gap={10} wrap={"wrap"} justify={"center"} align={"center"}>
                     <Link href="http://unitary.fund/">
                         <Image src="https://unitary.fund/logos/logov3.svg" h={"50px"} />
                     </Link>
-                </Stack>
+                    <Link href="http://sfu.ca/">
+                        <Image src={SFULogo} h={"50px"} />
+                    </Link>
+                    <Link href="http://aalto.fi/en">
+                        <Image src={AaltoLogo} h={"50px"} />
+                    </Link>
+                </Flex>
             </Stack>
         </Container>
     )
