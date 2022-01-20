@@ -3,7 +3,6 @@ import ReactDOM from "react-dom"
 import { ChakraProvider, ColorModeScript } from "@chakra-ui/react"
 import { BrowserRouter, Route, Routes } from "react-router-dom"
 
-import "./index.css"
 import reportWebVitals from "./reportWebVitals"
 import theme from "./styles/theme"
 import Home from "./pages/Home"
