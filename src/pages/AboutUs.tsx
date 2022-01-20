@@ -10,10 +10,24 @@ const AboutUs = (): JSX.Element => {
                 Our Team
             </Heading>
             <Text mb={4} mx={"auto"} maxW={"xl"} textAlign={"center"}>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque euismod, nisi
-                vel consectetur interdum, nisl nunc egestas nisi, sed malesuada nisl nunc euismod
-                nisi vel consectetur interdum. Pellentesque euismod, nisi vel consectetur interdum,
-                nisl nunc egestas nisi, sed malesuada nisl nunc euismod nisi vel consectetur
+                This project started at{" "}
+                <Link href={"https://www.sfu.ca/"} color="teal.500" isExternal>
+                    Simon Fraser University
+                </Link>{" "}
+                in Summer 2020, it has since then resulted in two Honours theses and became an
+                international collaboration with{" "}
+                <Link href={"https://www.aalto.fi/en"} color="teal.500" isExternal>
+                    Aalto University
+                </Link>{" "}
+                in Finland and the{" "}
+                <Link href={"https://www.tum.de/en/"} color="teal.500" isExternal>
+                    Technical University of Munich
+                </Link>{" "}
+                in Germany. In Fall 2021 we were awarded a microgrant from the{" "}
+                <Link href={"https://unitary.fund"} color="teal.500" isExternal>
+                    Unitary Fund
+                </Link>{" "}
+                .
             </Text>
             <Flex gap={10} justifyContent={"center"} py={6} flexWrap={"wrap"}>
                 <Box
@@ -32,8 +46,8 @@ const AboutUs = (): JSX.Element => {
                         alexnguyenn
                     </Text>
                     <Text mb={4}>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque
-                        euismod, nisi vel consectetur interdum, nisl
+                        Just your normal everyday Computer Science undergrad at SFU. Currently in a
+                        love-hate relationship with Javascript.
                     </Text>
                     <Flex flexWrap={"wrap"} gap={3} justifyContent={"center"}>
                         <Link href={"https://github.com/alexnguyenn"}>
@@ -60,8 +74,8 @@ const AboutUs = (): JSX.Element => {
                         gwwatkin
                     </Text>
                     <Text mb={4}>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque
-                        euismod, nisi vel consectetur interdum, nisl
+                        Loves math, programming, endurance sports and music. Studied Math and
+                        Computing at SFU and did too many internships.
                     </Text>
                     <Flex flexWrap={"wrap"} gap={3} justifyContent={"center"}>
                         <Link href={"https://github.com/gwwatkin"}>
@@ -88,8 +102,8 @@ const AboutUs = (): JSX.Element => {
                         Keelando
                     </Text>
                     <Text mb={4}>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque
-                        euismod, nisi vel consectetur interdum, nisl
+                        Metabolizer of data through methodical application of interconnected web
+                        technologies. When I&apos;m not programming, I&apos;m surfing.
                     </Text>
                     <Flex flexWrap={"wrap"} gap={3} justifyContent={"center"}>
                         <Link href={"https://github.com/Keelando"}>
@@ -116,8 +130,8 @@ const AboutUs = (): JSX.Element => {
                         isolatedinformation
                     </Text>
                     <Text mb={4}>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque
-                        euismod, nisi vel consectetur interdum, nisl
+                        Physicist who loves computers. Interested in all things quantum except Ant
+                        Man and the Wasp
                     </Text>
                     <Flex flexWrap={"wrap"} gap={3} justifyContent={"center"}>
                         <Link href={"https://github.com/isolatedinformation"}>
