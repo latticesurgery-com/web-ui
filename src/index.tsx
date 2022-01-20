@@ -14,7 +14,7 @@ const NotFound = React.lazy(() => import("./pages/NotFound"))
 
 ReactDOM.render(
     <React.StrictMode>
-        <ChakraProvider>
+        <ChakraProvider theme={theme}>
             <ColorModeScript initialColorMode={theme.config.initialColorMode} />
             <BrowserRouter>
                 <React.Suspense fallback={<></>}>
