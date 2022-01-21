@@ -1,8 +1,20 @@
-import { Container, Stack, Heading, Text, Button, Link, Image, Flex } from "@chakra-ui/react"
+import {
+    Container,
+    Stack,
+    Heading,
+    Text,
+    Button,
+    Link,
+    Image,
+    Flex,
+    useColorModeValue,
+} from "@chakra-ui/react"
 import { FaGithub } from "react-icons/fa"
 import { Link as RouterLink } from "react-router-dom"
-import SFULogo from "../assets/SFU_horizontal_logo_rgb.png"
-import AaltoLogo from "../assets/AaltoLogo.png"
+
+import SFULogo from "../assets/backers/SFU_horizontal_logo_rgb.png"
+import SFULogoReversed from "../assets/backers/SFU_horizontal_reversed_colour_rgb.png"
+import AaltoLogo from "../assets/backers/AaltoLogo.png"
 
 import Navbar from "../components/UI/Navbar"
 
@@ -58,14 +70,17 @@ const Home = (): JSX.Element => {
                 <Text fontSize={"lg"} letterSpacing={3} fontWeight={500}>
                     SUPPORTED AND BACKED BY
                 </Text>
-                <Flex gap={10} wrap={"wrap"} justify={"center"} align={"center"}>
-                    <Link href="http://unitary.fund/">
+                <Flex rowGap={10} columnGap={20} wrap={"wrap"} justify={"center"} align={"center"}>
+                    <Link href="https://unitary.fund/">
                         <Image src="https://unitary.fund/logos/logov3.svg" h={"50px"} />
                     </Link>
-                    <Link href="http://sfu.ca/">
-                        <Image src={SFULogo} h={"50px"} />
+                    <Link href="https://sfu.ca/">
+                        <Image src={useColorModeValue(SFULogo, SFULogoReversed)} h={"50px"} />
                     </Link>
-                    <Link href="http://aalto.fi/en">
+                    <Link
+                        href="https://aalto.fi/en"
+                        filter={useColorModeValue("unset", "invert(100%)")}
+                    >
                         <Image src={AaltoLogo} h={"50px"} />
                     </Link>
                 </Flex>
