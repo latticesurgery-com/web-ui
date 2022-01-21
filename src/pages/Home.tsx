@@ -5,11 +5,8 @@ import SFULogo from "../assets/SFU_horizontal_logo_rgb.png"
 import AaltoLogo from "../assets/AaltoLogo.png"
 import Base from "./Base"
 import Compiler from "../components/sections/Compiler"
-import { useState } from "react"
-import { AppState } from "../appState"
 
 const Home = (): JSX.Element => {
-    const [appState, setAppState] = useState(new AppState())
     return (
         <Base>
             <Stack

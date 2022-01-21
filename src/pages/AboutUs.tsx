@@ -1,4 +1,4 @@
-import { Avatar, Flex, Box, Heading, Text, Icon, Link, Container } from "@chakra-ui/react"
+import { Avatar, Flex, Box, Heading, Text, Icon, Link } from "@chakra-ui/react"
 import { FaGithub, FaLinkedin } from "react-icons/fa"
 import Base from "./Base"
 

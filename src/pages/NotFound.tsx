@@ -1,4 +1,4 @@
-import { Box, Heading, Text, Button, Container, Link } from "@chakra-ui/react"
+import { Box, Heading, Text, Button, Link } from "@chakra-ui/react"
 import { Link as Routerlink } from "react-router-dom"
 import Base from "./Base"
 
