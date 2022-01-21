@@ -4,8 +4,12 @@ import { Link as RouterLink } from "react-router-dom"
 import SFULogo from "../assets/SFU_horizontal_logo_rgb.png"
 import AaltoLogo from "../assets/AaltoLogo.png"
 import Base from "./Base"
+import Compiler from "../components/sections/Compiler"
+import { useState } from "react"
+import { AppState } from "../appState"
 
 const Home = (): JSX.Element => {
+    const [appState, setAppState] = useState(new AppState())
     return (
         <Base>
             <Stack
@@ -52,6 +56,7 @@ const Home = (): JSX.Element => {
                     </Button>
                 </Flex>
             </Stack>
+            <Compiler />
             <Stack my={"50px"} spacing={4} textAlign={"center"}>
                 <Text fontSize={"lg"} letterSpacing={3} fontWeight={500}>
                     SUPPORTED AND BACKED BY

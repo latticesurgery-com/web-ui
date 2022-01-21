@@ -1,7 +1,7 @@
 import { Container } from "@chakra-ui/react"
 import Navbar from "../components/UI/Navbar"
 
-interface MyProps { }
+interface MyProps {}
 
 const Base = (props: React.PropsWithChildren<MyProps>) => {
     return (
@@ -9,6 +9,7 @@ const Base = (props: React.PropsWithChildren<MyProps>) => {
             <Navbar />
             {/* Page Component Goes Here: */}
             {props.children}
+            {/* Footer Will Go Here */}
         </Container>
     )
 }
