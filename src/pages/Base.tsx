@@ -6,7 +6,7 @@ const Base = (props: React.PropsWithChildren<Record<never, never>>) => {
     return (
         <Container maxW="container.xl">
             <Navbar />
-            <React.Suspense fallback={<></>}>{props.children}</React.Suspense>
+            {props.children}
         </Container>
     )
 }

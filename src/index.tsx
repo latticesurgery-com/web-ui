@@ -18,48 +18,17 @@ ReactDOM.render(
         <ChakraProvider theme={theme}>
             <ColorModeScript initialColorMode={theme.config.initialColorMode} />
             <BrowserRouter>
-                <Routes>
-                    <Route
-                        path="/"
-                        element={
-                            <Base>
-                                <Home />
-                            </Base>
-                        }
-                    />
-                    <Route
-                        path="/online-compiler"
-                        element={
-                            <Base>
-                                <CompilerPage />
-                            </Base>
-                        }
-                    />
-                    <Route
-                        path="/overview"
-                        element={
-                            <Base>
-                                <Overview />
-                            </Base>
-                        }
-                    />
-                    <Route
-                        path="/about-us"
-                        element={
-                            <Base>
-                                <AboutUs />
-                            </Base>
-                        }
-                    />
-                    <Route
-                        path="*"
-                        element={
-                            <Base>
-                                <NotFound />
-                            </Base>
-                        }
-                    />
-                </Routes>
+                <Base>
+                    <React.Suspense fallback={<></>}>
+                        <Routes>
+                            <Route path="/" element={<Home />} />
+                            <Route path="/online-compiler" element={<CompilerPage />} />
+                            <Route path="/overview" element={<Overview />} />
+                            <Route path="/about-us" element={<AboutUs />} />
+                            <Route path="*" element={<NotFound />} />
+                        </Routes>
+                    </React.Suspense>
+                </Base>
             </BrowserRouter>
         </ChakraProvider>
     </React.StrictMode>,
