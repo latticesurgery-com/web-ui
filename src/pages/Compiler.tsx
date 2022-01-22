@@ -8,23 +8,13 @@ import {
     NoServerResponse,
     CompilerError,
 } from "../apiResponses"
-import {
-    Container,
-    Stack,
-    Box,
-    Alert,
-    AlertIcon,
-    AlertTitle,
-    AlertDescription,
-} from "@chakra-ui/react"
-import Navbar from "../components/UI/Navbar"
+import { Stack, Box, Alert, AlertIcon, AlertTitle, AlertDescription } from "@chakra-ui/react"
 import CircuitSelect from "../components/sections/CircuitSelect"
 
 const CompilerPage = (): JSX.Element => {
     const [appState, setAppState] = useState(new AppState())
     return (
-        <Container maxW="container.xl">
-            <Navbar />
+        <>
             <Box mt={10}>
                 <CircuitSelect appState={appState} setAppState={setAppState} />
             </Box>
@@ -65,7 +55,7 @@ const CompilerPage = (): JSX.Element => {
                     <LatticeView compilationResult={appState.apiResponse} />
                 )}
             </Stack>
-        </Container>
+        </>
     )
 }
 

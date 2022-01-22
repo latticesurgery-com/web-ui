@@ -1,5 +1,4 @@
 import {
-    Container,
     Stack,
     Heading,
     Text,
@@ -16,12 +15,9 @@ import SFULogo from "../assets/backers/SFU_horizontal_logo_rgb.png"
 import SFULogoReversed from "../assets/backers/SFU_horizontal_reversed_colour_rgb.png"
 import AaltoLogo from "../assets/backers/AaltoLogo.png"
 
-import Navbar from "../components/UI/Navbar"
-
 const Home = (): JSX.Element => {
     return (
-        <Container maxW="container.xl">
-            <Navbar />
+        <>
             <Stack
                 textAlign={"center"}
                 align={"center"}
@@ -85,7 +81,7 @@ const Home = (): JSX.Element => {
                     </Link>
                 </Flex>
             </Stack>
-        </Container>
+        </>
     )
 }
 
