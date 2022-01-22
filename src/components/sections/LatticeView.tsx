@@ -5,6 +5,7 @@ import { CompilationResult, Slice } from "../../slices"
 import CellViewer from "../CellViewer"
 import { css } from "@emotion/react"
 import "./LatticeView.css"
+import { VStack, Box, StackDivider, Heading, Divider, Center} from "@chakra-ui/react"
 
 type SliceViewerProps = {
     slice: Slice
@@ -52,101 +53,106 @@ const LatticeView = ({ compilationResult }: LatticeViewProps): JSX.Element => {
     }
 
     return (
-        <div id="lattice-view-output">
-            <h2 ref={latticeSection} className="scroll-margin">
-                Lattice Viewer
-            </h2>
-            <hr />
+        <>
+            <VStack spacing={4} align="stretch">
+                <Heading as="h1" size="2xl" mt={2} mb={2} textAlign={"center"}>
+                    Lattice Viewer
+                </Heading>
+                <Center><Box h="20px" bg="blue.200" rounded="lg" width="75%"/>
+                </Center>
+            </VStack>
 
-            <div className="form-check form-switch p-1">
-                <div className="form-check form-switch">
-                    <input
-                        className="form-check-input lg-checkbox"
-                        type="checkbox"
-                        role="switch"
-                        id="flexSwitchCheckDefault"
-                        onChange={handleChange}
-                        defaultChecked={true}
-                    />
-                    <label className="form-check-label" htmlFor="flexSwitchCheckDefault">
-                        View Compilation
-                    </label>
+            <div id="lattice-view-output">
+                <div className="form-check form-switch p-1">
+                    <div className="form-check form-switch">
+                        <input
+                            className="form-check-input lg-checkbox"
+                            type="checkbox"
+                            role="switch"
+                            id="flexSwitchCheckDefault"
+                            onChange={handleChange}
+                            defaultChecked={true}
+                        />
+                        <label className="form-check-label" htmlFor="flexSwitchCheckDefault">
+                            View Compilation
+                        </label>
+                    </div>
                 </div>
-            </div>
 
-            <div className="p-1 vertical-center">
-                <div>
-                    {showCompilationText ? (
-                        <div
-                            id="compilation-text"
-                            className="mb-3"
-                            css={css`
-                                margin-left: 10px;
-                            `}
-                        >
-                            <pre>{compilation_text}</pre>
-                        </div>
-                    ) : null}
-                </div>
-            </div>
-
-            {/* Updated Toolbar */}
-            <div className="d-flex mt-1 scroll-margin">
-                <div
-                    id="slice-toolbar"
-                    className="lattice-card shadow"
-                    css={css`
-                        flex-grow: 0;
-                        flex-shrink: 0;
-                        align-self: flex-start;
-                    `}
-                >
-                    <div className="card-body center">
-                        <h5 className="card-title center">Select Time Slice </h5>
-                        <div className="card-text center">
-                            Slice {selectedSliceNumber + 1} / {slices_len}
-                        </div>
-                        {/* <hr css={css`width:100px; margin: auto`}/> */}
-                        <div
-                            className="btn-toolbar"
-                            role="toolbar"
-                            css={css`
-                                justify-content: center;
-                            `}
-                        >
-                            <div className="btn-group me-2" role="group">
-                                <button
-                                    disabled={disable["prev"]}
-                                    onClick={() => changeSlice(-1)}
-                                    className="btn btn-primary"
-                                >
-                                    Prev
-                                </button>
+                <div className="p-1 vertical-center">
+                    <div>
+                        {showCompilationText ? (
+                            <div
+                                id="compilation-text"
+                                className="mb-3"
+                                css={css`
+                                    margin-left: 10px;
+                                `}
+                            >
+                                <pre>{compilation_text}</pre>
                             </div>
-                            <div className="btn-group me-2" role="group">
-                                <button
-                                    disabled={disable["next"]}
-                                    onClick={() => changeSlice(+1)}
-                                    className="btn btn-primary"
-                                >
-                                    Next
-                                </button>
+                        ) : null}
+                    </div>
+                </div>
+
+                {/* Updated Toolbar */}
+                <div className="d-flex mt-1 scroll-margin">
+                    <div
+                        id="slice-toolbar"
+                        className="lattice-card shadow"
+                        css={css`
+                            flex-grow: 0;
+                            flex-shrink: 0;
+                            align-self: flex-start;
+                        `}
+                    >
+                        <div className="card-body center">
+                            <h5 className="card-title center">Select Time Slice </h5>
+                            <div className="card-text center">
+                                Slice {selectedSliceNumber + 1} / {slices_len}
+                            </div>
+                            {/* <hr css={css`width:100px; margin: auto`}/> */}
+                            <div
+                                className="btn-toolbar"
+                                role="toolbar"
+                                css={css`
+                                    justify-content: center;
+                                `}
+                            >
+                                <div className="btn-group me-2" role="group">
+                                    <button
+                                        disabled={disable["prev"]}
+                                        onClick={() => changeSlice(-1)}
+                                        className="btn btn-primary"
+                                    >
+                                        Prev
+                                    </button>
+                                </div>
+                                <div className="btn-group me-2" role="group">
+                                    <button
+                                        disabled={disable["next"]}
+                                        onClick={() => changeSlice(+1)}
+                                        className="btn btn-primary"
+                                    >
+                                        Next
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div id="draggable-container" className="mt-2">
-                <SliceViewer slice={slices[selectedSliceNumber]} />
-            </div>
+                <div id="draggable-container" className="mt-2">
+                    <SliceViewer slice={slices[selectedSliceNumber]} />
+                </div>
 
-            <div className="p-3">
-                <a href="/" className="btn btn-info p-2">
-                    New Circuit
-                </a>
+                <div className="p-3">
+                    <a href="/" className="btn btn-info p-2">
+                        New Circuit
+                    </a>
+                </div>
             </div>
-        </div>
+        </>
     )
 }
 
