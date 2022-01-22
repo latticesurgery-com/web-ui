@@ -5,6 +5,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom"
 
 import reportWebVitals from "./reportWebVitals"
 import theme from "./styles/theme"
+import Base from "./pages/Base"
 
 const Home = React.lazy(() => import("./pages/Home"))
 const CompilerPage = React.lazy(() => import("./pages/Compiler"))
@@ -17,15 +18,48 @@ ReactDOM.render(
         <ChakraProvider theme={theme}>
             <ColorModeScript initialColorMode={theme.config.initialColorMode} />
             <BrowserRouter>
-                <React.Suspense fallback={<></>}>
-                    <Routes>
-                        <Route path="/" element={<Home />} />
-                        <Route path="/online-compiler" element={<CompilerPage />} />
-                        <Route path="/overview" element={<Overview />} />
-                        <Route path="/about-us" element={<AboutUs />} />
-                        <Route path="*" element={<NotFound />} />
-                    </Routes>
-                </React.Suspense>
+                <Routes>
+                    <Route
+                        path="/"
+                        element={
+                            <Base>
+                                <Home />
+                            </Base>
+                        }
+                    />
+                    <Route
+                        path="/online-compiler"
+                        element={
+                            <Base>
+                                <CompilerPage />
+                            </Base>
+                        }
+                    />
+                    <Route
+                        path="/overview"
+                        element={
+                            <Base>
+                                <Overview />
+                            </Base>
+                        }
+                    />
+                    <Route
+                        path="/about-us"
+                        element={
+                            <Base>
+                                <AboutUs />
+                            </Base>
+                        }
+                    />
+                    <Route
+                        path="*"
+                        element={
+                            <Base>
+                                <NotFound />
+                            </Base>
+                        }
+                    />
+                </Routes>
             </BrowserRouter>
         </ChakraProvider>
     </React.StrictMode>,

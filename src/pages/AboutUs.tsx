@@ -1,10 +1,9 @@
 import { Avatar, Flex, Box, Heading, Text, Icon, Link } from "@chakra-ui/react"
 import { FaGithub, FaLinkedin } from "react-icons/fa"
-import Base from "./Base"
 
 const AboutUs = (): JSX.Element => {
     return (
-        <Base>
+        <>
             <Heading as="h1" size="2xl" my={4} textAlign={"center"}>
                 Our Team
             </Heading>
@@ -142,7 +141,7 @@ const AboutUs = (): JSX.Element => {
                     </Flex>
                 </Box>
             </Flex>
-        </Base>
+        </>
     )
 }
 

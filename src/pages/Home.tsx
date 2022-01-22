@@ -1,4 +1,3 @@
-import Base from "./Base"
 import {
     Stack,
     Heading,
@@ -18,7 +17,7 @@ import AaltoLogo from "../assets/backers/AaltoLogo.png"
 
 const Home = (): JSX.Element => {
     return (
-        <Base>
+        <>
             <Stack
                 textAlign={"center"}
                 align={"center"}
@@ -82,7 +81,7 @@ const Home = (): JSX.Element => {
                     </Link>
                 </Flex>
             </Stack>
-        </Base>
+        </>
     )
 }
 

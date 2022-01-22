@@ -1,10 +1,9 @@
 import { Box, Heading, Text, Button, Link } from "@chakra-ui/react"
 import { Link as Routerlink } from "react-router-dom"
-import Base from "./Base"
 
 const NotFound = (): JSX.Element => {
     return (
-        <Base>
+        <>
             <Box textAlign={"center"} mt={"20vh"}>
                 <Heading as="h1" size="2xl" mb={4} textAlign={"center"}>
                     Page Not Found
@@ -22,7 +21,7 @@ const NotFound = (): JSX.Element => {
                     </Link>
                 </Button>
             </Box>
-        </Base>
+        </>
     )
 }
 
