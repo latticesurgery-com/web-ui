@@ -5,17 +5,7 @@ import { CompilationResult, Slice } from "../../slices"
 import CellViewer from "../CellViewer"
 import { css } from "@emotion/react"
 import "./LatticeView.css"
-import {
-    VStack,
-    Box,
-    Heading,
-    Center,
-    Switch,
-    FormLabel,
-    Flex,
-    Text,
-
-} from "@chakra-ui/react"
+import { VStack, Box, Heading, Center, Switch, FormLabel, Flex, Text } from "@chakra-ui/react"
 import parseCompilationText from "../../parseCompilationText"
 
 type SliceViewerProps = {
@@ -73,7 +63,7 @@ const LatticeView = ({ compilationResult }: LatticeViewProps): JSX.Element => {
                     Lattice Viewer
                 </Heading>
                 <Center>
-                    <Box h="20px" bg="blue.200" rounded="lg" width="75%" />
+                    <Box h="10px" bg="blue.200" rounded="lg" width="75%" />
                 </Center>
             </VStack>
 
@@ -92,6 +82,7 @@ const LatticeView = ({ compilationResult }: LatticeViewProps): JSX.Element => {
             {showCompilationText ? (
                 <Flex gap={10} justifyContent={"center"} pt={0} pb={4} flexWrap={"wrap"}>
                     <Box
+                        className="box-hover"
                         textAlign="center"
                         borderWidth="4px"
                         borderRadius="xl"
@@ -99,23 +90,26 @@ const LatticeView = ({ compilationResult }: LatticeViewProps): JSX.Element => {
                         p={4}
                     >
                         <Text className="line-1">Input Circuit</Text>
-                        <Box>
+                        <Box pt={1}>
                             <pre>{input_circuit}</pre>
                         </Box>
                     </Box>
                     <Box
+                        className="box-hover"
                         textAlign="center"
                         borderWidth="4px"
                         borderRadius="xl"
                         boxShadow={"xl"}
-                        p={5}
+                        p={4}
+                        minW="175px"
                     >
                         <Text className="line-1">Pauli Rotations</Text>
-                        <Box>
+                        <Box pt="5" pb="5">
                             <pre>{circuit_after_pauli_rotations}</pre>
                         </Box>
                     </Box>
                     <Box
+                        className="box-hover"
                         textAlign="center"
                         borderWidth="4px"
                         borderRadius="xl"
@@ -123,7 +117,9 @@ const LatticeView = ({ compilationResult }: LatticeViewProps): JSX.Element => {
                         p={5}
                     >
                         <Text className="line-1">Litinski Transform</Text>
-                        <pre>{circuit_after_litinski}</pre>
+                        <Box pt="5" pb="2">
+                            <pre className="vcenter">{circuit_after_litinski}</pre>
+                        </Box>
                     </Box>
                 </Flex>
             ) : null}

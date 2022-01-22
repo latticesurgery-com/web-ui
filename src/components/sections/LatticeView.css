@@ -1,64 +1,74 @@
 /* lattice view styles */
 
-.lattice-card{
-  border: 2px solid black;
-  border-radius: 15px;
-  width:200px;
-  background-color:#ffdbb3 !important;
+.lattice-card {
+    border: 2px solid black;
+    border-radius: 15px;
+    width: 200px;
+    background-color: #ffdbb3 !important;
 }
 .center {
-  text-align:center;
+    text-align: center;
+}
+
+.vcenter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 #lattice-view-output {
-  margin-bottom: 20px;
+    margin-bottom: 20px;
 }
 
-#toolbar{
+#toolbar {
     /* Make it independent of zoom */
-  height: 10%;
-  line-height: 10vh;
-  font-size: 5vh;
-  /* Keep it above the lattice */
-  z-index: 100;
-  position: relative;
-  /* style */
-  background-color: lavender;
-  border-bottom: solid darkgrey 1.5vh;
+    height: 10%;
+    line-height: 10vh;
+    font-size: 5vh;
+    /* Keep it above the lattice */
+    z-index: 100;
+    position: relative;
+    /* style */
+    background-color: lavender;
+    border-bottom: solid darkgrey 1.5vh;
 }
-#draggable-container{
-  font-size: 0;
-  z-index: 10;
+#draggable-container {
+    font-size: 0;
+    z-index: 10;
 }
 
 .lattice-row {
-  width:100%;
-  margin: auto;
+    width: 100%;
+    margin: auto;
 }
 
-.lattice-cell{
-  border: 0.5px solid #a2abae;
-  min-width: 50px;
-  max-width:130px;
-  width: 12vw;
-  position: relative;
-  font-size:18px;
+.lattice-cell {
+    border: 0.5px solid #a2abae;
+    min-width: 50px;
+    max-width: 130px;
+    width: 12vw;
+    position: relative;
+    font-size: 18px;
 }
 
-.qubit-state{
-  line-height: 1;
+.qubit-state {
+    line-height: 1;
 }
 
 .col {
-  padding-left: 0px;
-  padding-right: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
 }
 
 .lg-checkbox {
-  transform: scale(1.5);
-  margin-right: 5px;
+    transform: scale(1.5);
+    margin-right: 5px;
 }
 
 .scroll-margin {
-  scroll-margin: 58px;
+    scroll-margin: 58px;
+}
+
+.box-hover:hover {
+    border-color: lightblue;
 }
