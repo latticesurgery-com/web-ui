@@ -142,19 +142,21 @@ const LatticeView = ({ compilationResult }: LatticeViewProps): JSX.Element => {
                 </Center>
 
                 <Center pt={3}>
-                    <Box>
-                        <Flex mr={3}>
-                            <Button disabled={disable["prev"]} onClick={() => changeSlice(-1)}>
-                                Prev
-                            </Button>
-                            <Button disabled={disable["next"]} onClick={() => changeSlice(+1)}>
-                                Next
-                            </Button>
-                        </Flex>
-                    </Box>
-                    <Box>
-                        <SliceIndexBar count={slices_len} selected={selectedSliceNumber} />
-                    </Box>
+                    <Flex flexWrap={"wrap"}>
+                        <Box>
+                            <Flex mr={3}>
+                                <Button fontSize='xl' disabled={disable["prev"]} onClick={() => changeSlice(-1)}>
+                                    Prev
+                                </Button>
+                                <Button fontSize='xl' disabled={disable["next"]} onClick={() => changeSlice(+1)}>
+                                    Next
+                                </Button>
+                            </Flex>
+                        </Box>
+                        <Box>
+                            <SliceIndexBar count={slices_len} selected={selectedSliceNumber} />
+                        </Box>
+                    </Flex>
                 </Center>
             </Box>
 

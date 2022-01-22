@@ -15,8 +15,8 @@ const SliceIndexBar = ({ count, selected }: SliceIndexBarProps): JSX.Element => 
                         const color = index == selected ? "#292cff" : "lightgrey"
                         return (
                             <Box
-                                h="30px"
-                                w="30px"
+                                h="35px"
+                                w="35px"
                                 rounded="lg"
                                 key={index}
                                 border="5px"
