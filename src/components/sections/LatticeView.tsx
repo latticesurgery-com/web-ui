@@ -5,7 +5,7 @@ import { CompilationResult, Slice } from "../../slices"
 import CellViewer from "../CellViewer"
 import { css } from "@emotion/react"
 import "./LatticeView.css"
-import { VStack, Box, StackDivider, Heading, Divider, Center} from "@chakra-ui/react"
+import { VStack, Box, Heading, Center, Switch, FormLabel, Flex } from "@chakra-ui/react"
 
 type SliceViewerProps = {
     slice: Slice
@@ -51,33 +51,30 @@ const LatticeView = ({ compilationResult }: LatticeViewProps): JSX.Element => {
     const handleChange = () => {
         setCompilationText(!showCompilationText)
     }
-
+    // console.log(compilation_text)
     return (
         <>
             <VStack spacing={4} align="stretch">
                 <Heading as="h1" size="2xl" mt={2} mb={2} textAlign={"center"}>
                     Lattice Viewer
                 </Heading>
-                <Center><Box h="20px" bg="blue.200" rounded="lg" width="75%"/>
+                <Center>
+                    <Box h="20px" bg="blue.200" rounded="lg" width="75%" />
                 </Center>
             </VStack>
 
             <div id="lattice-view-output">
-                <div className="form-check form-switch p-1">
-                    <div className="form-check form-switch">
-                        <input
-                            className="form-check-input lg-checkbox"
-                            type="checkbox"
-                            role="switch"
-                            id="flexSwitchCheckDefault"
-                            onChange={handleChange}
-                            defaultChecked={true}
-                        />
-                        <label className="form-check-label" htmlFor="flexSwitchCheckDefault">
-                            View Compilation
-                        </label>
-                    </div>
-                </div>
+                <Flex gap={5} justifyContent={"left"} py={6} flexWrap={"wrap"}>
+                    <FormLabel htmlFor="compilation-text" fontSize="xl" mb="0">
+                        View Compilation
+                    </FormLabel>
+                    <Switch
+                        id="compilation-text"
+                        size="lg"
+                        onChange={handleChange}
+                        defaultChecked={true}
+                    />
+                </Flex>
 
                 <div className="p-1 vertical-center">
                     <div>
