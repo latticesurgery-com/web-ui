@@ -9,7 +9,7 @@ function parseCompilationText(compilation_text: string) {
 
     return {
         "input_circuit": input_circuit,
-        "circuit_after_pauli_rotations": pauli_rotations_split[1].slice(1,-1),
+        "circuit_after_pauli_rotations": pauli_rotations_split[1].slice(1, -1),
         "circuit_after_litinski": circuit_after_litinski_split[1].slice(1),
     }
 }
