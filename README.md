@@ -17,7 +17,7 @@ $ cd web-ui
 $ npm ci 
 $ npm start
 ```
-It development server will be served at `localhost:8000`
+It development server will be served at `localhost:3000`
 
 ### Run against a local compiler library
 Start lsqecc's local development server, then go to: `http://localhost:3000/?localapi=true`. To set the port: `http://localhost:3000/?localapi=true&port=8888`, otherwise it defaults to 9876 (lsqecc's default).
