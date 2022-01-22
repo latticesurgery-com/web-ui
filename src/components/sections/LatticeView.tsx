@@ -5,8 +5,19 @@ import { CompilationResult, Slice } from "../../slices"
 import CellViewer from "../CellViewer"
 import { css } from "@emotion/react"
 import "./LatticeView.css"
-import { VStack, Box, Heading, Center, Switch, FormLabel, Flex, Text } from "@chakra-ui/react"
+import {
+    VStack,
+    Box,
+    Heading,
+    Center,
+    Switch,
+    FormLabel,
+    Flex,
+    Text,
+    Button,
+} from "@chakra-ui/react"
 import parseCompilationText from "../../parseCompilationText"
+import SliceIndexBar from "../SliceIndexBar"
 
 type SliceViewerProps = {
     slice: Slice
@@ -124,52 +135,29 @@ const LatticeView = ({ compilationResult }: LatticeViewProps): JSX.Element => {
                 </Flex>
             ) : null}
 
-            {/* Updated Toolbar */}
-            <div className="d-flex mt-1 scroll-margin">
-                <div
-                    id="slice-toolbar"
-                    className="lattice-card shadow"
-                    css={css`
-                        flex-grow: 0;
-                        flex-shrink: 0;
-                        align-self: flex-start;
-                    `}
-                >
-                    <div className="card-body center">
-                        <h5 className="card-title center">Select Time Slice </h5>
-                        <div className="card-text center">
-                            Slice {selectedSliceNumber + 1} / {slices_len}
-                        </div>
-                        {/* <hr css={css`width:100px; margin: auto`}/> */}
-                        <div
-                            className="btn-toolbar"
-                            role="toolbar"
-                            css={css`
-                                justify-content: center;
-                            `}
-                        >
-                            <div className="btn-group me-2" role="group">
-                                <button
-                                    disabled={disable["prev"]}
-                                    onClick={() => changeSlice(-1)}
-                                    className="btn btn-primary"
-                                >
-                                    Prev
-                                </button>
-                            </div>
-                            <div className="btn-group me-2" role="group">
-                                <button
-                                    disabled={disable["next"]}
-                                    onClick={() => changeSlice(+1)}
-                                    className="btn btn-primary"
-                                >
-                                    Next
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <Box pt={3} pb={3}>
+                <Center>
+                    <Heading as="h3" size="xl">
+                        Select Time Slice
+                    </Heading>
+                </Center>
+
+                <Center pt={3}>
+                    <Box>
+                        <Flex mr={3}>
+                            <Button disabled={disable["prev"]} onClick={() => changeSlice(-1)}>
+                                Prev
+                            </Button>
+                            <Button disabled={disable["next"]} onClick={() => changeSlice(+1)}>
+                                Next
+                            </Button>
+                        </Flex>
+                    </Box>
+                    <Box>
+                        <SliceIndexBar count={slices_len} selected={selectedSliceNumber} />
+                    </Box>
+                </Center>
+            </Box>
 
             <div id="draggable-container" className="mt-2">
                 <SliceViewer slice={slices[selectedSliceNumber]} />
