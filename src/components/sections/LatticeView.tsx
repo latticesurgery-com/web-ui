@@ -3,7 +3,6 @@ import React, { useRef } from "react"
 import { useState } from "react"
 import { CompilationResult, Slice } from "../../slices"
 import CellViewer from "../CellViewer"
-import { css } from "@emotion/react"
 import "./LatticeView.css"
 import {
     VStack,

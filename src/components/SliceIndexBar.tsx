@@ -1,15 +1,4 @@
-import {
-    VStack,
-    Box,
-    Heading,
-    Center,
-    Switch,
-    FormLabel,
-    Flex,
-    Text,
-    Button,
-} from "@chakra-ui/react"
-import React from "react"
+import { Box, Flex } from "@chakra-ui/react"
 
 type SliceIndexBarProps = {
     count: number
@@ -23,7 +12,7 @@ const SliceIndexBar = ({ count, selected }: SliceIndexBarProps): JSX.Element => 
             <Box border={"6px"} borderColor="black">
                 <Flex flexWrap={"wrap"} gap={1}>
                     {nElements.map(function (element, index) {
-                        var color = index == selected ? "#292cff" : "lightgrey"
+                        const color = index == selected ? "#292cff" : "lightgrey"
                         return (
                             <Box
                                 h="30px"
