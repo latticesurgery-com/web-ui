@@ -30,19 +30,14 @@ const Overview = (): JSX.Element => {
                 <Text mb={8}>
                     A great deal of inspiration was taken from Daniel Litinski&apos;s Game of
                     Surface Codes{" "}
-                    <Link
-                        as="sup"
-                        color="teal.500"
-                        href="https://arxiv.org/abs/1911.05759"
-                        isExternal
-                    >
-                        [1]
+                    <Link color="teal.500" href="https://arxiv.org/abs/1911.05759" isExternal>
+                        <Text as="sup">[1]</Text>
                     </Link>
-                    . We follow Litinski’s formulation of lattice surgery patch computation and the
-                    pre processing of quantum circuits as Pauli rotations. We have also an option to
-                    remove the stabilizer part of the circuit from the quantum computation with an
-                    algorithm outlined in the same paper. This algorithm is available in this
-                    project as the &ldquo;Litinski Transform&rdquo;.
+                    . We follow Litinski&apos;s formulation of lattice surgery patch computation and
+                    the pre processing of quantum circuits as Pauli rotations. We have also an
+                    option to remove the stabilizer part of the circuit from the quantum computation
+                    with an algorithm outlined in the same paper. This algorithm is available in
+                    this project as the &ldquo;Litinski Transform&rdquo;.
                 </Text>
                 <Heading as="h2" size="lg" mb={8} textAlign={"center"}>
                     Surface Codes and Lattice Surgery
@@ -59,21 +54,11 @@ const Overview = (): JSX.Element => {
                     for the output circuit to perform the same computation specified by the input
                     circuit. Recent work has focused on building compilers that translate a logical
                     quantum circuit to a much larger error corrected one, by adopting QECCs{" "}
-                    <Link
-                        color="teal.500"
-                        as="sup"
-                        href="https://arxiv.org/abs/1906.07994"
-                        isExternal
-                    >
-                        [2]
+                    <Link color="teal.500" href="https://arxiv.org/abs/1906.07994" isExternal>
+                        <Text as="sup">[2]</Text>
                     </Link>
-                    <Link
-                        color="teal.500"
-                        as="sup"
-                        href="https://arxiv.org/abs/1911.05759"
-                        isExternal
-                    >
-                        [3]
+                    <Link color="teal.500" href="https://arxiv.org/abs/1911.05759" isExternal>
+                        <Text as="sup">[3]</Text>
                     </Link>
                     .
                 </Text>
@@ -84,12 +69,11 @@ const Overview = (): JSX.Element => {
                     surgery, which stores logical qubits in portions of the surface code&apos;s
                     lattice patches and performs logical operations by merging and splitting patches{" "}
                     <Link
-                        as="sup"
                         color="teal.500"
                         href="https://iopscience.iop.org/article/10.1088/1367-2630/14/12/123011/meta"
                         isExternal
                     >
-                        [4]
+                        <Text as="sup">[4]</Text>
                     </Link>
                     .
                 </Text>

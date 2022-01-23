@@ -36,30 +36,28 @@ const Home = (): JSX.Element => {
                     operations on a surface code lattice.
                 </Text>
                 <Flex gap={6} direction={"row"} wrap={"wrap"} justify={"center"}>
-                    <Button size={"lg"}>
-                        <Link
-                            as={RouterLink}
-                            to={"/online-compiler"}
-                            _hover={{ textDecoration: "none", color: "inherit" }}
-                        >
-                            Try out the compiler
-                        </Link>
-                    </Button>
-                    <Button
-                        variant={"outline"}
-                        size={"lg"}
-                        rightIcon={<FaGithub />}
-                        borderWidth={2}
-                        _hover={{ borderColor: "gray.500" }}
+                    <Link
+                        as={RouterLink}
+                        to={"/online-compiler"}
+                        _hover={{ textDecoration: "none", color: "inherit" }}
                     >
-                        <Link
-                            _hover={{ textDecoration: "none", color: "inherit" }}
-                            isExternal
-                            href="https://github.com/latticesurgery-com/"
+                        <Button size={"lg"}>Try out the compiler</Button>
+                    </Link>
+                    <Link
+                        _hover={{ textDecoration: "none", color: "inherit" }}
+                        href="https://github.com/latticesurgery-com/"
+                        isExternal
+                    >
+                        <Button
+                            variant={"outline"}
+                            size={"lg"}
+                            rightIcon={<FaGithub />}
+                            borderWidth={2}
+                            _hover={{ borderColor: "gray.500" }}
                         >
                             Visit us on GitHub
-                        </Link>
-                    </Button>
+                        </Button>
+                    </Link>
                 </Flex>
             </Stack>
             <Stack my={"50px"} spacing={4} textAlign={"center"}>
