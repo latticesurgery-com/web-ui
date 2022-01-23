@@ -198,6 +198,18 @@ const AboutUs = (): JSX.Element => {
                     href="https://www.sfu.ca/computing/newsandevents/2021/two-undergraduate-students-receive-grant-award-quantum-computing.html"
                 />
             </Flex>
+
+            <Text textAlign="center" fontSize="lg" opacity="75%" mb={20}>
+                Want to get in touch? Contact us at{" "}
+                <Link
+                    href="mailto:info@latticesurgery.com"
+                    isExternal
+                    _hover={{ textDecoration: "underline", color: "inherit" }}
+                    fontWeight={600}
+                >
+                    info@latticesurgery.com
+                </Link>
+            </Text>
         </>
     )
 }
