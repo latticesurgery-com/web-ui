@@ -14,6 +14,7 @@ import { Link as RouterLink } from "react-router-dom"
 import SFULogo from "../assets/backers/SFU_horizontal_logo_rgb.png"
 import SFULogoReversed from "../assets/backers/SFU_horizontal_reversed_colour_rgb.png"
 import AaltoLogo from "../assets/backers/AaltoLogo.png"
+import UnitaryFundLogo from "../assets/backers/UnitaryFundLogo.png"
 
 const Home = (): JSX.Element => {
     return (
@@ -66,7 +67,7 @@ const Home = (): JSX.Element => {
                 </Text>
                 <Flex rowGap={10} columnGap={20} wrap={"wrap"} justify={"center"} align={"center"}>
                     <Link href="https://unitary.fund/">
-                        <Image src="https://unitary.fund/logos/logov3.svg" h={"50px"} />
+                        <Image src={UnitaryFundLogo} h={"50px"} />
                     </Link>
                     <Link href="https://sfu.ca/">
                         <Image src={useColorModeValue(SFULogo, SFULogoReversed)} h={"50px"} />
