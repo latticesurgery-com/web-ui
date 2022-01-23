@@ -38,11 +38,11 @@ const Overview = (): JSX.Element => {
                     >
                         [1]
                     </Link>
-                    . We follow Litinski’s formulation of lattice surgery patch computation and the
-                    pre processing of quantum circuits as Pauli rotations. We have also an option to
-                    remove the stabilizer part of the circuit from the quantum computation with an
-                    algorithm outlined in the same paper. This algorithm is available in this
-                    project as the &ldquo;Litinski Transform&rdquo;.
+                    . We follow Litinski&apos;s formulation of lattice surgery patch computation and
+                    the pre processing of quantum circuits as Pauli rotations. We have also an
+                    option to remove the stabilizer part of the circuit from the quantum computation
+                    with an algorithm outlined in the same paper. This algorithm is available in
+                    this project as the &ldquo;Litinski Transform&rdquo;.
                 </Text>
                 <Heading as="h2" size="lg" mb={8} textAlign={"center"}>
                     Surface Codes and Lattice Surgery

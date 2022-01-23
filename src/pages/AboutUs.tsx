@@ -48,10 +48,13 @@ const AboutUs = (): JSX.Element => {
                         love-hate relationship with Javascript.
                     </Text>
                     <Flex flexWrap={"wrap"} gap={3} justifyContent={"center"}>
-                        <Link href={"https://github.com/alexnguyenn"}>
+                        <Link href={"https://github.com/alexnguyenn"} isExternal>
                             <Icon as={FaGithub} w={6} h={6} opacity={"75%"} />
                         </Link>
-                        <Link href={"https://www.linkedin.com/in/alex-nguyen-906320163/"}>
+                        <Link
+                            href={"https://www.linkedin.com/in/alex-nguyen-906320163/"}
+                            isExternal
+                        >
                             <Icon as={FaLinkedin} w={7} h={7} opacity={"75%"} />
                         </Link>
                     </Flex>
@@ -76,10 +79,10 @@ const AboutUs = (): JSX.Element => {
                         Computing at SFU and did too many internships.
                     </Text>
                     <Flex flexWrap={"wrap"} gap={3} justifyContent={"center"}>
-                        <Link href={"https://github.com/gwwatkin"}>
+                        <Link href={"https://github.com/gwwatkin"} isExternal>
                             <Icon as={FaGithub} w={6} h={6} opacity={"75%"} />
                         </Link>
-                        <Link href={"https://www.linkedin.com/in/gwwatkins/"}>
+                        <Link href={"https://www.linkedin.com/in/gwwatkins/"} isExternal>
                             <Icon as={FaLinkedin} w={7} h={7} opacity={"75%"} />
                         </Link>
                     </Flex>
@@ -104,10 +107,10 @@ const AboutUs = (): JSX.Element => {
                         technologies. When I&apos;m not programming, I&apos;m surfing.
                     </Text>
                     <Flex flexWrap={"wrap"} gap={3} justifyContent={"center"}>
-                        <Link href={"https://github.com/Keelando"}>
+                        <Link href={"https://github.com/Keelando"} isExternal>
                             <Icon as={FaGithub} w={6} h={6} opacity={"75%"} />
                         </Link>
-                        <Link href={"https://www.linkedin.com/in/keelanwatkins87/"}>
+                        <Link href={"https://www.linkedin.com/in/keelanwatkins87/"} isExternal>
                             <Icon as={FaLinkedin} w={7} h={7} opacity={"75%"} />
                         </Link>
                     </Flex>
@@ -132,10 +135,10 @@ const AboutUs = (): JSX.Element => {
                         Man and the Wasp
                     </Text>
                     <Flex flexWrap={"wrap"} gap={3} justifyContent={"center"}>
-                        <Link href={"https://github.com/isolatedinformation"}>
+                        <Link href={"https://github.com/isolatedinformation"} isExternal>
                             <Icon as={FaGithub} w={6} h={6} opacity={"75%"} />
                         </Link>
-                        <Link href={"https://www.linkedin.com/in/isolatedinformation/"}>
+                        <Link href={"https://www.linkedin.com/in/isolatedinformation/"} isExternal>
                             <Icon as={FaLinkedin} w={7} h={7} opacity={"75%"} />
                         </Link>
                     </Flex>

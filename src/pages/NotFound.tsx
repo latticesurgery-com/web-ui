@@ -11,15 +11,9 @@ const NotFound = (): JSX.Element => {
                 <Text mb={6} mx={"auto"} maxW={"xl"} textAlign={"center"}>
                     The page you are looking for does not exist.
                 </Text>
-                <Button colorScheme={"orange"}>
-                    <Link
-                        as={Routerlink}
-                        to="/"
-                        _hover={{ textDecoration: "none", color: "inherit" }}
-                    >
-                        Go to Home
-                    </Link>
-                </Button>
+                <Link as={Routerlink} to="/" _hover={{ textDecoration: "none", color: "inherit" }}>
+                    <Button colorScheme={"orange"}>Go to Home</Button>
+                </Link>
             </Box>
         </>
     )
