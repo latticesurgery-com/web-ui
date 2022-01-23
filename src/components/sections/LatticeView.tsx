@@ -65,7 +65,7 @@ const LatticeView = ({ compilationResult }: LatticeViewProps): JSX.Element => {
     const handleChange = () => {
         setCompilationText(!showCompilationText)
     }
-    console.log(compilation_text)
+    console.log(circuit_after_litinski)
     return (
         <>
             <VStack spacing={4} align="stretch">
@@ -118,7 +118,7 @@ const LatticeView = ({ compilationResult }: LatticeViewProps): JSX.Element => {
                             <pre>{circuit_after_pauli_rotations}</pre>
                         </Box>
                     </Box>
-                    <Box
+                    {circuit_after_litinski=="" ? null:<Box
                         className="box-hover"
                         textAlign="center"
                         borderWidth="4px"
@@ -130,7 +130,7 @@ const LatticeView = ({ compilationResult }: LatticeViewProps): JSX.Element => {
                         <Box pt="5" pb="2">
                             <pre className="vcenter">{circuit_after_litinski}</pre>
                         </Box>
-                    </Box>
+                    </Box>}
                 </Flex>
             ) : null}
 
@@ -145,10 +145,18 @@ const LatticeView = ({ compilationResult }: LatticeViewProps): JSX.Element => {
                     <Flex flexWrap={"wrap"}>
                         <Box>
                             <Flex mr={3}>
-                                <Button fontSize='xl' disabled={disable["prev"]} onClick={() => changeSlice(-1)}>
+                                <Button
+                                    fontSize="xl"
+                                    disabled={disable["prev"]}
+                                    onClick={() => changeSlice(-1)}
+                                >
                                     Prev
                                 </Button>
-                                <Button fontSize='xl' disabled={disable["next"]} onClick={() => changeSlice(+1)}>
+                                <Button
+                                    fontSize="xl"
+                                    disabled={disable["next"]}
+                                    onClick={() => changeSlice(+1)}
+                                >
                                     Next
                                 </Button>
                             </Flex>

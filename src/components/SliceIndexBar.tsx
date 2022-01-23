@@ -1,4 +1,4 @@
-import { Box, Flex } from "@chakra-ui/react"
+import { Box, Flex,Center,Text } from "@chakra-ui/react"
 
 type SliceIndexBarProps = {
     count: number
@@ -21,7 +21,8 @@ const SliceIndexBar = ({ count, selected }: SliceIndexBarProps): JSX.Element => 
                                 key={index}
                                 border="5px"
                                 backgroundColor={color}
-                            ></Box>
+                                textColor="white"
+                            ><Center><Text>{index==selected? index:null}</Text></Center></Box>
                         )
                     })}
                 </Flex>
