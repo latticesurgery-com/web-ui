@@ -86,8 +86,7 @@ const AboutUs = (): JSX.Element => {
                     sub="gwwatkin"
                     avatarSrc="https://avatars.githubusercontent.com/u/36427091"
                     description={
-                        "Loves math, programming, endurance sports and music. " +
-                        "Studied Math and Computing at SFU and did too many internships."
+                        "Loves math, programming, endurance sports and music. Did too many internships."
                     }
                     github="https://github.com/gwwatkin"
                     linkedin="https://www.linkedin.com/in/gwwatkins/"
@@ -144,7 +143,7 @@ const AboutUs = (): JSX.Element => {
                     sub="Assistant Professor at Simon Fraser University, Canada Research Chair"
                     avatarSrc="https://www.sfu.ca/content/sfu/physics/people/faculty/hoikwanl.img.1629284380.png"
                     description={
-                        "My research aims to solve the current practicality issues of quantum technology by harnessing the advantages of bosonic systems. I will likely be facilitated by the freedom of Canada, friendliness of Canadians, and fragrance of Tim Hortons coffee."
+                        "My research aims to solve the current practicality issues of quantum technology. I will likely be facilitated by the freedom of Canada, friendliness of Canadians, and fragrance of Tim Hortons coffee."
                     }
                 >
                     <Link
@@ -162,7 +161,7 @@ const AboutUs = (): JSX.Element => {
                     sub="Assistant Professor at Aalto University"
                     avatarSrc="https://acris.aalto.fi/ws/portalfiles/portal/67484151/Aalto_SCI_Paler_Alexandru_2021_photo_Aalto_University_Matti_Ahlgren_7.jpg"
                     description={
-                        "Researching the design and implementation of quantum software for compiling and optimising quantum circuits, for actively applying quantum error correction methods, and for quantum circuit simulation."
+                        "Researching the design and implementation of quantum software for compiling and optimising quantum circuits."
                     }
                 >
                     <Link
