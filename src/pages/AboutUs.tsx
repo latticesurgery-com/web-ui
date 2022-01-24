@@ -98,8 +98,7 @@ const AboutUs = (): JSX.Element => {
                     sub="Keelando"
                     avatarSrc="https://avatars.githubusercontent.com/u/47836064"
                     description={
-                        "Metabolizer of data through methodical application of interconnected " +
-                        "web technologies. When I'm not programming, I'm surfing."
+                        "Finding joy in the process of solving problems with a varied approach to full stack web applications. Enjoy Hiking, surfing, and building a Raspberry Pi Cloud."
                     }
                     github="https://github.com/Keelando"
                     linkedin="https://www.linkedin.com/in/keelanwatkins87/"
