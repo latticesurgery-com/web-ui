@@ -97,7 +97,8 @@ const AboutUs = (): JSX.Element => {
                     sub="Keelando"
                     avatarSrc="https://avatars.githubusercontent.com/u/47836064"
                     description={
-                        "Finding joy in the process of solving problems with a varied approach to full stack web applications. Enjoy Hiking, surfing, and building a Raspberry Pi Cloud."
+                        "Finding joy in the process of solving problems with a varied approach to " +
+                        "full stack web applications. Enjoy hiking, surfing, and building a Raspberry Pi Cloud."
                     }
                     github="https://github.com/Keelando"
                     linkedin="https://www.linkedin.com/in/keelanwatkins87/"
@@ -143,7 +144,9 @@ const AboutUs = (): JSX.Element => {
                     sub="Assistant Professor at Simon Fraser University, Canada Research Chair"
                     avatarSrc="https://www.sfu.ca/content/sfu/physics/people/faculty/hoikwanl.img.1629284380.png"
                     description={
-                        "My research aims to solve the current practicality issues of quantum technology. I will likely be facilitated by the freedom of Canada, friendliness of Canadians, and fragrance of Tim Hortons coffee."
+                        "My research aims to solve the current practicality issues of quantum technology. " +
+                        "I will likely be facilitated by the freedom of Canada, friendliness of Canadians, " +
+                        "and fragrance of Tim Hortons coffee."
                     }
                 >
                     <Link
