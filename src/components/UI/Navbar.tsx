@@ -27,9 +27,9 @@ const Links: Array<LinkItem> = [
     { name: "Home", href: "/" },
     { name: "Online Compiler", href: "/online-compiler" },
     { name: "Overview", href: "/overview" },
+    { name: "About Us", href: "/about-us" },
     { name: "Docs", href: "https://lattice-surgery-compiler.readthedocs.io/en/latest/" },
     { name: "GitHub", href: "https://github.com/latticesurgery-com/" },
-    { name: "About Us", href: "/about-us" },
 ]
 
 interface NavLinkProps {
