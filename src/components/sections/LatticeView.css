@@ -10,12 +10,6 @@
     text-align: center;
 }
 
-.vcenter {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
 #lattice-view-output {
     margin-bottom: 20px;
 }

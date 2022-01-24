@@ -128,7 +128,7 @@ const LatticeView = ({ compilationResult }: LatticeViewProps): JSX.Element => {
                         >
                             <Text className="line-1">Litinski Transform</Text>
                             <Box pt="5" pb="2">
-                                <pre className="vcenter">{circuit_after_litinski}</pre>
+                                <pre>{circuit_after_litinski}</pre>
                             </Box>
                         </Box>
                     )}
