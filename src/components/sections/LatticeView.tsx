@@ -65,7 +65,6 @@ const LatticeView = ({ compilationResult }: LatticeViewProps): JSX.Element => {
     const handleChange = () => {
         setCompilationText(!showCompilationText)
     }
-    console.log(circuit_after_litinski)
     return (
         <>
             <VStack spacing={4} align="stretch">
