@@ -163,7 +163,11 @@ const LatticeView = ({ compilationResult }: LatticeViewProps): JSX.Element => {
                             </Flex>
                         </Box>
                         <Box>
-                            <SliceIndexBar count={slices_len} selected={selectedSliceNumber} />
+                            <SliceIndexBar
+                                count={slices_len}
+                                selected={selectedSliceNumber}
+                                setSlice={setSelectedSliceNumber}
+                            />
                         </Box>
                     </Flex>
                 </Center>
