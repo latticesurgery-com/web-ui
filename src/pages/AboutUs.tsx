@@ -123,10 +123,10 @@ const AboutUs = (): JSX.Element => {
             <Flex gap={10} justifyContent="center" py={6} mb={20} flexWrap="wrap">
                 <Profile
                     name="Steven Pearce"
-                    sub="Simon Fraser University"
+                    sub="Lecturer at Simon Fraser University"
                     avatarSrc="http://www.cs.sfu.ca/~stevenp/scan0005.jpg"
                     description={
-                        "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+                        "Former astrophysicist, current non-conformist. Went from tsunami waves to wave-particles."
                     }
                 >
                     <Link
@@ -140,11 +140,11 @@ const AboutUs = (): JSX.Element => {
                     </Link>
                 </Profile>
                 <Profile
-                    name="Kero Lau"
-                    sub="Simon Fraser University"
+                    name="Hoi-Kwan (Kero) Lau"
+                    sub="Assistant Professor at Simon Fraser University, Canada Research Chair"
                     avatarSrc="https://www.sfu.ca/content/sfu/physics/people/faculty/hoikwanl.img.1629284380.png"
                     description={
-                        "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+                        "My research aims to solve the current practicality issues of quantum technology by harnessing the advantages of bosonic systems. I will likely be facilitated by the freedom of Canada, friendliness of Canadians, and fragrance of Tim Hortons coffee."
                     }
                 >
                     <Link
@@ -159,10 +159,10 @@ const AboutUs = (): JSX.Element => {
                 </Profile>
                 <Profile
                     name="Alexandru Paler"
-                    sub="Aalto University"
+                    sub="Assistant Professor at Aalto University"
                     avatarSrc="https://acris.aalto.fi/ws/portalfiles/portal/67484151/Aalto_SCI_Paler_Alexandru_2021_photo_Aalto_University_Matti_Ahlgren_7.jpg"
                     description={
-                        "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+                        "Researching the design and implementation of quantum software for compiling and optimising quantum circuits, for actively applying quantum error correction methods, and for quantum circuit simulation."
                     }
                 >
                     <Link
