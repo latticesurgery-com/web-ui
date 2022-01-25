@@ -38,7 +38,7 @@ const Profile = (props: ProfileProps): JSX.Element => {
                     </Link>
                 )}
                 {props.portfolio && (
-                    <Link href={props.linkedin} isExternal>
+                    <Link href={props.portfolio} isExternal>
                         <Icon as={FaRegFolderOpen} w={7} h={7} opacity="75%" />
                     </Link>
                 )}
