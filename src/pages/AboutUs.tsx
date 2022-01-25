@@ -1,6 +1,6 @@
 import { Avatar, Flex, Box, Heading, Text, Icon, Link, Button } from "@chakra-ui/react"
 import { BiLinkExternal } from "react-icons/bi"
-import { FaGithub, FaLinkedin } from "react-icons/fa"
+import { FaGithub, FaRegFolderOpen, FaLinkedin } from "react-icons/fa"
 
 import Article from "../components/UI/Article"
 
@@ -38,14 +38,8 @@ const Profile = (props: ProfileProps): JSX.Element => {
                     </Link>
                 )}
                 {props.portfolio && (
-                    <Link
-                        href={props.portfolio}
-                        isExternal
-                        _hover={{ textDecoration: "none", color: "inherit" }}
-                    >
-                        <Button variant="outline" size="sm" rightIcon={<BiLinkExternal />}>
-                            Portfolio
-                        </Button>
+                    <Link href={props.linkedin} isExternal>
+                        <Icon as={FaRegFolderOpen} w={7} h={7} opacity="75%" />
                     </Link>
                 )}
             </Flex>
