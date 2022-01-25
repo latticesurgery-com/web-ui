@@ -176,12 +176,6 @@ const LatticeView = ({ compilationResult }: LatticeViewProps): JSX.Element => {
             <div id="draggable-container" className="mt-2">
                 <SliceViewer slice={slices[selectedSliceNumber]} />
             </div>
-
-            <div className="p-3">
-                <a href="/" className="btn btn-info p-2">
-                    New Circuit
-                </a>
-            </div>
         </>
     )
 }
