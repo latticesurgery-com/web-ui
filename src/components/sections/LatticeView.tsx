@@ -3,8 +3,20 @@ import React, { useRef } from "react"
 import { useState } from "react"
 import { CompilationResult, Slice } from "../../slices"
 import CellViewer from "../CellViewer"
-import { css } from "@emotion/react"
 import "./LatticeView.css"
+import {
+    VStack,
+    Box,
+    Heading,
+    Center,
+    Switch,
+    FormLabel,
+    Flex,
+    Text,
+    Button,
+} from "@chakra-ui/react"
+import parseCompilationText from "../../parseCompilationText"
+import SliceIndexBar from "../SliceIndexBar"
 
 type SliceViewerProps = {
     slice: Slice
@@ -33,6 +45,9 @@ const LatticeView = ({ compilationResult }: LatticeViewProps): JSX.Element => {
     }
     const { compilation_text, slices } = compilationResult
     const slices_len = slices.length
+
+    const { input_circuit, circuit_after_pauli_rotations, circuit_after_litinski } =
+        parseCompilationText(compilation_text)
     // JS object that returns boolean when "previous" or "next" buttons need to be disabled
     const disable = {
         prev: selectedSliceNumber === 0,
@@ -50,103 +65,120 @@ const LatticeView = ({ compilationResult }: LatticeViewProps): JSX.Element => {
     const handleChange = () => {
         setCompilationText(!showCompilationText)
     }
-
     return (
-        <div id="lattice-view-output">
-            <h2 ref={latticeSection} className="scroll-margin">
-                Lattice Viewer
-            </h2>
-            <hr />
+        <>
+            <VStack spacing={4} align="stretch">
+                <Heading as="h1" size="2xl" mt={2} mb={2} textAlign={"center"}>
+                    Lattice Viewer
+                </Heading>
+                <Center>
+                    <Box h="10px" bg="blue.200" rounded="lg" width="75%" />
+                </Center>
+            </VStack>
 
-            <div className="form-check form-switch p-1">
-                <div className="form-check form-switch">
-                    <input
-                        className="form-check-input lg-checkbox"
-                        type="checkbox"
-                        role="switch"
-                        id="flexSwitchCheckDefault"
-                        onChange={handleChange}
-                        defaultChecked={true}
-                    />
-                    <label className="form-check-label" htmlFor="flexSwitchCheckDefault">
-                        View Compilation
-                    </label>
-                </div>
-            </div>
+            <Flex gap={3} justifyContent={"center"} py={4} flexWrap={"wrap"}>
+                <FormLabel htmlFor="compilation-text" fontSize="xl" mb="0">
+                    View Compilation
+                </FormLabel>
+                <Switch
+                    id="compilation-text"
+                    size="lg"
+                    onChange={handleChange}
+                    defaultChecked={true}
+                />
+            </Flex>
 
-            <div className="p-1 vertical-center">
-                <div>
-                    {showCompilationText ? (
-                        <div
-                            id="compilation-text"
-                            className="mb-3"
-                            css={css`
-                                margin-left: 10px;
-                            `}
+            {showCompilationText ? (
+                <Flex gap={10} justifyContent={"center"} pt={0} pb={4} flexWrap={"wrap"}>
+                    <Box
+                        className="box-hover"
+                        textAlign="center"
+                        borderWidth="4px"
+                        borderRadius="xl"
+                        boxShadow={"xl"}
+                        p={4}
+                    >
+                        <Text className="line-1">Input Circuit</Text>
+                        <Box pt={1}>
+                            <pre>{input_circuit}</pre>
+                        </Box>
+                    </Box>
+                    <Box
+                        className="box-hover"
+                        textAlign="center"
+                        borderWidth="4px"
+                        borderRadius="xl"
+                        boxShadow={"xl"}
+                        p={4}
+                        minW="175px"
+                    >
+                        <Text className="line-1">Pauli Rotations</Text>
+                        <Box pt="5" pb="5">
+                            <pre>{circuit_after_pauli_rotations}</pre>
+                        </Box>
+                    </Box>
+                    {circuit_after_litinski == "" ? null : (
+                        <Box
+                            className="box-hover"
+                            textAlign="center"
+                            borderWidth="4px"
+                            borderRadius="xl"
+                            boxShadow={"xl"}
+                            p={5}
                         >
-                            <pre>{compilation_text}</pre>
-                        </div>
-                    ) : null}
-                </div>
-            </div>
+                            <Text className="line-1">Litinski Transform</Text>
+                            <Box pt="5" pb="2">
+                                <pre>{circuit_after_litinski}</pre>
+                            </Box>
+                        </Box>
+                    )}
+                </Flex>
+            ) : null}
 
-            {/* Updated Toolbar */}
-            <div className="d-flex mt-1 scroll-margin">
-                <div
-                    id="slice-toolbar"
-                    className="lattice-card shadow"
-                    css={css`
-                        flex-grow: 0;
-                        flex-shrink: 0;
-                        align-self: flex-start;
-                    `}
-                >
-                    <div className="card-body center">
-                        <h5 className="card-title center">Select Time Slice </h5>
-                        <div className="card-text center">
-                            Slice {selectedSliceNumber + 1} / {slices_len}
-                        </div>
-                        {/* <hr css={css`width:100px; margin: auto`}/> */}
-                        <div
-                            className="btn-toolbar"
-                            role="toolbar"
-                            css={css`
-                                justify-content: center;
-                            `}
-                        >
-                            <div className="btn-group me-2" role="group">
-                                <button
+            <Box pt={3} pb={3}>
+                <Center>
+                    <Heading as="h3" size="xl">
+                        Select Time Slice
+                    </Heading>
+                </Center>
+
+                <Center pt={3}>
+                    <Flex flexWrap={"wrap"}>
+                        <Box>
+                            <Flex mr={3}>
+                                <Button
+                                    fontSize="xl"
                                     disabled={disable["prev"]}
                                     onClick={() => changeSlice(-1)}
-                                    className="btn btn-primary"
                                 >
                                     Prev
-                                </button>
-                            </div>
-                            <div className="btn-group me-2" role="group">
-                                <button
+                                </Button>
+                                <Button
+                                    fontSize="xl"
                                     disabled={disable["next"]}
                                     onClick={() => changeSlice(+1)}
-                                    className="btn btn-primary"
                                 >
                                     Next
-                                </button>
-                            </div>
-                        </div>
-                    </div>
+                                </Button>
+                            </Flex>
+                        </Box>
+                        <Box>
+                            <SliceIndexBar
+                                count={slices_len}
+                                selected={selectedSliceNumber}
+                                setSlice={setSelectedSliceNumber}
+                            />
+                        </Box>
+                    </Flex>
+                </Center>
+            </Box>
+
+            <Box>
+                <div id="draggable-container" className="mt-2 mb-5">
+                    <SliceViewer slice={slices[selectedSliceNumber]} />
                 </div>
-            </div>
-
-            <div id="draggable-container" className="mt-2">
-                <SliceViewer slice={slices[selectedSliceNumber]} />
-            </div>
-
-            <div className="p-3">
-                <a href="/" className="btn btn-info p-2">
-                    New Circuit
-                </a>
-            </div>
-        </div>
+            </Box>
+        </>
     )
 }
 
