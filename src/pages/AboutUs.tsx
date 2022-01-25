@@ -124,7 +124,7 @@ const AboutUs = (): JSX.Element => {
                 <Profile
                     name="Steven Pearce"
                     sub="Lecturer at Simon Fraser University"
-                    avatarSrc="http://www.cs.sfu.ca/~stevenp/scan0005.jpg"
+                    avatarSrc="https://www.cs.sfu.ca/~stevenp/scan0005.jpg"
                     description={
                         "Former astrophysicist, current non-conformist. Went from tsunami waves to wave-particles."
                     }
@@ -144,9 +144,8 @@ const AboutUs = (): JSX.Element => {
                     sub="Assistant Professor at Simon Fraser University, Canada Research Chair"
                     avatarSrc="https://www.sfu.ca/content/sfu/physics/people/faculty/hoikwanl.img.1629284380.png"
                     description={
-                        "My research aims to solve the current practicality issues of quantum technology. " +
-                        "I will likely be facilitated by the freedom of Canada, friendliness of Canadians, " +
-                        "and fragrance of Tim Hortons coffee."
+                        "I aim to solve practicality issues of quantum technology, likely to be aided by the" +
+                        "freedom of Canada, friendliness of Canadians, and fragrance of Tim Hortons coffee."
                     }
                 >
                     <Link
