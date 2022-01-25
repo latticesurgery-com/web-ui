@@ -124,7 +124,7 @@ const AboutUs = (): JSX.Element => {
                 <Profile
                     name="Steven Pearce"
                     sub="Lecturer at Simon Fraser University"
-                    avatarSrc="http://www.cs.sfu.ca/~stevenp/scan0005.jpg"
+                    avatarSrc="https://www.cs.sfu.ca/~stevenp/scan0005.jpg"
                     description={
                         "Former astrophysicist, current non-conformist. Went from tsunami waves to wave-particles."
                     }
