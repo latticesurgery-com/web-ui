@@ -144,7 +144,7 @@ const AboutUs = (): JSX.Element => {
                     sub="Assistant Professor at Simon Fraser University, Canada Research Chair"
                     avatarSrc="https://www.sfu.ca/content/sfu/physics/people/faculty/hoikwanl.img.1629284380.png"
                     description={
-                        "I aim at solving practicality issues of quantum technology, likely be aided by the" +
+                        "I aim at solving practicality issues of quantum technology, likely to be aided by the" +
                         "freedom of Canada, friendliness of Canadians, and fragrance of Tim Hortons coffee."
                     }
                 >
