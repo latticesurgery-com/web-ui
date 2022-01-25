@@ -11,6 +11,7 @@ interface ProfileProps {
     description: string
     github?: string
     linkedin?: string
+    portfolio?: string
     children?: JSX.Element | JSX.Element[]
 }
 
@@ -34,6 +35,17 @@ const Profile = (props: ProfileProps): JSX.Element => {
                 {props.linkedin && (
                     <Link href={props.linkedin} isExternal>
                         <Icon as={FaLinkedin} w={7} h={7} opacity="75%" />
+                    </Link>
+                )}
+                {props.portfolio && (
+                    <Link
+                        href={props.portfolio}
+                        isExternal
+                        _hover={{ textDecoration: "none", color: "inherit" }}
+                    >
+                        <Button variant="outline" size="sm" rightIcon={<BiLinkExternal />}>
+                            Portfolio
+                        </Button>
                     </Link>
                 )}
             </Flex>
@@ -102,6 +114,7 @@ const AboutUs = (): JSX.Element => {
                     }
                     github="https://github.com/Keelando"
                     linkedin="https://www.linkedin.com/in/keelanwatkins87/"
+                    portfolio="https://watkinsportal.ca"
                 />
 
                 <Profile
