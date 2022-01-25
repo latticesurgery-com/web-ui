@@ -173,9 +173,11 @@ const LatticeView = ({ compilationResult }: LatticeViewProps): JSX.Element => {
                 </Center>
             </Box>
 
-            <div id="draggable-container" className="mt-2">
-                <SliceViewer slice={slices[selectedSliceNumber]} />
-            </div>
+            <Box>
+                <div id="draggable-container" className="mt-2 mb-5">
+                    <SliceViewer slice={slices[selectedSliceNumber]} />
+                </div>
+            </Box>
         </>
     )
 }
