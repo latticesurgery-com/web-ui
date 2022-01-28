@@ -1,5 +1,4 @@
-class CompilationStage
-{
+class CompilationStage {
     constructor(public name: string, public content: string) {}
 }
 
@@ -31,4 +30,3 @@ const parseCompilationText = (compilation_text: string): Array<CompilationStage>
 }
 
 export default parseCompilationText
-

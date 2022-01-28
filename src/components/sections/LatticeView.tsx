@@ -89,22 +89,24 @@ const LatticeView = ({ compilationResult }: LatticeViewProps): JSX.Element => {
 
             {showCompilationText && (
                 <Flex gap={10} justifyContent={"center"} pt={0} pb={4} flexWrap={"wrap"}>
-                    {stages.map( stage => <Box
+                    {stages.map((stage, idx) => (
+                        <Box
                             className="box-hover"
                             textAlign="center"
                             borderWidth="4px"
                             borderRadius="xl"
                             boxShadow={"xl"}
+                            key={idx}
                             p={4}
-                          >
-                              <Text className="line-1">{stage.name}</Text>
-                              <Box pt={1}>
-                              <pre>{stage.content}</pre>
-                              </Box>
-                          </Box>)
-                    }
+                        >
+                            <Text className="line-1">{stage.name}</Text>
+                            <Box pt={1}>
+                                <pre>{stage.content}</pre>
+                            </Box>
+                        </Box>
+                    ))}
                 </Flex>
-            ) }
+            )}
 
             <Box pt={3} pb={3}>
                 <Center>
