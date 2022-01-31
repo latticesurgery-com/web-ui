@@ -46,8 +46,7 @@ const LatticeView = ({ compilationResult }: LatticeViewProps): JSX.Element => {
     const { compilation_text, slices } = compilationResult
     const slices_len = slices.length
 
-    const { input_circuit, circuit_after_pauli_rotations, circuit_after_litinski } =
-        parseCompilationText(compilation_text)
+    const stages = parseCompilationText(compilation_text)
     // JS object that returns boolean when "previous" or "next" buttons need to be disabled
     const disable = {
         prev: selectedSliceNumber === 0,
@@ -88,52 +87,26 @@ const LatticeView = ({ compilationResult }: LatticeViewProps): JSX.Element => {
                 />
             </Flex>
 
-            {showCompilationText ? (
+            {showCompilationText && (
                 <Flex gap={10} justifyContent={"center"} pt={0} pb={4} flexWrap={"wrap"}>
-                    <Box
-                        className="box-hover"
-                        textAlign="center"
-                        borderWidth="4px"
-                        borderRadius="xl"
-                        boxShadow={"xl"}
-                        p={4}
-                    >
-                        <Text className="line-1">Input Circuit</Text>
-                        <Box pt={1}>
-                            <pre>{input_circuit}</pre>
-                        </Box>
-                    </Box>
-                    <Box
-                        className="box-hover"
-                        textAlign="center"
-                        borderWidth="4px"
-                        borderRadius="xl"
-                        boxShadow={"xl"}
-                        p={4}
-                        minW="175px"
-                    >
-                        <Text className="line-1">Pauli Rotations</Text>
-                        <Box pt="5" pb="5">
-                            <pre>{circuit_after_pauli_rotations}</pre>
-                        </Box>
-                    </Box>
-                    {circuit_after_litinski == "" ? null : (
+                    {stages.map((stage, idx) => (
                         <Box
                             className="box-hover"
                             textAlign="center"
                             borderWidth="4px"
                             borderRadius="xl"
                             boxShadow={"xl"}
-                            p={5}
+                            key={idx}
+                            p={4}
                         >
-                            <Text className="line-1">Litinski Transform</Text>
-                            <Box pt="5" pb="2">
-                                <pre>{circuit_after_litinski}</pre>
+                            <Text className="line-1">{stage.name}</Text>
+                            <Box pt={1}>
+                                <pre>{stage.content}</pre>
                             </Box>
                         </Box>
-                    )}
+                    ))}
                 </Flex>
-            ) : null}
+            )}
 
             <Box pt={3} pb={3}>
                 <Center>
