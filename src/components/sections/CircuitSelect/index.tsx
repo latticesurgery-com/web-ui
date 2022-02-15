@@ -36,8 +36,7 @@ const CircuitSelect = ({ appState, setAppState }: AppStateProps) => {
                 apiResponse: new CompilationResultSuccess(json_data, ""),
                 compilationIsLoading: false,
             })
-        }
-        else {
+        } else {
             submitCompileRequest({ appState, setAppState }, data as string, doTransform)
         }
     }
