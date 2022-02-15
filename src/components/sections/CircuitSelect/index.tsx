@@ -13,6 +13,7 @@ import { IoChevronDownSharp } from "react-icons/io5"
 import { AppStateProps } from "../../../appState"
 import FileUploader from "./FileUploader"
 import submitCompileRequest from "../../submitCompileRequest"
+import { CompilationResultSuccess } from "../../../apiResponses"
 
 const CircuitSelect = ({ appState, setAppState }: AppStateProps) => {
     const [doTransform, setDoTransform] = useState(true)
@@ -28,7 +29,15 @@ const CircuitSelect = ({ appState, setAppState }: AppStateProps) => {
 
     const onFileAccepted = async (file: File) => {
         const data = await readFile(file)
-        console.log(data)
+        console.log("DATA", data)
+        if (file.name.slice(-4) == ".txt") {
+            const json_data = JSON.parse(data as string)
+            setAppState({
+                apiResponse: new CompilationResultSuccess(json_data, ""),
+                compilationIsLoading: false,
+            })
+        }
+        // if (file.name)
         // if (data) {
         //     submitCompileRequest({ appState, setAppState }, data as string, doTransform)
         // }

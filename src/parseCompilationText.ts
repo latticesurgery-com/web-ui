@@ -4,6 +4,9 @@ class CompilationStage {
 
 const parseCompilationText = (compilation_text: string): Array<CompilationStage> => {
     // Manually parse Compilation text into each part
+    if (compilation_text =="") {
+        return [new CompilationStage("User Uploaded Json","")]
+    }
     const compilation_text_split = compilation_text.split("Circuit")
     const input_circuit = compilation_text_split[1].slice(2)
 
