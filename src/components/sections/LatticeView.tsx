@@ -76,7 +76,7 @@ const LatticeView = ({ compilationResult }: LatticeViewProps): JSX.Element => {
         // Attach date suffix, plus random id for now. Can include circuit, params eventually
         const rand_n = (Math.random() + 1).toString(36).substring(8)
         const date = new Date().toISOString().split("T")[0]
-        a.download = "LSC_" + date + "_" + rand_n
+        a.download = "LSC_" + date + "_" + rand_n + ".json"
         a.href = link
         document.body.appendChild(a)
         a.click()
