@@ -20,7 +20,7 @@ const FileUploader = ({ onFileAccepted, isLoading }: FileUploaderProps): JSX.Ele
 
     const { getRootProps, getInputProps, isDragActive } = useDropzone({
         onDrop,
-        accept: [".qasm",".txt"],
+        accept: [".qasm", ".txt"],
         maxFiles: 1,
         multiple: false,
         disabled: isLoading,
