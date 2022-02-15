@@ -30,17 +30,16 @@ const CircuitSelect = ({ appState, setAppState }: AppStateProps) => {
     const onFileAccepted = async (file: File) => {
         const data = await readFile(file)
         console.log("DATA", data)
-        if (file.name.slice(-4) == ".txt") {
+        if (file.name.slice(-5) == ".json") {
             const json_data = JSON.parse(data as string)
             setAppState({
                 apiResponse: new CompilationResultSuccess(json_data, ""),
                 compilationIsLoading: false,
             })
         }
-        // if (file.name)
-        // if (data) {
-        //     submitCompileRequest({ appState, setAppState }, data as string, doTransform)
-        // }
+        else {
+            submitCompileRequest({ appState, setAppState }, data as string, doTransform)
+        }
     }
 
     const onExampleCircuitSelect = async (example: string) => {
