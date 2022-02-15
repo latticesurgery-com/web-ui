@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import React, { useRef } from "react"
 import { useState } from "react"
-import { CompilationResult, Slice } from "../../slices"
+import { CompilationResult, Slice, Slices } from "../../slices"
 import CellViewer from "../CellViewer"
 import "./LatticeView.css"
 import {
@@ -17,6 +17,7 @@ import {
 } from "@chakra-ui/react"
 import parseCompilationText from "../../parseCompilationText"
 import SliceIndexBar from "../SliceIndexBar"
+import { IoSaveOutline } from "react-icons/io5"
 
 type SliceViewerProps = {
     slice: Slice
@@ -64,6 +65,24 @@ const LatticeView = ({ compilationResult }: LatticeViewProps): JSX.Element => {
     const handleChange = () => {
         setCompilationText(!showCompilationText)
     }
+
+    // export slices to downloadable text JSON file
+    const exportJson = (slices: Slices) => {
+        const stringJson = JSON.stringify(slices)
+        const blob = new Blob([stringJson], { type: "text/plain;charset=utf-8" })
+        const url = window.URL || window.webkitURL
+        const link = url.createObjectURL(blob)
+        const a = document.createElement("a")
+        // Attach date suffix, plus random id for now. Can include circuit, params eventually
+        const rand_n = (Math.random() + 1).toString(36).substring(8)
+        const date = new Date().toISOString().split("T")[0]
+        a.download = "LSC_" + date + "_" + rand_n + ".json"
+        a.href = link
+        document.body.appendChild(a)
+        a.click()
+        document.body.removeChild(a)
+    }
+
     return (
         <>
             <VStack spacing={4} align="stretch">
@@ -75,16 +94,26 @@ const LatticeView = ({ compilationResult }: LatticeViewProps): JSX.Element => {
                 </Center>
             </VStack>
 
-            <Flex gap={3} justifyContent={"center"} py={4} flexWrap={"wrap"}>
-                <FormLabel htmlFor="compilation-text" fontSize="xl" mb="0">
-                    View Compilation
-                </FormLabel>
-                <Switch
-                    id="compilation-text"
-                    size="lg"
-                    onChange={handleChange}
-                    defaultChecked={true}
-                />
+            <Flex gap="6" justifyContent={"center"} py={4} flexWrap={"wrap"}>
+                <Flex alignItems="center">
+                    <FormLabel htmlFor="compilation-text" fontSize="xl" mb="0">
+                        View Compilation
+                    </FormLabel>
+                    <Switch
+                        id="compilation-text"
+                        size="lg"
+                        onChange={handleChange}
+                        defaultChecked={true}
+                    />
+                </Flex>
+                <Button borderWidth="2px" onClick={() => exportJson(slices)}>
+                    <Flex gap="4">
+                        <Text fontSize="xl" margin="auto">
+                            Save JSON
+                        </Text>
+                        <IoSaveOutline size="30px"></IoSaveOutline>
+                    </Flex>
+                </Button>
             </Flex>
 
             {showCompilationText && (
