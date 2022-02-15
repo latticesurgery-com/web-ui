@@ -20,7 +20,7 @@ const FileUploader = ({ onFileAccepted, isLoading }: FileUploaderProps): JSX.Ele
 
     const { getRootProps, getInputProps, isDragActive } = useDropzone({
         onDrop,
-        accept: ".qasm",
+        accept: [".qasm",".txt"],
         maxFiles: 1,
         multiple: false,
         disabled: isLoading,
@@ -47,11 +47,13 @@ const FileUploader = ({ onFileAccepted, isLoading }: FileUploaderProps): JSX.Ele
             {...getRootProps()}
         >
             <input {...getInputProps()} />
-            <Icon as={AiFillFileAdd} mr={2} />
+            <Icon boxSize="28px" as={AiFillFileAdd} mr={2} />
             <Text>
                 {isDragActive
                     ? "Drop the file here"
-                    : "Drop your .qasm circuit here, or click to select file"}
+                    : "Drop your .qasm circuit here, or click to select file."}
+                <br />
+                Alternatively, upload Json compilation result as .txt
             </Text>
             {isLoading && <Spinner ml={2} size="sm" />}
         </Center>

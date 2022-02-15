@@ -28,9 +28,10 @@ const CircuitSelect = ({ appState, setAppState }: AppStateProps) => {
 
     const onFileAccepted = async (file: File) => {
         const data = await readFile(file)
-        if (data) {
-            submitCompileRequest({ appState, setAppState }, data as string, doTransform)
-        }
+        console.log(data)
+        // if (data) {
+        //     submitCompileRequest({ appState, setAppState }, data as string, doTransform)
+        // }
     }
 
     const onExampleCircuitSelect = async (example: string) => {
