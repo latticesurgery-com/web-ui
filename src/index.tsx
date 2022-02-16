@@ -31,7 +31,6 @@ ReactDOM.render(
                             </Routes>
                         </React.Suspense>
                     </DevModeContextProvider>
-                    Z
                 </Base>
             </BrowserRouter>
         </ChakraProvider>

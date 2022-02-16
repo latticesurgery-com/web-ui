@@ -1,11 +1,17 @@
 import React from "react"
 
-interface DevModeContextInterface {
-    isDevMode: boolean,
+type DevModeContextType = {
+    isDevMode: boolean
     setIsDevMode: (value: boolean) => void
 }
+
+const defaultContext = {
+    isDevMode: false,
+    setIsDevMode: () => null
+}
+
 // <DevModeContextInterface | null>(null)
-export const DevModeContext = React.createContext<any>({} as any)
+export const DevModeContext = React.createContext<DevModeContextType>(defaultContext)
 
 // Alternatively: React.PropsWithChildren<Record<never, never>>
 const DevModeContextProvider = (props: React.PropsWithChildren<{}>) => {

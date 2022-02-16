@@ -29,17 +29,18 @@ const CompilerPage = (): JSX.Element => {
     const { isDevMode, setIsDevMode } = useContext(DevModeContext)
     const query = new URLSearchParams(path.search)
     const mode = query.get("dev")
-    console.log("MODE",mode)
-    console.log("dev mode???",isDevMode)
+    console.log("Dev Mode?", isDevMode)
 
-    let navigate = useNavigate()
+    const navigate = useNavigate()
     useEffect(() => {
         if (mode == "true") {
             setIsDevMode(true)
             navigate(path.pathname)
+            console.log("LSC Dev Mode Enabled")
         } else if (mode == "false") {
             setIsDevMode(false)
             navigate(path.pathname)
+            console.log("LSC Dev Mode Disabled")
         }
     })
 
@@ -49,8 +50,8 @@ const CompilerPage = (): JSX.Element => {
                 <Box w="100%" bg="#98ff98" color="black" rounded="2xl" p="4">
                     <Center>
                         <Text>
-                            Dev Mode is enabled. Some features are under development and may break
-                            at any time. To disable, include dev=false in the query string by
+                            <b>Dev Mode enabled</b>. Some features are under development and may
+                            break at any time. To disable, include dev=false in the query string by
                             pasting: ?dev=false to the end of the url
                         </Text>
                     </Center>
