@@ -8,26 +8,55 @@ import {
     NoServerResponse,
     CompilerError,
 } from "../apiResponses"
-import { Stack, Box, Alert, AlertIcon, AlertTitle, AlertDescription } from "@chakra-ui/react"
+import {
+    Stack,
+    Box,
+    Alert,
+    AlertIcon,
+    AlertTitle,
+    AlertDescription,
+    Center,
+    Text,
+} from "@chakra-ui/react"
 import CircuitSelect from "../components/sections/CircuitSelect"
-import { useLocation } from "react-router-dom"
+import { useLocation, useNavigate } from "react-router-dom"
 import { DevModeContext } from "../contexts/DevModeContext"
 
 const CompilerPage = (): JSX.Element => {
     const [appState, setAppState] = useState(new AppState())
 
-    const { search } = useLocation()
+    const path = useLocation()
     const { isDevMode, setIsDevMode } = useContext(DevModeContext)
-    const query = new URLSearchParams(search)
+    const query = new URLSearchParams(path.search)
     const mode = query.get("dev")
-    console.log("MODE", mode)
-    if (mode=="true") {
-        setIsDevMode(true)
-    }
+    console.log("MODE",mode)
+    console.log("dev mode???",isDevMode)
 
+    let navigate = useNavigate()
+    useEffect(() => {
+        if (mode == "true") {
+            setIsDevMode(true)
+            navigate(path.pathname)
+        } else if (mode == "false") {
+            setIsDevMode(false)
+            navigate(path.pathname)
+        }
+    })
 
     return (
         <>
+            {isDevMode && (
+                <Box w="100%" bg="#98ff98" color="black" rounded="2xl" p="4">
+                    <Center>
+                        <Text>
+                            Dev Mode is enabled. Some features are under development and may break
+                            at any time. To disable, include dev=false in the query string by
+                            pasting: ?dev=false to the end of the url
+                        </Text>
+                    </Center>
+                </Box>
+            )}
+
             <Box mt={10}>
                 <CircuitSelect appState={appState} setAppState={setAppState} />
             </Box>
