@@ -42,7 +42,12 @@ const SliceViewer = ({ slice }: SliceViewerProps) => {
                     gap="0"
                 >
                     {row.map((cell, col_idx) => (
-                        <GridItem className="lattice-cell" key={col_idx}>
+                        <GridItem
+                            w={cell_dimension_pixels}
+                            h={cell_dimension_pixels}
+                            className="lattice-cell"
+                            key={col_idx}
+                        >
                             <CellViewer
                                 cell={cell}
                                 row_idx={row_idx}

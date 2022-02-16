@@ -31,12 +31,8 @@
 
 .lattice-cell {
     border: 0.5px solid #a2abae;
-    min-width: 50px;
-    max-width: 130px;
-    /* width: 12vw; */
     position: relative;
     font-size: 18px;
-    aspect-ratio: 1 / 1;
 }
 
 .qubit-state {
