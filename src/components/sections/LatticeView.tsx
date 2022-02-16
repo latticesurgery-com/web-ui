@@ -15,7 +15,6 @@ import {
     Text,
     Button,
     Grid,
-    AspectRatio,
     GridItem,
 } from "@chakra-ui/react"
 import parseCompilationText from "../../parseCompilationText"
