@@ -1,4 +1,5 @@
 /** @jsxImportSource @emotion/react */
+import { Box } from "@chakra-ui/react"
 import { css } from "@emotion/react"
 import { PatchType, Orientation, EdgeType, ActivityType } from "../slices"
 import { VisualArrayCell } from "../slices"
@@ -54,8 +55,7 @@ type CellViewerProps = {
 
 const CellViewer = ({ cell, row_idx, col_idx }: CellViewerProps) => {
     return (
-        <div
-            className="lattice-cell-inside"
+        <Box
             css={css`
                 height: 100%;
                 width: 100%;
@@ -111,7 +111,7 @@ const CellViewer = ({ cell, row_idx, col_idx }: CellViewerProps) => {
                     </p>
                 )}
             </span>
-        </div>
+        </Box>
     )
 }
 
