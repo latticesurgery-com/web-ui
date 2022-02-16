@@ -1,11 +1,4 @@
 /* lattice view styles */
-
-.lattice-card {
-    border: 2px solid black;
-    border-radius: 15px;
-    width: 200px;
-    background-color: #ffdbb3 !important;
-}
 .center {
     text-align: center;
 }
@@ -26,7 +19,7 @@
     background-color: lavender;
     border-bottom: solid darkgrey 1.5vh;
 }
-#draggable-container {
+#lattice-container {
     font-size: 0;
     z-index: 10;
 }
@@ -38,9 +31,6 @@
 
 .lattice-cell {
     border: 0.5px solid #a2abae;
-    min-width: 50px;
-    max-width: 130px;
-    width: 12vw;
     position: relative;
     font-size: 18px;
 }

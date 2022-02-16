@@ -14,6 +14,8 @@ import {
     Flex,
     Text,
     Button,
+    Grid,
+    GridItem,
 } from "@chakra-ui/react"
 import parseCompilationText from "../../parseCompilationText"
 import SliceIndexBar from "../SliceIndexBar"
@@ -22,19 +24,43 @@ import { IoSaveOutline } from "react-icons/io5"
 type SliceViewerProps = {
     slice: Slice
 }
-const SliceViewer = ({ slice }: SliceViewerProps) => (
-    <div className="slice grid">
-        {slice.map((row, row_idx) => (
-            <div className="lattice-row row flex-nowrap" key={row_idx}>
-                {row.map((cell, col_idx) => (
-                    <div className="lattice-cell ratio ratio-1x1 col" key={col_idx}>
-                        <CellViewer cell={cell} row_idx={row_idx} col_idx={col_idx} key={col_idx} />
-                    </div>
-                ))}
-            </div>
-        ))}
-    </div>
-)
+const SliceViewer = ({ slice }: SliceViewerProps) => {
+    const cell_dimension_pixels = "130px"
+    const m_rows = slice.length
+    const n_cols = slice[0].length
+    return (
+        <Grid
+            templateRows={`repeat(${m_rows}, ${cell_dimension_pixels})`}
+            gap="0"
+            className="slice"
+        >
+            {slice.map((row, row_idx) => (
+                <Grid
+                    className="lattice-row"
+                    key={row_idx}
+                    templateColumns={`repeat(${n_cols}, ${cell_dimension_pixels})`}
+                    gap="0"
+                >
+                    {row.map((cell, col_idx) => (
+                        <GridItem
+                            w={cell_dimension_pixels}
+                            h={cell_dimension_pixels}
+                            className="lattice-cell"
+                            key={col_idx}
+                        >
+                            <CellViewer
+                                cell={cell}
+                                row_idx={row_idx}
+                                col_idx={col_idx}
+                                key={col_idx}
+                            />
+                        </GridItem>
+                    ))}
+                </Grid>
+            ))}
+        </Grid>
+    )
+}
 
 type LatticeViewProps = {
     compilationResult: CompilationResult
@@ -175,10 +201,8 @@ const LatticeView = ({ compilationResult }: LatticeViewProps): JSX.Element => {
                 </Center>
             </Box>
 
-            <Box>
-                <div id="draggable-container" className="mt-2 mb-5">
-                    <SliceViewer slice={slices[selectedSliceNumber]} />
-                </div>
+            <Box mt="4" pb="8" id="lattice-container">
+                <SliceViewer slice={slices[selectedSliceNumber]} />
             </Box>
         </>
     )
