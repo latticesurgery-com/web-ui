@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useContext, useEffect } from "react"
 import { AppState } from "../appState"
 import LatticeView from "../components/sections/LatticeView"
 import {
@@ -10,9 +10,22 @@ import {
 } from "../apiResponses"
 import { Stack, Box, Alert, AlertIcon, AlertTitle, AlertDescription } from "@chakra-ui/react"
 import CircuitSelect from "../components/sections/CircuitSelect"
+import { useLocation } from "react-router-dom"
+import { DevModeContext } from "../contexts/DevModeContext"
 
 const CompilerPage = (): JSX.Element => {
     const [appState, setAppState] = useState(new AppState())
+
+    const { search } = useLocation()
+    const { isDevMode, setIsDevMode } = useContext(DevModeContext)
+    const query = new URLSearchParams(search)
+    const mode = query.get("dev")
+    console.log("MODE", mode)
+    if (mode=="true") {
+        setIsDevMode(true)
+    }
+
+
     return (
         <>
             <Box mt={10}>
