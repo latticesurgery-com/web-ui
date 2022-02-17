@@ -7,14 +7,12 @@ type DevModeContextType = {
 
 const defaultContext = {
     isDevMode: false,
-    setIsDevMode: () => null
+    setIsDevMode: () => null,
 }
 
-// <DevModeContextInterface | null>(null)
 export const DevModeContext = React.createContext<DevModeContextType>(defaultContext)
 
-// Alternatively: React.PropsWithChildren<Record<never, never>>
-const DevModeContextProvider = (props: React.PropsWithChildren<{}>) => {
+const DevModeContextProvider = (props: React.PropsWithChildren<Record<never, never>>) => {
     const [isDevMode, setIsDevMode] = React.useState(false)
     return (
         <DevModeContext.Provider

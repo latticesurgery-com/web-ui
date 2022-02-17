@@ -29,7 +29,6 @@ const CompilerPage = (): JSX.Element => {
     const { isDevMode, setIsDevMode } = useContext(DevModeContext)
     const query = new URLSearchParams(path.search)
     const mode = query.get("dev")
-    console.log("Dev Mode?", isDevMode)
 
     const navigate = useNavigate()
     useEffect(() => {
