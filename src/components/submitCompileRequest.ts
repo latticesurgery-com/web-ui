@@ -60,7 +60,6 @@ const submitCompileRequest = (
                         for (let i = 0; i < REPEATS; i++) {
                             responseJson.slices[slice_idx] =
                                 responseJson.slices[slice_idx].concat(slice)
-                       
                         }
                     })
                     setAppState({

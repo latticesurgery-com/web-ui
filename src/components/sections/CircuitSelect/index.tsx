@@ -27,7 +27,7 @@ const CircuitSelect = ({ appState, setAppState }: AppStateProps) => {
     const [doTransform, setDoTransform] = useState(true)
     const [repeats, setRepeats] = useState(0)
 
-    const { isDevMode, setIsDevMode } = React.useContext(DevModeContext)
+    const { isDevMode } = React.useContext(DevModeContext)
 
     const readFile = (file: File) => {
         return new Promise((resolve, reject) => {
