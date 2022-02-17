@@ -29,9 +29,6 @@ const CircuitSelect = ({ appState, setAppState }: AppStateProps) => {
 
     const { isDevMode, setIsDevMode } = React.useContext(DevModeContext)
 
-    console.log("ISDEV??", isDevMode)
-    console.log("REPEATS", repeats)
-
     const readFile = (file: File) => {
         return new Promise((resolve, reject) => {
             const reader = new FileReader()
@@ -100,8 +97,8 @@ const CircuitSelect = ({ appState, setAppState }: AppStateProps) => {
             </Checkbox>
             {isDevMode && (
                 <Box p="3" rounded="lg" borderWidth="3px" borderColor="#98ff98">
-                    <Flex>
-                        <Text>Repeats</Text>
+                    <Flex gap="2">
+                        <Text margin="auto">Repeats</Text>
                         <NumberInput
                             w="120px"
                             defaultValue={repeats}

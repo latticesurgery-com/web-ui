@@ -27,6 +27,7 @@ const SliceIndexBar = ({ count, selected, setSlice }: SliceIndexBarProps): JSX.E
                             backgroundColor={color}
                             textColor="white"
                             onClick={() => handleChange(index)}
+                            rounded="sm"
                         ></Box>
                     )
                 })}
