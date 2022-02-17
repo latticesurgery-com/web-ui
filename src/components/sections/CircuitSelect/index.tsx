@@ -8,15 +8,29 @@ import {
     MenuItem,
     MenuList,
     Text,
+    Box,
+    NumberDecrementStepper,
+    NumberIncrementStepper,
+    NumberInputField,
+    NumberInputStepper,
+    NumberInput,
 } from "@chakra-ui/react"
 import { IoChevronDownSharp } from "react-icons/io5"
 import { AppStateProps } from "../../../appState"
 import FileUploader from "./FileUploader"
 import submitCompileRequest from "../../submitCompileRequest"
 import { CompilationResultSuccess } from "../../../apiResponses"
+import { DevModeContext } from "../../../contexts/DevModeContext"
+import React from "react"
 
 const CircuitSelect = ({ appState, setAppState }: AppStateProps) => {
     const [doTransform, setDoTransform] = useState(true)
+    const [repeats, setRepeats] = useState(0)
+
+    const { isDevMode, setIsDevMode } = React.useContext(DevModeContext)
+
+    console.log("ISDEV??", isDevMode)
+    console.log("REPEATS", repeats)
 
     const readFile = (file: File) => {
         return new Promise((resolve, reject) => {
@@ -37,7 +51,7 @@ const CircuitSelect = ({ appState, setAppState }: AppStateProps) => {
                 compilationIsLoading: false,
             })
         } else {
-            submitCompileRequest({ appState, setAppState }, data as string, doTransform)
+            submitCompileRequest({ appState, setAppState }, data as string, doTransform, repeats)
         }
     }
 
@@ -45,7 +59,7 @@ const CircuitSelect = ({ appState, setAppState }: AppStateProps) => {
         const file_url = `${process.env.PUBLIC_URL}/assets/demo_circuits/${example}`
         const data = await fetch(file_url).then((response) => response.text())
         if (data) {
-            submitCompileRequest({ appState, setAppState }, data as string, doTransform)
+            submitCompileRequest({ appState, setAppState }, data as string, doTransform, repeats)
         }
     }
 
@@ -76,6 +90,7 @@ const CircuitSelect = ({ appState, setAppState }: AppStateProps) => {
                 onFileAccepted={onFileAccepted}
                 isLoading={appState.compilationIsLoading}
             />
+
             <Checkbox
                 isChecked={doTransform}
                 onChange={(e) => setDoTransform(e.target.checked)}
@@ -83,6 +98,26 @@ const CircuitSelect = ({ appState, setAppState }: AppStateProps) => {
             >
                 <Text as={"span"}>Litinski Transform</Text>
             </Checkbox>
+            {isDevMode && (
+                <Box p="3" rounded="lg" borderWidth="3px" borderColor="#98ff98">
+                    <Flex>
+                        <Text>Repeats</Text>
+                        <NumberInput
+                            w="120px"
+                            defaultValue={repeats}
+                            onChange={(value) => {
+                                setRepeats(parseInt(value))
+                            }}
+                        >
+                            <NumberInputField />
+                            <NumberInputStepper>
+                                <NumberIncrementStepper />
+                                <NumberDecrementStepper />
+                            </NumberInputStepper>
+                        </NumberInput>
+                    </Flex>
+                </Box>
+            )}
         </Flex>
     )
 }
