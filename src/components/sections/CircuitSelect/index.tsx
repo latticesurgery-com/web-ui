@@ -26,7 +26,6 @@ import React from "react"
 const CircuitSelect = ({ appState, setAppState }: AppStateProps) => {
     const [doTransform, setDoTransform] = useState(true)
     const [repeats, setRepeats] = useState(0)
-
     const { isDevMode } = React.useContext(DevModeContext)
 
     const readFile = (file: File) => {
@@ -87,7 +86,6 @@ const CircuitSelect = ({ appState, setAppState }: AppStateProps) => {
                 onFileAccepted={onFileAccepted}
                 isLoading={appState.compilationIsLoading}
             />
-
             <Checkbox
                 isChecked={doTransform}
                 onChange={(e) => setDoTransform(e.target.checked)}
