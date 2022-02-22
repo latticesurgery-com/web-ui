@@ -13,7 +13,8 @@ import {
 const submitCompileRequest = (
     { appState, setAppState }: AppStateProps,
     circuitStr: string,
-    doLitinskiTransform: boolean
+    doLitinskiTransform: boolean,
+    repeats: number
 ) => {
     const queryStringMap = queryString.parse(window.location.search)
 
@@ -46,6 +47,20 @@ const submitCompileRequest = (
             } else {
                 try {
                     const responseJson = JSON.parse(response.data) as CompilationResult
+                    // Extend the slices by
+                    const REPEATS = repeats
+                    responseJson.slices.forEach((slice, slice_idx) => {
+                        slice.forEach((row, row_idx) => {
+                            for (let i = 0; i < REPEATS; i++) {
+                                responseJson.slices[slice_idx][row_idx] =
+                                    responseJson.slices[slice_idx][row_idx].concat(row)
+                            }
+                        })
+                        for (let i = 0; i < REPEATS; i++) {
+                            responseJson.slices[slice_idx] =
+                                responseJson.slices[slice_idx].concat(slice)
+                        }
+                    })
                     setAppState({
                         apiResponse: new CompilationResultSuccess(
                             responseJson.slices,

@@ -50,8 +50,8 @@ const CompilerPage = (): JSX.Element => {
                     <Center>
                         <Text>
                             <b>Dev Mode enabled</b>. Some features are under development and may
-                            break at any time. To disable, include dev=false in the query string by
-                            pasting: ?dev=false to the end of the url
+                            break at any time. To disable, either refresh page, or include dev=false
+                            in the query string by pasting: ?dev=false to the end of the url
                         </Text>
                     </Center>
                 </Box>
