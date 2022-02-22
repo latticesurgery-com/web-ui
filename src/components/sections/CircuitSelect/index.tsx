@@ -20,13 +20,10 @@ import { AppStateProps } from "../../../appState"
 import FileUploader from "./FileUploader"
 import submitCompileRequest from "../../submitCompileRequest"
 import { CompilationResultSuccess } from "../../../apiResponses"
-import { DevModeContext } from "../../../contexts/DevModeContext"
-import React from "react"
 
-const CircuitSelect = ({ appState, setAppState }: AppStateProps) => {
+const CircuitSelect = ({ appState, setAppState, isDevMode }: AppStateProps) => {
     const [doTransform, setDoTransform] = useState(true)
     const [repeats, setRepeats] = useState(0)
-    const { isDevMode } = React.useContext(DevModeContext)
 
     const readFile = (file: File) => {
         return new Promise((resolve, reject) => {

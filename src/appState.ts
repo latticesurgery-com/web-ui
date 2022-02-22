@@ -9,6 +9,7 @@ class AppState {
 interface AppStateProps {
     appState: AppState
     setAppState: React.Dispatch<AppState>
+    isDevMode?: boolean
 }
 
 export { AppState }

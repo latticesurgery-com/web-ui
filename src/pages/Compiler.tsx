@@ -1,4 +1,4 @@
-import { useState, useContext, useEffect } from "react"
+import { useState } from "react"
 import { AppState } from "../appState"
 import LatticeView from "../components/sections/LatticeView"
 import {
@@ -8,57 +8,34 @@ import {
     NoServerResponse,
     CompilerError,
 } from "../apiResponses"
-import {
-    Stack,
-    Box,
-    Alert,
-    AlertIcon,
-    AlertTitle,
-    AlertDescription,
-    Center,
-    Text,
-} from "@chakra-ui/react"
+import { Stack, Box, Alert, AlertIcon, AlertTitle, AlertDescription } from "@chakra-ui/react"
 import CircuitSelect from "../components/sections/CircuitSelect"
-import { useLocation, useNavigate } from "react-router-dom"
-import { DevModeContext } from "../contexts/DevModeContext"
+import { useSearchParams } from "react-router-dom"
 
 const CompilerPage = (): JSX.Element => {
     const [appState, setAppState] = useState(new AppState())
 
-    const path = useLocation()
-    const { isDevMode, setIsDevMode } = useContext(DevModeContext)
-    const query = new URLSearchParams(path.search)
-    const mode = query.get("dev")
-
-    const navigate = useNavigate()
-    useEffect(() => {
-        if (mode == "true") {
-            setIsDevMode(true)
-            navigate(path.pathname)
-            console.log("LSC Dev Mode Enabled")
-        } else if (mode == "false") {
-            setIsDevMode(false)
-            navigate(path.pathname)
-            console.log("LSC Dev Mode Disabled")
-        }
-    })
+    const [searchParams] = useSearchParams()
+    const isDevMode = searchParams.get("dev") === "true"
 
     return (
         <>
             {isDevMode && (
-                <Box w="100%" bg="#98ff98" color="black" rounded="2xl" p="4">
-                    <Center>
-                        <Text>
-                            <b>Dev Mode enabled</b>. Some features are under development and may
-                            break at any time. To disable, either refresh page, or include dev=false
-                            in the query string by pasting: ?dev=false to the end of the url
-                        </Text>
-                    </Center>
-                </Box>
+                <Alert mt={10} status="warning">
+                    <AlertIcon />
+                    <AlertTitle>Dev Mode enabled!</AlertTitle>
+                    <AlertDescription>
+                        Some features are under development and may break at any time.
+                    </AlertDescription>
+                </Alert>
             )}
 
             <Box mt={10}>
-                <CircuitSelect appState={appState} setAppState={setAppState} />
+                <CircuitSelect
+                    appState={appState}
+                    setAppState={setAppState}
+                    isDevMode={isDevMode}
+                />
             </Box>
             <Stack mt={10} spacing={5}>
                 {appState.apiResponse instanceof ApiHttpError && (
