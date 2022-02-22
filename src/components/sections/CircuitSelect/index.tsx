@@ -100,6 +100,7 @@ const CircuitSelect = ({ appState, setAppState, isDevMode }: AppStateProps) => {
                             onChange={(value) => {
                                 setRepeats(parseInt(value))
                             }}
+                            isDisabled={appState.compilationIsLoading}
                         >
                             <NumberInputField />
                             <NumberInputStepper>
