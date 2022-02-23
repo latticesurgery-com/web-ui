@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { AppState } from "../appState"
+import { AppState } from "../lib/appState"
 import LatticeView from "../components/sections/LatticeView"
 import {
     JsonParseError,
@@ -7,7 +7,7 @@ import {
     CompilationResultSuccess,
     NoServerResponse,
     CompilerError,
-} from "../apiResponses"
+} from "../lib/apiResponses"
 import { Stack, Box, Alert, AlertIcon, AlertTitle, AlertDescription } from "@chakra-ui/react"
 import CircuitSelect from "../components/sections/CircuitSelect"
 import { useSearchParams } from "react-router-dom"

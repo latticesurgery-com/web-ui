@@ -1,8 +1,8 @@
 /** @jsxImportSource @emotion/react */
 import { Box } from "@chakra-ui/react"
 import { css } from "@emotion/react"
-import { PatchType, Orientation, EdgeType, ActivityType } from "../slices"
-import { VisualArrayCell } from "../slices"
+import { PatchType, Orientation, EdgeType, ActivityType } from "../lib/slices"
+import { VisualArrayCell } from "../lib/slices"
 
 type StylesMapType = {
     [key in Orientation | PatchType | EdgeType]: string

@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import React, { useRef } from "react"
 import { useState } from "react"
-import { CompilationResult, Slice, Slices } from "../../slices"
+import { CompilationResult, Slice, Slices } from "../../lib/slices"
 import CellViewer from "../CellViewer"
 import "./LatticeView.css"
 import {
@@ -17,7 +17,7 @@ import {
     Grid,
     GridItem,
 } from "@chakra-ui/react"
-import parseCompilationText from "../../parseCompilationText"
+import parseCompilationText from "../../lib/parseCompilationText"
 import SliceIndexBar from "../SliceIndexBar"
 import { IoSaveOutline } from "react-icons/io5"
 

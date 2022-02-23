@@ -1,6 +1,6 @@
-import { AppStateProps } from "../appState"
+import { AppStateProps } from "../lib/appState"
 import queryString from "query-string"
-import { CompilationResult } from "../slices"
+import { CompilationResult } from "../lib/slices"
 import axios from "axios"
 import {
     JsonParseError,
@@ -8,7 +8,7 @@ import {
     CompilationResultSuccess,
     NoServerResponse,
     CompilerError,
-} from "../apiResponses"
+} from "../lib/apiResponses"
 
 const submitCompileRequest = (
     { appState, setAppState }: AppStateProps,

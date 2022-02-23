@@ -16,10 +16,10 @@ import {
     NumberInput,
 } from "@chakra-ui/react"
 import { IoChevronDownSharp } from "react-icons/io5"
-import { AppStateProps } from "../../../appState"
+import { AppStateProps } from "../../../lib/appState"
 import FileUploader from "./FileUploader"
 import submitCompileRequest from "../../submitCompileRequest"
-import { CompilationResultSuccess } from "../../../apiResponses"
+import { CompilationResultSuccess } from "../../../lib/apiResponses"
 
 const CircuitSelect = ({ appState, setAppState, isDevMode }: AppStateProps) => {
     const [doTransform, setDoTransform] = useState(true)
