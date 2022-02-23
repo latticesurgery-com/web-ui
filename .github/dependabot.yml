@@ -6,9 +6,13 @@ updates:
   - package-ecosystem: "npm"
     directory: "/"
     schedule:
-      interval: "daily"
+        interval: "daily"
+    ignore:
+        # Ignore patch updates for types dependencies
+        - dependency-name: "@types/*"
+          update-types: ["version-update:semver-patch"]
 
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
-      interval: "daily"
+        interval: "daily"
