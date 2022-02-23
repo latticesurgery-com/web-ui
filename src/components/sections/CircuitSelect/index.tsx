@@ -19,9 +19,10 @@ import { IoChevronDownSharp } from "react-icons/io5"
 import { AppStateProps } from "../../../lib/appState"
 import FileUploader from "./FileUploader"
 import submitCompileRequest from "../../submitCompileRequest"
+import isDevMode from "../../../lib/isDevMode"
 import { CompilationResultSuccess } from "../../../lib/apiResponses"
 
-const CircuitSelect = ({ appState, setAppState, isDevMode }: AppStateProps) => {
+const CircuitSelect = ({ appState, setAppState }: AppStateProps) => {
     const [doTransform, setDoTransform] = useState(true)
     const [repeats, setRepeats] = useState(0)
 
@@ -90,7 +91,7 @@ const CircuitSelect = ({ appState, setAppState, isDevMode }: AppStateProps) => {
             >
                 <Text as={"span"}>Litinski Transform</Text>
             </Checkbox>
-            {isDevMode && (
+            {isDevMode() && (
                 <Box p="3" rounded="lg" borderWidth="3px" borderColor="#98ff98">
                     <Flex gap="2">
                         <Text margin="auto">Repeats</Text>
