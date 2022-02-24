@@ -1,5 +1,6 @@
-import { useState, useContext, useEffect } from "react"
-import { AppState } from "../appState"
+import { useState } from "react"
+import { AppState } from "../lib/appState"
+import isDevMode from "../lib/isDevMode"
 import LatticeView from "../components/sections/LatticeView"
 import {
     JsonParseError,
@@ -7,54 +8,23 @@ import {
     CompilationResultSuccess,
     NoServerResponse,
     CompilerError,
-} from "../apiResponses"
-import {
-    Stack,
-    Box,
-    Alert,
-    AlertIcon,
-    AlertTitle,
-    AlertDescription,
-    Center,
-    Text,
-} from "@chakra-ui/react"
+} from "../lib/apiResponses"
+import { Stack, Box, Alert, AlertIcon, AlertTitle, AlertDescription } from "@chakra-ui/react"
 import CircuitSelect from "../components/sections/CircuitSelect"
-import { useLocation, useNavigate } from "react-router-dom"
-import { DevModeContext } from "../contexts/DevModeContext"
 
 const CompilerPage = (): JSX.Element => {
     const [appState, setAppState] = useState(new AppState())
 
-    const path = useLocation()
-    const { isDevMode, setIsDevMode } = useContext(DevModeContext)
-    const query = new URLSearchParams(path.search)
-    const mode = query.get("dev")
-
-    const navigate = useNavigate()
-    useEffect(() => {
-        if (mode == "true") {
-            setIsDevMode(true)
-            navigate(path.pathname)
-            console.log("LSC Dev Mode Enabled")
-        } else if (mode == "false") {
-            setIsDevMode(false)
-            navigate(path.pathname)
-            console.log("LSC Dev Mode Disabled")
-        }
-    })
-
     return (
         <>
-            {isDevMode && (
-                <Box w="100%" bg="#98ff98" color="black" rounded="2xl" p="4">
-                    <Center>
-                        <Text>
-                            <b>Dev Mode enabled</b>. Some features are under development and may
-                            break at any time. To disable, either refresh page, or include dev=false
-                            in the query string by pasting: ?dev=false to the end of the url
-                        </Text>
-                    </Center>
-                </Box>
+            {isDevMode() && (
+                <Alert mt={10} status="warning">
+                    <AlertIcon />
+                    <AlertTitle>Dev Mode enabled!</AlertTitle>
+                    <AlertDescription>
+                        Some features are under development and may break at any time.
+                    </AlertDescription>
+                </Alert>
             )}
 
             <Box mt={10}>

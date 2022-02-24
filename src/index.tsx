@@ -6,7 +6,6 @@ import { BrowserRouter, Route, Routes } from "react-router-dom"
 import reportWebVitals from "./reportWebVitals"
 import theme from "./styles/theme"
 import Base from "./pages/Base"
-import DevModeContextProvider from "./contexts/DevModeContext"
 
 const Home = React.lazy(() => import("./pages/Home"))
 const CompilerPage = React.lazy(() => import("./pages/Compiler"))
@@ -20,17 +19,15 @@ ReactDOM.render(
             <ColorModeScript initialColorMode={theme.config.initialColorMode} />
             <BrowserRouter>
                 <Base>
-                    <DevModeContextProvider>
-                        <React.Suspense fallback={<></>}>
-                            <Routes>
-                                <Route path="/" element={<Home />} />
-                                <Route path="/online-compiler" element={<CompilerPage />} />
-                                <Route path="/overview" element={<Overview />} />
-                                <Route path="/about-us" element={<AboutUs />} />
-                                <Route path="*" element={<NotFound />} />
-                            </Routes>
-                        </React.Suspense>
-                    </DevModeContextProvider>
+                    <React.Suspense fallback={<></>}>
+                        <Routes>
+                            <Route path="/" element={<Home />} />
+                            <Route path="/online-compiler" element={<CompilerPage />} />
+                            <Route path="/overview" element={<Overview />} />
+                            <Route path="/about-us" element={<AboutUs />} />
+                            <Route path="*" element={<NotFound />} />
+                        </Routes>
+                    </React.Suspense>
                 </Base>
             </BrowserRouter>
         </ChakraProvider>

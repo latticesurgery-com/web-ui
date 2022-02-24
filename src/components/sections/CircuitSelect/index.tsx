@@ -16,17 +16,15 @@ import {
     NumberInput,
 } from "@chakra-ui/react"
 import { IoChevronDownSharp } from "react-icons/io5"
-import { AppStateProps } from "../../../appState"
+import { AppStateProps } from "../../../lib/appState"
 import FileUploader from "./FileUploader"
 import submitCompileRequest from "../../submitCompileRequest"
-import { CompilationResultSuccess } from "../../../apiResponses"
-import { DevModeContext } from "../../../contexts/DevModeContext"
-import React from "react"
+import isDevMode from "../../../lib/isDevMode"
+import { CompilationResultSuccess } from "../../../lib/apiResponses"
 
 const CircuitSelect = ({ appState, setAppState }: AppStateProps) => {
     const [doTransform, setDoTransform] = useState(true)
     const [repeats, setRepeats] = useState(0)
-    const { isDevMode } = React.useContext(DevModeContext)
 
     const readFile = (file: File) => {
         return new Promise((resolve, reject) => {
@@ -93,7 +91,7 @@ const CircuitSelect = ({ appState, setAppState }: AppStateProps) => {
             >
                 <Text as={"span"}>Litinski Transform</Text>
             </Checkbox>
-            {isDevMode && (
+            {isDevMode() && (
                 <Box p="3" rounded="lg" borderWidth="3px" borderColor="#98ff98">
                     <Flex gap="2">
                         <Text margin="auto">Repeats</Text>
@@ -103,6 +101,7 @@ const CircuitSelect = ({ appState, setAppState }: AppStateProps) => {
                             onChange={(value) => {
                                 setRepeats(parseInt(value))
                             }}
+                            isDisabled={appState.compilationIsLoading}
                         >
                             <NumberInputField />
                             <NumberInputStepper>
