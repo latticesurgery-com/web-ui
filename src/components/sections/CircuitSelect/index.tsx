@@ -18,7 +18,7 @@ import {
 import { IoChevronDownSharp } from "react-icons/io5"
 import { AppStateProps } from "../../../lib/appState"
 import FileUploader from "./FileUploader"
-import submitCompileRequest from "../../submitCompileRequest"
+import submitCompileRequest from "../../../lib/submitCompileRequest"
 import isDevMode from "../../../lib/isDevMode"
 import { CompilationResultSuccess } from "../../../lib/apiResponses"
 

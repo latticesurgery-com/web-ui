@@ -1,8 +1,10 @@
-import { AppState } from "../lib/appState"
+import { AppState } from "./appState"
 import queryString from "query-string"
-import { CompilationResult } from "../lib/slices"
+import { CompilationResult } from "./slices"
 import axios from "axios"
-import { CompilationResultSuccess, ResponseError } from "../lib/apiResponses"
+import { CompilationResultSuccess, ResponseError } from "./apiResponses"
+
+const API_URL = "https://api.latticesurgery.com/compile"
 
 const submitCompileRequest = async (
     setAppState: React.Dispatch<AppState>,
@@ -14,7 +16,7 @@ const submitCompileRequest = async (
 
     const apiUrl = queryStringMap.localapi
         ? `http://localhost:${queryStringMap.port || 9876}/compile`
-        : "https://api.latticesurgery.com/compile"
+        : API_URL
 
     // Modify State on Compile Request Submit
     setAppState({
