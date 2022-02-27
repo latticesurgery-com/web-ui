@@ -1,11 +1,11 @@
-import { AppStateProps } from "../lib/appState"
+import { AppState } from "../lib/appState"
 import queryString from "query-string"
 import { CompilationResult } from "../lib/slices"
 import axios from "axios"
 import { CompilationResultSuccess, ResponseError } from "../lib/apiResponses"
 
 const submitCompileRequest = async (
-    { appState, setAppState }: AppStateProps,
+    setAppState: React.Dispatch<AppState>,
     circuitStr: string,
     doLitinskiTransform: boolean,
     repeats: number
