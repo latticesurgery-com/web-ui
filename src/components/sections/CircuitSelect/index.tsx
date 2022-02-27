@@ -18,7 +18,7 @@ import {
 import { IoChevronDownSharp } from "react-icons/io5"
 import { AppStateProps } from "../../../lib/appState"
 import FileUploader from "./FileUploader"
-import submitCompileRequest from "../../submitCompileRequest"
+import submitCompileRequest from "../../../lib/submitCompileRequest"
 import isDevMode from "../../../lib/isDevMode"
 import { CompilationResultSuccess } from "../../../lib/apiResponses"
 
@@ -45,7 +45,7 @@ const CircuitSelect = ({ appState, setAppState }: AppStateProps) => {
                 compilationIsLoading: false,
             })
         } else {
-            submitCompileRequest({ appState, setAppState }, data as string, doTransform, repeats)
+            submitCompileRequest(setAppState, data as string, doTransform, repeats)
         }
     }
 
@@ -53,7 +53,7 @@ const CircuitSelect = ({ appState, setAppState }: AppStateProps) => {
         const file_url = `${process.env.PUBLIC_URL}/assets/demo_circuits/${example}`
         const data = await fetch(file_url).then((response) => response.text())
         if (data) {
-            submitCompileRequest({ appState, setAppState }, data as string, doTransform, repeats)
+            submitCompileRequest(setAppState, data as string, doTransform, repeats)
         }
     }
 
