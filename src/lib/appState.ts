@@ -1,15 +1,12 @@
 import React from "react"
 import { ApiResponse } from "./apiResponses"
 
-class AppState {
+export class AppState {
     compilationIsLoading: boolean = false
     apiResponse: ApiResponse = null
 }
 
-interface AppStateProps {
+export interface AppStateProps {
     appState: AppState
     setAppState: React.Dispatch<AppState>
 }
-
-export { AppState }
-export type { AppStateProps }
