@@ -16,7 +16,7 @@ const SliceIndexBar = ({ count, selected, setSlice }: SliceIndexBarProps): JSX.E
         setNumInput(ind)
     }
     // group slices
-    const max_steps = count <= 100 ? count : 100 // customizable
+    const max_steps = count <= 200 ? count : 200 // max_steps maxes out at 200. can change the resolution of steps here if desired (performance trade-off if you go too high)
     const nSteps = Array.from(Array(max_steps).keys())
 
     // run handleInputChange when input field is updated
@@ -40,15 +40,23 @@ const SliceIndexBar = ({ count, selected, setSlice }: SliceIndexBarProps): JSX.E
         return Math.max(Math.floor(Math.log10(Math.abs(num))), 0) + 1
     }
 
+    const max_width = 500 // can make slice selector bar wider by changing this parameter
     return (
-        <Box borderWidth="3px" borderColor="black" maxW="500px" rounded="lg" p="1" boxShadow="md">
+        <Box
+            borderWidth="3px"
+            borderColor="black"
+            maxW={`${max_width}px`}
+            rounded="lg"
+            p="1"
+            boxShadow="md"
+        >
             <Flex>
                 {nSteps.map((index) => {
                     const color = (index * count) / max_steps <= selected ? "blue.300" : "lightgrey"
                     return (
                         <Box
                             h="40px"
-                            w={`${400 / max_steps}px`}
+                            w={`${max_width / max_steps}px`}
                             key={index}
                             backgroundColor={color}
                             border={count < 55 ? "1px solid white" : ""}
