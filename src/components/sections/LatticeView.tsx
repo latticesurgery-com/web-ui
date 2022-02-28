@@ -165,9 +165,14 @@ const LatticeView = ({ compilationResult }: LatticeViewProps): JSX.Element => {
 
             <Box pt={3} pb={3}>
                 <Center>
-                    <Heading as="h3" size="xl">
-                        Select Time Slice
-                    </Heading>
+                    <Flex flexWrap="wrap">
+                        <Heading as="h3" size="xl">
+                            Select Time Slice
+                        </Heading>
+                        <Text ml="4" mt="1" fontSize="24px">
+                            N = {slices_len}
+                        </Text>
+                    </Flex>
                 </Center>
 
                 <Center pt={3}>

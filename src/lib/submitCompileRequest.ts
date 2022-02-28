@@ -85,7 +85,7 @@ const submitCompileRequest = async (
                 })
             } else {
                 setAppState({
-                    apiResponse: new ResponseError("Error!", "Server did not response"),
+                    apiResponse: new ResponseError("Error!", "Server did not respond"),
                     compilationIsLoading: false,
                 })
             }
