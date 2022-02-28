@@ -1,4 +1,6 @@
-import { Box, Flex, Center, Text } from "@chakra-ui/react"
+import { Box, Flex, Center, NumberInput, NumberInputField } from "@chakra-ui/react"
+import { StringOrNumber } from "@chakra-ui/utils"
+import { useEffect, useState } from "react"
 
 type SliceIndexBarProps = {
     count: number
@@ -6,34 +8,64 @@ type SliceIndexBarProps = {
     setSlice: (num: number) => void
 }
 const SliceIndexBar = ({ count, selected, setSlice }: SliceIndexBarProps): JSX.Element => {
-    const nElements = Array.from(Array(count).keys())
-    const flex_gap = 0
-    // const [selectedSlice, setSelectedSlice] = React.useState<number>(initial)
-    const handleChange = (ind: number) => {
+    const [numInput, setNumInput] = useState<StringOrNumber>(selected)
+    const handleSliceClick = (ind: number) => {
         setSlice(ind)
+        setNumInput(ind)
     }
+    const max_steps = 100 // customizable
+    const nSteps = Array.from(Array(max_steps).keys())
+    
+    const handleInputChange = (input: string) => {
+        setNumInput(input)
+        try {
+            let val = parseInt(input)
+            if (val > 0 && val < count) {
+                setSlice(val)
+            }
+        } catch {}
+    }
+
+    // Triggers component re-render when selected is updated
+    useEffect(() => {
+        setNumInput(selected)
+    }, [selected])
+
     return (
-        <Box borderWidth="3px" borderColor="black" maxW="400px" rounded="xl" p="1" boxShadow={"lg"}>
-            <Flex gap={flex_gap}>
-                {nElements.map(function (element, index) {
-                    const color = index <= selected ? "#4299e1" : "lightgrey"
+        <Box borderWidth="3px" borderColor="black" maxW="450px" rounded="lg" p="1" boxShadow="md">
+            <Flex>
+                {nSteps.map((index) => {
+                    const color = (index * count) / max_steps <= selected ? "#4299e1" : "lightgrey"
                     return (
                         <Box
                             h="40px"
-                            width={200 / count - count * flex_gap}
+                            width={`${400 / max_steps}px`}
                             key={index}
-                            borderWidth="0.75px"
-                            borderColor="white"
                             backgroundColor={color}
                             textColor="white"
-                            onClick={() => handleChange(index)}
-                            rounded="sm"
+                            onClick={() => {
+                                // console.log("SET", index * Math.floor(count / max_steps))
+                                handleSliceClick(index * Math.floor(count / max_steps))
+                            }}
                         ></Box>
                     )
                 })}
-                <Box width="50px">
+                <Box>
                     <Center>
-                        <Text>{selected + 1}</Text>
+                        <Flex>
+                            <NumberInput
+                                w="100px"
+                                variant="outline"
+                                defaultValue={selected + 1}
+                                value={numInput}
+                                max={count}
+                                onChange={(e) => {
+                                    handleInputChange(e)
+                                }}
+                            >
+                                <NumberInputField />
+                            </NumberInput>
+                        </Flex>
                     </Center>
                 </Box>
             </Flex>
