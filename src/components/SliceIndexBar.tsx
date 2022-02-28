@@ -1,4 +1,4 @@
-import { Box, Flex, Center, NumberInput, NumberInputField } from "@chakra-ui/react"
+import { Box, Flex, NumberInput, NumberInputField } from "@chakra-ui/react"
 import { StringOrNumber } from "@chakra-ui/utils"
 import { useEffect, useState } from "react"
 
@@ -31,22 +31,27 @@ const SliceIndexBar = ({ count, selected, setSlice }: SliceIndexBarProps): JSX.E
             // if the string input is not a number within the valid slice range, do nothing.
         }
     }
-
     // Triggers component re-render when selected is updated
     useEffect(() => {
         setNumInput(selected)
     }, [selected])
+
+    const numDigits = (num: number) => {
+        return Math.max(Math.floor(Math.log10(Math.abs(num))), 0) + 1
+    }
+
     return (
-        <Box borderWidth="3px" borderColor="black" maxW="450px" rounded="lg" p="1" boxShadow="md">
+        <Box borderWidth="3px" borderColor="black" maxW="500px" rounded="lg" p="1" boxShadow="md">
             <Flex>
                 {nSteps.map((index) => {
-                    const color = (index * count) / max_steps <= selected ? "#4299e1" : "lightgrey"
+                    const color = (index * count) / max_steps <= selected ? "blue.300" : "lightgrey"
                     return (
                         <Box
                             h="40px"
                             w={`${400 / max_steps}px`}
                             key={index}
                             backgroundColor={color}
+                            border={count < 55 ? "1px solid white" : ""}
                             textColor="white"
                             onClick={() => {
                                 handleSliceClick(Math.floor((index * count) / max_steps))
@@ -55,22 +60,16 @@ const SliceIndexBar = ({ count, selected, setSlice }: SliceIndexBarProps): JSX.E
                     )
                 })}
                 <Box>
-                    <Center>
-                        <Flex>
-                            <NumberInput
-                                w="100px"
-                                variant="outline"
-                                defaultValue={selected + 1}
-                                value={numInput}
-                                max={count}
-                                onChange={(e) => {
-                                    handleInputChange(e)
-                                }}
-                            >
-                                <NumberInputField />
-                            </NumberInput>
-                        </Flex>
-                    </Center>
+                    <NumberInput
+                        defaultValue={selected + 1}
+                        value={numInput}
+                        max={count}
+                        onChange={(e) => {
+                            handleInputChange(e)
+                        }}
+                    >
+                        <NumberInputField w={`${15 + 15 * numDigits(count - 1)}px`} p="1" />
+                    </NumberInput>
                 </Box>
             </Flex>
         </Box>
