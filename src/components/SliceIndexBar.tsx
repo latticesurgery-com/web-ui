@@ -8,14 +8,19 @@ type SliceIndexBarProps = {
     setSlice: (num: number) => void
 }
 const SliceIndexBar = ({ count, selected, setSlice }: SliceIndexBarProps): JSX.Element => {
+    // set input field state seperately from selected slice state
+    // and only update slice state when input field is valid 
     const [numInput, setNumInput] = useState<StringOrNumber>(selected)
+    // handleSliceClick is run when you click the slice selector range
     const handleSliceClick = (ind: number) => {
         setSlice(ind)
         setNumInput(ind)
     }
+    // group slices
     const max_steps = count <= 100 ? count : 100 // customizable
     const nSteps = Array.from(Array(max_steps).keys())
 
+    // run handleInputChange when input field is updated
     const handleInputChange = (input: string) => {
         setNumInput(input)
         try {
@@ -24,7 +29,7 @@ const SliceIndexBar = ({ count, selected, setSlice }: SliceIndexBarProps): JSX.E
                 setSlice(val)
             }
         } catch {
-            // if the string input is not a number within the valid slice range, we do nothing.
+            // if the string input is not a number within the valid slice range, do nothing.
         }
     }
 
