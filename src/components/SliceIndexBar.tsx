@@ -19,11 +19,13 @@ const SliceIndexBar = ({ count, selected, setSlice }: SliceIndexBarProps): JSX.E
     const handleInputChange = (input: string) => {
         setNumInput(input)
         try {
-            let val = parseInt(input)
+            const val = parseInt(input)
             if (val > 0 && val < count) {
                 setSlice(val)
             }
-        } catch {}
+        } catch {
+            // if the string input is not a number within the valid slice range, we do nothing.
+        }
     }
 
     // Triggers component re-render when selected is updated
