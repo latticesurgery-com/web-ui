@@ -24,7 +24,7 @@ const SliceIndexBar = ({ count, selected, setSlice }: SliceIndexBarProps): JSX.E
         setNumInput(input)
         try {
             const val = parseInt(input)
-            if (val > 0 && val < count) {
+            if (0 <= val && val < count) {
                 setSlice(val)
             }
         } catch {
