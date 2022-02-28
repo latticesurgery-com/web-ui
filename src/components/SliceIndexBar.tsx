@@ -13,9 +13,9 @@ const SliceIndexBar = ({ count, selected, setSlice }: SliceIndexBarProps): JSX.E
         setSlice(ind)
         setNumInput(ind)
     }
-    const max_steps = 100 // customizable
+    const max_steps = count <= 100 ? count : 100 // customizable
     const nSteps = Array.from(Array(max_steps).keys())
-    
+
     const handleInputChange = (input: string) => {
         setNumInput(input)
         try {
@@ -30,7 +30,6 @@ const SliceIndexBar = ({ count, selected, setSlice }: SliceIndexBarProps): JSX.E
     useEffect(() => {
         setNumInput(selected)
     }, [selected])
-
     return (
         <Box borderWidth="3px" borderColor="black" maxW="450px" rounded="lg" p="1" boxShadow="md">
             <Flex>
@@ -39,13 +38,12 @@ const SliceIndexBar = ({ count, selected, setSlice }: SliceIndexBarProps): JSX.E
                     return (
                         <Box
                             h="40px"
-                            width={`${400 / max_steps}px`}
+                            w={`${400 / max_steps}px`}
                             key={index}
                             backgroundColor={color}
                             textColor="white"
                             onClick={() => {
-                                // console.log("SET", index * Math.floor(count / max_steps))
-                                handleSliceClick(index * Math.floor(count / max_steps))
+                                handleSliceClick(Math.floor((index * count) / max_steps))
                             }}
                         ></Box>
                     )
