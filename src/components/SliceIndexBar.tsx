@@ -52,7 +52,7 @@ const SliceIndexBar = ({ count, selected, setSlice }: SliceIndexBarProps): JSX.E
         >
             <Flex>
                 {nSteps.map((index) => {
-                    const color = (index * count) / max_steps <= selected ? "blue.300" : "lightgrey"
+                    const color = (index * count) / max_steps < selected ? "blue.300" : "#edf2f7"
                     return (
                         <Box
                             h="40px"
