@@ -8,8 +8,7 @@ type SliceIndexBarProps = {
     setSlice: (num: number) => void
 }
 const SliceIndexBar = ({ count, selected, setSlice }: SliceIndexBarProps): JSX.Element => {
-    // set input field state seperately from selected slice state
-    // and only update slice state when input field is valid 
+    // set input field state seperately from selected slice state and only update slice state when input field is valid
     const [numInput, setNumInput] = useState<StringOrNumber>(selected)
     // handleSliceClick is run when you click the slice selector range
     const handleSliceClick = (ind: number) => {
