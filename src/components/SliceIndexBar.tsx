@@ -41,6 +41,7 @@ const SliceIndexBar = ({ count, selected, setSlice }: SliceIndexBarProps): JSX.E
     }
 
     const max_width = 500 // can make slice selector bar wider by changing this parameter
+
     return (
         <Box
             borderWidth="3px"
@@ -52,7 +53,7 @@ const SliceIndexBar = ({ count, selected, setSlice }: SliceIndexBarProps): JSX.E
         >
             <Flex>
                 {nSteps.map((index) => {
-                    const color = (index * count) / max_steps < selected ? "blue.300" : "#edf2f7"
+                    const color = (index * count) / max_steps <= selected ? "blue.300" : "#edf2f7"
                     return (
                         <Box
                             h="40px"
