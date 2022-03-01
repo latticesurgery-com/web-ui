@@ -12,9 +12,16 @@ import { GrAddCircle, GrSubtractCircle } from "react-icons/gr"
 type ZoomBarProps = {
     cellDimension: number
     setCellDimension: (num: number) => void
+    cellFontSize: number
+    setCellFontSize: (num: number) => void
 }
 
-const ZoomBar = ({ cellDimension, setCellDimension }: ZoomBarProps) => {
+const ZoomBar = ({
+    cellDimension,
+    setCellDimension,
+    cellFontSize,
+    setCellFontSize,
+}: ZoomBarProps) => {
     const [sliderMax, sliderStep, defaultSliderValue] = [200, 10, 150]
     const [sliderValue, setSliderValue] = useState(150)
     console.log("Slider Val", sliderValue)
@@ -23,11 +30,13 @@ const ZoomBar = ({ cellDimension, setCellDimension }: ZoomBarProps) => {
             if (sliderValue !== sliderMax) {
                 setSliderValue(sliderValue + 10)
                 setCellDimension(cellDimension + 10)
+                setCellFontSize(cellFontSize + 1.5)
             }
         } else if (direction < 0) {
             if (sliderValue !== 0) {
                 setSliderValue(sliderValue - 10)
                 setCellDimension(cellDimension - 10)
+                setCellFontSize(cellFontSize - 1.5)
             }
         }
     }
