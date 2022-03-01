@@ -36,7 +36,11 @@ const SliceViewer = ({ slice, cellDimensionPixels, cellFontSize }: SliceViewerPr
             gap="0"
             w="fit-content"
             shadow="2xl"
+<<<<<<< HEAD
             mx="8"
+=======
+            m="8"
+>>>>>>> c1e091720334e8667cff2739f258207b53bbe7b2
         >
             {slice.map((row, row_idx) => (
                 <Grid
