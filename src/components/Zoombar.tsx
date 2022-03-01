@@ -26,27 +26,24 @@ const ZoomBar = ({
 }: ZoomBarProps) => {
     const [sliderMax, sliderStep, defaultSliderValue] = [200, 10, 150]
     const [sliderValue, setSliderValue] = useState(150) // 150 corresponds to 100% zoom.
-    console.log("Slider Val", sliderValue)
     const [sliderMoving, setSliderMoving] = useState(false)
-    console.log("slider moving?", sliderMoving)
+
     const zoomChange = (direction: number) => {
         if (direction > 0) {
             if (sliderValue !== sliderMax) {
                 setSliderValue(sliderValue + 10)
                 setCellDimension(cellDimension + 10)
                 setCellFontSize(cellFontSize + 1.5)
-                setSliderMoving(true)
-                setTimeout(() => setSliderMoving(false), 1000)
             }
         } else if (direction < 0) {
             if (sliderValue !== 0) {
                 setSliderValue(sliderValue - 10)
                 setCellDimension(cellDimension - 10)
                 setCellFontSize(cellFontSize - 1.5)
-                setSliderMoving(true)
-                setTimeout(() => setSliderMoving(false), 1000)
             }
         }
+        setSliderMoving(true)
+        setTimeout(() => setSliderMoving(false), 1000)
     }
     return (
         <VStack p="1" gap="2">

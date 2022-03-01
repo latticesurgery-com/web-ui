@@ -54,6 +54,7 @@
     border-color: lightblue;
 }
 
+/* Allow lattice view to expand beyond parent container, and align with left side of page */
 .full-width {
     position: relative;
     left: 50%;
