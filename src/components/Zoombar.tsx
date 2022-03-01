@@ -61,6 +61,8 @@ const ZoomBar = ({
                 step={sliderStep}
                 onChange={(val) => {
                     setSliderValue(val)
+                }}
+                onChangeEnd={(val) => {
                     setCellDimension(val)
                     setCellFontSize(val / 7.5)
                 }}
