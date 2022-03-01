@@ -17,8 +17,8 @@
 }
 #lattice-container {
     width: fit-content;
-    margin-top:0;
-    margin-bottom:30px;
+    margin-top: 0;
+    margin-bottom: 30px;
 }
 
 .lattice-row {
@@ -52,4 +52,10 @@
 
 .box-hover:hover {
     border-color: lightblue;
+}
+
+.full-width {
+    position: relative;
+    left: 50%;
+    margin-left: -48vw !important;
 }

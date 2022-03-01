@@ -214,23 +214,25 @@ const LatticeView = ({ compilationResult }: LatticeViewProps): JSX.Element => {
                 </Center>
             </Box>
 
-            <Flex>
-                <Box w="40px" h="350px" mt="2" rounded="3xl">
-                    <ZoomBar
-                        cellDimension={cellDimensionPixels}
-                        setCellDimension={setCellDimensionPixels}
-                        cellFontSize={cellFontSize}
-                        setCellFontSize={setCellFontSize}
-                    />
-                </Box>
-                <Box id="lattice-container">
-                    <SliceViewer
-                        cellFontSize={cellFontSize}
-                        slice={slices[selectedSliceNumber]}
-                        cellDimensionPixels={cellDimensionPixels}
-                    />
-                </Box>
-            </Flex>
+            <Box className="full-width">
+                <Flex>
+                    <Box w="40px" h="350px" mt="2" rounded="3xl">
+                        <ZoomBar
+                            cellDimension={cellDimensionPixels}
+                            setCellDimension={setCellDimensionPixels}
+                            cellFontSize={cellFontSize}
+                            setCellFontSize={setCellFontSize}
+                        />
+                    </Box>
+                    <Box id="lattice-container">
+                        <SliceViewer
+                            cellFontSize={cellFontSize}
+                            slice={slices[selectedSliceNumber]}
+                            cellDimensionPixels={cellDimensionPixels}
+                        />
+                    </Box>
+                </Flex>
+            </Box>
         </>
     )
 }
