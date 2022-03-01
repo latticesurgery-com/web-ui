@@ -33,8 +33,8 @@ const SliceViewer = ({ slice }: SliceViewerProps) => {
             templateRows={`repeat(${m_rows}, ${cell_dimension_pixels})`}
             gap="0"
             w="fit-content"
-            shadow="xl"
-            m="4"
+            shadow="2xl"
+            m="8"
         >
             {slice.map((row, row_idx) => (
                 <Grid

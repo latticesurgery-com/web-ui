@@ -16,6 +16,7 @@
     z-index: 100;
 }
 #lattice-container {
+    width: fit-content;
     margin-top:0;
     margin-bottom:30px;
 }
