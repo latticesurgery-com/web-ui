@@ -166,7 +166,7 @@ const LatticeView = ({ compilationResult }: LatticeViewProps): JSX.Element => {
                 </Flex>
             )}
 
-            <Box pt={3} pb={3}>
+            <Box pt="3" pb="3">
                 <Center>
                     <Flex flexWrap="wrap">
                         <Heading as="h3" size="xl">

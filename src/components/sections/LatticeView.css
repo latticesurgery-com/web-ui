@@ -14,12 +14,8 @@
     font-size: 5vh;
     /* Keep it above the lattice */
     z-index: 100;
-    /* style */
-    /* background-color: lavender; */
-    /* border-bottom: solid darkgrey 1.5vh; */
 }
 #lattice-container {
-    z-index: 10;
     margin-top:0;
     margin-bottom:30px;
 }
