@@ -20,17 +20,18 @@ import {
 import parseCompilationText from "../../lib/parseCompilationText"
 import SliceIndexBar from "../SliceIndexBar"
 import { IoSaveOutline } from "react-icons/io5"
+import ZoomBar from "../Zoombar"
 
 type SliceViewerProps = {
     slice: Slice
+    cellDimensionPixels: number
 }
-const SliceViewer = ({ slice }: SliceViewerProps) => {
-    const cell_dimension_pixels = "130px"
+const SliceViewer = ({ slice, cellDimensionPixels }: SliceViewerProps) => {
     const m_rows = slice.length
     const n_cols = slice[0].length
     return (
         <Grid
-            templateRows={`repeat(${m_rows}, ${cell_dimension_pixels})`}
+            templateRows={`repeat(${m_rows}, ${cellDimensionPixels}px)`}
             gap="0"
             w="fit-content"
             shadow="2xl"
@@ -40,13 +41,13 @@ const SliceViewer = ({ slice }: SliceViewerProps) => {
                 <Grid
                     className="lattice-row"
                     key={row_idx}
-                    templateColumns={`repeat(${n_cols}, ${cell_dimension_pixels})`}
+                    templateColumns={`repeat(${n_cols}, ${cellDimensionPixels}px)`}
                     gap="0"
                 >
                     {row.map((cell, col_idx) => (
                         <GridItem
-                            w={cell_dimension_pixels}
-                            h={cell_dimension_pixels}
+                            w={`${cellDimensionPixels}px`}
+                            h={`${cellDimensionPixels}px`}
                             className="lattice-cell"
                             key={col_idx}
                             shadow="md"
@@ -73,6 +74,7 @@ const LatticeView = ({ compilationResult }: LatticeViewProps): JSX.Element => {
     const changeSlice = (delta: number) => {
         setSelectedSliceNumber(selectedSliceNumber + delta)
     }
+    const [cellDimensionPixels, setCellDimensionPixels] = useState(130)
     const { compilation_text, slices } = compilationResult
     const slices_len = slices.length
 
@@ -209,9 +211,20 @@ const LatticeView = ({ compilationResult }: LatticeViewProps): JSX.Element => {
                 </Center>
             </Box>
 
-            <Box id="lattice-container">
-                <SliceViewer slice={slices[selectedSliceNumber]} />
-            </Box>
+            <Flex>
+                <Box w="40px" h="350px" mt="8" rounded="3xl">
+                    <ZoomBar
+                        cellDimension={cellDimensionPixels}
+                        setCellDimension={setCellDimensionPixels}
+                    />
+                </Box>
+                <Box id="lattice-container">
+                    <SliceViewer
+                        slice={slices[selectedSliceNumber]}
+                        cellDimensionPixels={cellDimensionPixels}
+                    />
+                </Box>
+            </Flex>
         </>
     )
 }
