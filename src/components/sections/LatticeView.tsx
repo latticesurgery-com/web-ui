@@ -32,7 +32,9 @@ const SliceViewer = ({ slice }: SliceViewerProps) => {
         <Grid
             templateRows={`repeat(${m_rows}, ${cell_dimension_pixels})`}
             gap="0"
-            className="slice"
+            w="fit-content"
+            shadow="xl"
+            m="4"
         >
             {slice.map((row, row_idx) => (
                 <Grid
@@ -47,6 +49,7 @@ const SliceViewer = ({ slice }: SliceViewerProps) => {
                             h={cell_dimension_pixels}
                             className="lattice-cell"
                             key={col_idx}
+                            shadow="md"
                         >
                             <CellViewer
                                 cell={cell}
@@ -206,7 +209,7 @@ const LatticeView = ({ compilationResult }: LatticeViewProps): JSX.Element => {
                 </Center>
             </Box>
 
-            <Box mt="4" pb="8" id="lattice-container">
+            <Box id="lattice-container">
                 <SliceViewer slice={slices[selectedSliceNumber]} />
             </Box>
         </>
