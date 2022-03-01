@@ -62,7 +62,7 @@ const ZoomBar = ({
                 onChange={(val) => {
                     setSliderValue(val)
                     setCellDimension(val)
-                    setCellFontSize(val/7.5)
+                    setCellFontSize(val / 7.5)
                 }}
             >
                 <SliderTrack w="15px" rounded="xl">
