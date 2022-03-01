@@ -94,7 +94,7 @@ const ZoomBar = ({
                 <SliderTrack w="8px" rounded="xl">
                     <SliderFilledTrack />
                 </SliderTrack>
-                <SliderThumb boxSize="5" onClick={(e) => setSliderMoving(true)} />
+                <SliderThumb boxSize="5" onClick={() => setSliderMoving(true)} />
             </Slider>
         </VStack>
     )
