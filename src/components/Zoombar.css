@@ -1,0 +1,10 @@
+.fade-out {
+    opacity: 0;
+    transition: opacity 1s;
+}
+.fade-in {
+    display: flex;
+    justify-content: center;
+    opacity: 1;
+    transition: opacity 0.4s;
+}
