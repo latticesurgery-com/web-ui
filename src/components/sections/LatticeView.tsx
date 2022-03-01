@@ -35,7 +35,7 @@ const SliceViewer = ({ slice, cellDimensionPixels }: SliceViewerProps) => {
             gap="0"
             w="fit-content"
             shadow="2xl"
-            m="8"
+            mx="8"
         >
             {slice.map((row, row_idx) => (
                 <Grid
@@ -46,7 +46,7 @@ const SliceViewer = ({ slice, cellDimensionPixels }: SliceViewerProps) => {
                 >
                     {row.map((cell, col_idx) => (
                         <GridItem
-                            w={`${cellDimensionPixels}px`}
+                            w="100%"
                             h={`${cellDimensionPixels}px`}
                             className="lattice-cell"
                             key={col_idx}
@@ -212,7 +212,7 @@ const LatticeView = ({ compilationResult }: LatticeViewProps): JSX.Element => {
             </Box>
 
             <Flex>
-                <Box w="40px" h="350px" mt="8" rounded="3xl">
+                <Box w="40px" h="350px" mt="2" rounded="3xl">
                     <ZoomBar
                         cellDimension={cellDimensionPixels}
                         setCellDimension={setCellDimensionPixels}
