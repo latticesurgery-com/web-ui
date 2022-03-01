@@ -90,10 +90,7 @@ const CellViewer = ({ cell, cell_font_size, row_idx, col_idx }: CellViewerProps)
                   }`}
             `}
         >
-            <Box
-                color="#686c6d"
-                fontSize={`${cell_font_size}`}
-            >
+            <Box color="#686c6d" fontSize={`${cell_font_size}`}>
                 ({row_idx},{col_idx})
             </Box>
             <span>
