@@ -14,23 +14,20 @@
     font-size: 5vh;
     /* Keep it above the lattice */
     z-index: 100;
-    position: relative;
-    /* style */
-    background-color: lavender;
-    border-bottom: solid darkgrey 1.5vh;
 }
 #lattice-container {
-    font-size: 0;
-    z-index: 10;
+    width: fit-content;
+    margin-top:0;
+    margin-bottom:30px;
 }
 
 .lattice-row {
-    width: 100%;
+    width: fit-content;
     margin: auto;
 }
 
 .lattice-cell {
-    border: 0.5px solid #a2abae;
+    border: 1px solid #a2abae;
     position: relative;
     font-size: 18px;
 }
