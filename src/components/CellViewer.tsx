@@ -3,7 +3,6 @@ import { Box } from "@chakra-ui/react"
 import { css } from "@emotion/react"
 import { PatchType, Orientation, EdgeType, ActivityType } from "../lib/slices"
 import { VisualArrayCell } from "../lib/slices"
-import "./CellViewer.css"
 
 type StylesMapType = {
     [key in Orientation | PatchType | EdgeType]: string
@@ -65,6 +64,13 @@ const CellViewer = ({ cell, cell_font_size, row_idx, col_idx }: CellViewerProps)
             shadow="sm"
             className="cell"
             css={css`
+                height: 100%;
+                width: 100%;
+                vertical-align: middle;
+                display: inline-block;
+                border-width: 4pt;
+                border-style: solid;
+                text-align: center;
                 ${cell !== null && cell.patch_type === PatchType.Ancilla
                     ? "border-color: white"
                     : "border-color: transparent"};
