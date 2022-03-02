@@ -54,7 +54,7 @@ const SliceViewer = ({ slice, cellDimensionPixels }: SliceViewerProps) => {
                         >
                             <CellViewer
                                 cell={cell}
-                                cell_font_size={cellDimensionPixels / 20}
+                                cell_font_size={cellDimensionPixels / 6.5}
                                 row_idx={row_idx}
                                 col_idx={col_idx}
                                 key={col_idx}
@@ -223,7 +223,6 @@ const LatticeView = ({ compilationResult }: LatticeViewProps): JSX.Element => {
                     </Box>
                     <Box id="lattice-container">
                         <SliceViewer
-                            cellFontSize={cellDimensionPixels / 20}
                             slice={slices[selectedSliceNumber]}
                             cellDimensionPixels={cellDimensionPixels}
                         />
