@@ -62,6 +62,7 @@ const submitCompileRequest = async (
                         responseJson.compilation_text
                     ),
                     compilationIsLoading: false,
+                    repeats: repeats,
                 })
             } catch (err) {
                 let msg

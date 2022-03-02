@@ -21,6 +21,7 @@ import parseCompilationText from "../../lib/parseCompilationText"
 import SliceIndexBar from "../SliceIndexBar"
 import { IoSaveOutline } from "react-icons/io5"
 import ZoomBar from "../Zoombar"
+import Draggable from "react-draggable"
 
 type SliceViewerProps = {
     slice: Slice
@@ -67,10 +68,12 @@ const SliceViewer = ({ slice, cellDimensionPixels }: SliceViewerProps) => {
     )
 }
 
-type LatticeViewProps = {
+interface LatticeViewProps {
     compilationResult: CompilationResult
+    repeats?: number
 }
-const LatticeView = ({ compilationResult }: LatticeViewProps): JSX.Element => {
+
+const LatticeView = ({ compilationResult, repeats = 1 }: LatticeViewProps): JSX.Element => {
     const [selectedSliceNumber, setSelectedSliceNumber] = React.useState<number>(0)
     const changeSlice = (delta: number) => {
         setSelectedSliceNumber(selectedSliceNumber + delta)
@@ -79,6 +82,8 @@ const LatticeView = ({ compilationResult }: LatticeViewProps): JSX.Element => {
     // cell font size is cellDimensionPixels divided by 20.
     const { compilation_text, slices } = compilationResult
     const slices_len = slices.length
+
+    const nodeRef = React.useRef(null) // Add to <Draggable> element
 
     const stages = parseCompilationText(compilation_text)
     // JS object that returns boolean when "previous" or "next" buttons need to be disabled
@@ -221,16 +226,26 @@ const LatticeView = ({ compilationResult }: LatticeViewProps): JSX.Element => {
                             setCellDimension={setCellDimensionPixels}
                         />
                     </Box>
-                    <Box id="lattice-container">
-                        <SliceViewer
-                            slice={slices[selectedSliceNumber]}
-                            cellDimensionPixels={cellDimensionPixels}
-                        />
+                    <Box
+                        w="100%"
+                        h={slices_len * cellDimensionPixels * (repeats + 1)}
+                        overflow="hidden"
+                    >
+                        <Draggable ref={nodeRef}>
+                            <Box id="lattice-container">
+                                <SliceViewer
+                                    slice={slices[selectedSliceNumber]}
+                                    cellDimensionPixels={cellDimensionPixels}
+                                />
+                            </Box>
+                        </Draggable>
                     </Box>
                 </Flex>
             </Box>
         </>
     )
 }
+
+// LatticeView.defaultProps = defaultProps
 
 export default LatticeView
