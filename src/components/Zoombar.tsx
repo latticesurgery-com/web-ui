@@ -24,7 +24,7 @@ const ZoomBar = ({
     cellFontSize,
     setCellFontSize,
 }: ZoomBarProps) => {
-    const [sliderMax, sliderStep, defaultSliderValue] = [200, 10, 150]
+    const [sliderMax, sliderStep] = [200, 10]
     const [sliderValue, setSliderValue] = useState(150) // 150 corresponds to 100% zoom.
     const [sliderMoving, setSliderMoving] = useState(false)
 
@@ -60,7 +60,6 @@ const ZoomBar = ({
                 aria-label="slider-ex-1"
                 orientation="vertical"
                 value={sliderValue}
-                defaultValue={defaultSliderValue}
                 min={0}
                 max={sliderMax}
                 step={sliderStep}
