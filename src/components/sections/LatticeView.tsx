@@ -25,9 +25,8 @@ import ZoomBar from "../Zoombar"
 type SliceViewerProps = {
     slice: Slice
     cellDimensionPixels: number
-    cellFontSize: number
 }
-const SliceViewer = ({ slice, cellDimensionPixels, cellFontSize }: SliceViewerProps) => {
+const SliceViewer = ({ slice, cellDimensionPixels }: SliceViewerProps) => {
     const m_rows = slice.length
     const n_cols = slice[0].length
     return (
@@ -55,7 +54,7 @@ const SliceViewer = ({ slice, cellDimensionPixels, cellFontSize }: SliceViewerPr
                         >
                             <CellViewer
                                 cell={cell}
-                                cell_font_size={cellFontSize}
+                                cell_font_size={cellDimensionPixels / 20}
                                 row_idx={row_idx}
                                 col_idx={col_idx}
                                 key={col_idx}
@@ -77,7 +76,7 @@ const LatticeView = ({ compilationResult }: LatticeViewProps): JSX.Element => {
         setSelectedSliceNumber(selectedSliceNumber + delta)
     }
     const [cellDimensionPixels, setCellDimensionPixels] = useState(130)
-    const [cellFontSize, setCellFontSize] = useState(20)
+    // cell font size is cellDimensionPixels divided by 20.
     const { compilation_text, slices } = compilationResult
     const slices_len = slices.length
 
@@ -220,13 +219,11 @@ const LatticeView = ({ compilationResult }: LatticeViewProps): JSX.Element => {
                         <ZoomBar
                             cellDimension={cellDimensionPixels}
                             setCellDimension={setCellDimensionPixels}
-                            cellFontSize={cellFontSize}
-                            setCellFontSize={setCellFontSize}
                         />
                     </Box>
                     <Box id="lattice-container">
                         <SliceViewer
-                            cellFontSize={cellFontSize}
+                            cellFontSize={cellDimensionPixels / 20}
                             slice={slices[selectedSliceNumber]}
                             cellDimensionPixels={cellDimensionPixels}
                         />

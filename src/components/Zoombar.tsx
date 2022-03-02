@@ -14,16 +14,9 @@ import "./Zoombar.css"
 type ZoomBarProps = {
     cellDimension: number
     setCellDimension: (num: number) => void
-    cellFontSize: number
-    setCellFontSize: (num: number) => void
 }
 
-const ZoomBar = ({
-    cellDimension,
-    setCellDimension,
-    cellFontSize,
-    setCellFontSize,
-}: ZoomBarProps) => {
+const ZoomBar = ({ cellDimension, setCellDimension }: ZoomBarProps) => {
     const [sliderMax, sliderStep] = [200, 10]
     const [sliderValue, setSliderValue] = useState(150) // 150 corresponds to 100% zoom.
     const [sliderMoving, setSliderMoving] = useState(false)
@@ -33,13 +26,11 @@ const ZoomBar = ({
             if (sliderValue !== sliderMax) {
                 setSliderValue(sliderValue + 10)
                 setCellDimension(cellDimension + 10)
-                setCellFontSize(cellFontSize + 1.5)
             }
         } else if (direction < 0) {
             if (sliderValue !== 0) {
                 setSliderValue(sliderValue - 10)
                 setCellDimension(cellDimension - 10)
-                setCellFontSize(cellFontSize - 1.5)
             }
         }
         setSliderMoving(true)
@@ -60,7 +51,7 @@ const ZoomBar = ({
                 aria-label="slider-ex-1"
                 orientation="vertical"
                 value={sliderValue}
-                min={0}
+                min={20}
                 max={sliderMax}
                 step={sliderStep}
                 onChange={(val) => {
@@ -69,7 +60,6 @@ const ZoomBar = ({
                 }}
                 onChangeEnd={(val) => {
                     setCellDimension(val)
-                    setCellFontSize(val / 7.5)
                     setTimeout(() => {
                         setSliderMoving(false)
                     }, 300)
