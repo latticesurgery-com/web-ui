@@ -62,7 +62,6 @@ const CellViewer = ({ cell, cell_font_size, row_idx, col_idx }: CellViewerProps)
     return (
         <Box
             shadow="sm"
-            className="cell"
             css={css`
                 height: 100%;
                 width: 100%;
