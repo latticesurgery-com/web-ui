@@ -227,7 +227,7 @@ const LatticeView = ({ compilationResult, repeats = 1 }: LatticeViewProps): JSX.
                         />
                     </Box>
                     <Box
-                        w="100%"
+                        w="100vw"
                         h={slices_len * cellDimensionPixels * (repeats + 1)}
                         overflow="hidden"
                     >

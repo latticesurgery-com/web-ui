@@ -15,10 +15,6 @@
     /* Keep it above the lattice */
     z-index: 100;
 }
-#lattice-container {
-    width: fit-content;
-    margin-top: 0;
-}
 
 .lattice-row {
     width: fit-content;
@@ -59,4 +55,5 @@
     left: 50%;
     margin-left: -48vw !important;
     margin-top: 0 !important;
+    width: fit-content;
 }
