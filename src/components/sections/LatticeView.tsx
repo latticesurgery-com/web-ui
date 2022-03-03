@@ -244,21 +244,20 @@ const LatticeView = ({ compilationResult, repeats = 1 }: LatticeViewProps): JSX.
                     </Box>
                     <Box h={slices_len * cellDimensionPixels * (repeats + 1)} overflow="hidden">
                         <Draggable
-                            ref={nodeRef}
+                            nodeRef={nodeRef}
                             position={latticePosition}
                             onStop={(e, data) => setLatticePosition({ x: data.x, y: data.y })}
                         >
-                            <div ref={nodeRef}>
-                                <Box
-                                    id="lattice-container"
-                                    w={largeLattice() ? "fit-content" : "94vw"}
-                                >
-                                    <SliceViewer
-                                        slice={slices[selectedSliceNumber]}
-                                        cellDimensionPixels={cellDimensionPixels}
-                                    />
-                                </Box>
-                            </div>
+                            <Box
+                                ref={nodeRef}
+                                id="lattice-container"
+                                w={largeLattice() ? "fit-content" : "94vw"}
+                            >
+                                <SliceViewer
+                                    slice={slices[selectedSliceNumber]}
+                                    cellDimensionPixels={cellDimensionPixels}
+                                />
+                            </Box>
                         </Draggable>
                     </Box>
                 </Flex>
