@@ -20,6 +20,7 @@ import {
 import parseCompilationText from "../../lib/parseCompilationText"
 import SliceIndexBar from "../SliceIndexBar"
 import { IoSaveOutline } from "react-icons/io5"
+import { MdCenterFocusStrong } from "react-icons/md"
 import ZoomBar from "../Zoombar"
 import Draggable from "react-draggable"
 
@@ -84,6 +85,7 @@ const LatticeView = ({ compilationResult, repeats = 1 }: LatticeViewProps): JSX.
     const slices_len = slices.length
 
     const [latticePosition, setLatticePosition] = useState({ x: 0, y: 0 })
+    const defaultLatticePosition = { x: 0, y: 0 }
 
     const nodeRef = React.useRef(null) // Add to <Draggable> element
     const { innerWidth } = window
@@ -230,10 +232,15 @@ const LatticeView = ({ compilationResult, repeats = 1 }: LatticeViewProps): JSX.
             <Box className="full-width">
                 <Flex>
                     <Box w="40px" h="350px" mt="2" rounded="3xl">
-                        <ZoomBar
-                            cellDimension={cellDimensionPixels}
-                            setCellDimension={setCellDimensionPixels}
-                        />
+                        <VStack>
+                            <Button onClick={() => setLatticePosition(defaultLatticePosition)}>
+                                <MdCenterFocusStrong size="25px" />
+                            </Button>
+                            <ZoomBar
+                                cellDimension={cellDimensionPixels}
+                                setCellDimension={setCellDimensionPixels}
+                            />
+                        </VStack>
                     </Box>
                     <Box h={slices_len * cellDimensionPixels * (repeats + 1)} overflow="hidden">
                         <Draggable
