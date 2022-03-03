@@ -1,4 +1,5 @@
 import { useState } from "react"
+import React from "react"
 import {
     Button,
     Checkbox,
@@ -16,15 +17,21 @@ import {
     NumberInput,
 } from "@chakra-ui/react"
 import { IoChevronDownSharp } from "react-icons/io5"
-import { AppStateProps } from "../../../lib/appState"
+import { AppState } from "../../../lib/appState"
 import FileUploader from "./FileUploader"
 import submitCompileRequest from "../../../lib/submitCompileRequest"
 import isDevMode from "../../../lib/isDevMode"
 import { CompilationResultSuccess } from "../../../lib/apiResponses"
 
-const CircuitSelect = ({ appState, setAppState }: AppStateProps) => {
+type CircuitSelectProps = {
+    appState: AppState
+    setAppState: React.Dispatch<AppState>
+    repeats: number
+    setRepeats: (value: number) => void
+}
+
+const CircuitSelect = ({ appState, setAppState, repeats, setRepeats }: CircuitSelectProps) => {
     const [doTransform, setDoTransform] = useState(true)
-    const [repeats, setRepeats] = useState(0)
 
     const readFile = (file: File) => {
         return new Promise((resolve, reject) => {
@@ -37,7 +44,6 @@ const CircuitSelect = ({ appState, setAppState }: AppStateProps) => {
 
     const onFileAccepted = async (file: File) => {
         const data = await readFile(file)
-        console.log("DATA", data)
         if (file.name.slice(-5) == ".json") {
             const json_data = JSON.parse(data as string)
             setAppState({
