@@ -240,7 +240,7 @@ const LatticeView = ({ compilationResult }: LatticeViewProps): JSX.Element => {
                     <Box
                         h={m_rows * cellDimensionPixels * 1.05}
                         minH="600px"
-                        maxH="2000px"
+                        maxH="4000px"
                         overflow="hidden"
                     >
                         <Draggable
