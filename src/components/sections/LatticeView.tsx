@@ -239,7 +239,6 @@ const LatticeView = ({ compilationResult, repeats = 1 }: LatticeViewProps): JSX.
                         <Draggable
                             ref={nodeRef}
                             position={latticePosition}
-                            onDrag={(e, data) => console.log("drag data", data.x)}
                             onStop={(e, data) => setLatticePosition({ x: data.x, y: data.y })}
                         >
                             <div ref={nodeRef}>
