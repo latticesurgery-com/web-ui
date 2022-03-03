@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@chakra-ui/react": "^1.8.1",
+    "@chakra-ui/react": "^1.8.6",
     "@emotion/core": "^11.0.0",
     "@emotion/react": "^11.7.1",
     "@emotion/styled": "^11.6.0",
@@ -19,7 +19,7 @@
     "emotion": "^11.0.0",
     "framer-motion": "^6.2.3",
     "lodash": "^4.17.21",
-    "query-string": "^7.0.1",
+    "query-string": "^7.1.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-draggable": "^4.4.4",
