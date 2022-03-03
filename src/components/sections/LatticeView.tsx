@@ -84,6 +84,13 @@ const LatticeView = ({ compilationResult, repeats = 1 }: LatticeViewProps): JSX.
     const slices_len = slices.length
 
     const nodeRef = React.useRef(null) // Add to <Draggable> element
+    const { innerWidth } = window
+    const largeLattice = () => {
+        if (slices_len * (repeats + 1) * cellDimensionPixels > innerWidth - 80) {
+            // 80 is width of zoombar
+            return true
+        } else return false
+    }
 
     const stages = parseCompilationText(compilation_text)
     // JS object that returns boolean when "previous" or "next" buttons need to be disabled
@@ -226,13 +233,9 @@ const LatticeView = ({ compilationResult, repeats = 1 }: LatticeViewProps): JSX.
                             setCellDimension={setCellDimensionPixels}
                         />
                     </Box>
-                    <Box
-                        w="100vw"
-                        h={slices_len * cellDimensionPixels * (repeats + 1)}
-                        overflow="hidden"
-                    >
+                    <Box h={slices_len * cellDimensionPixels * (repeats + 1)} overflow="hidden">
                         <Draggable ref={nodeRef}>
-                            <Box id="lattice-container">
+                            <Box id="lattice-container" w={largeLattice() ? "fit-content" : "94vw"}>
                                 <SliceViewer
                                     slice={slices[selectedSliceNumber]}
                                     cellDimensionPixels={cellDimensionPixels}
