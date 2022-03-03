@@ -9,7 +9,6 @@ import CircuitSelect from "../components/sections/CircuitSelect"
 const CompilerPage = (): JSX.Element => {
     const [appState, setAppState] = useState(new AppState())
     const [repeats, setRepeats] = useState(0)
-    console.log("REPEATS", repeats)
     return (
         <>
             {isDevMode() && (

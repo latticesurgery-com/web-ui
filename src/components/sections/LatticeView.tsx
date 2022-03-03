@@ -83,6 +83,8 @@ const LatticeView = ({ compilationResult, repeats = 1 }: LatticeViewProps): JSX.
     const { compilation_text, slices } = compilationResult
     const slices_len = slices.length
 
+    const [latticePosition, setLatticePosition] = useState({ x: 0, y: 0 })
+
     const nodeRef = React.useRef(null) // Add to <Draggable> element
     const { innerWidth } = window
     const largeLattice = () => {
@@ -234,13 +236,23 @@ const LatticeView = ({ compilationResult, repeats = 1 }: LatticeViewProps): JSX.
                         />
                     </Box>
                     <Box h={slices_len * cellDimensionPixels * (repeats + 1)} overflow="hidden">
-                        <Draggable ref={nodeRef}>
-                            <Box id="lattice-container" w={largeLattice() ? "fit-content" : "94vw"}>
-                                <SliceViewer
-                                    slice={slices[selectedSliceNumber]}
-                                    cellDimensionPixels={cellDimensionPixels}
-                                />
-                            </Box>
+                        <Draggable
+                            ref={nodeRef}
+                            position={latticePosition}
+                            onDrag={(e, data) => console.log("drag data", data.x)}
+                            onStop={(e, data) => setLatticePosition({ x: data.x, y: data.y })}
+                        >
+                            <div ref={nodeRef}>
+                                <Box
+                                    id="lattice-container"
+                                    w={largeLattice() ? "fit-content" : "94vw"}
+                                >
+                                    <SliceViewer
+                                        slice={slices[selectedSliceNumber]}
+                                        cellDimensionPixels={cellDimensionPixels}
+                                    />
+                                </Box>
+                            </div>
                         </Draggable>
                     </Box>
                 </Flex>

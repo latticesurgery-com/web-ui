@@ -44,7 +44,6 @@ const CircuitSelect = ({ appState, setAppState, repeats, setRepeats }: CircuitSe
 
     const onFileAccepted = async (file: File) => {
         const data = await readFile(file)
-        console.log("DATA", data)
         if (file.name.slice(-5) == ".json") {
             const json_data = JSON.parse(data as string)
             setAppState({
