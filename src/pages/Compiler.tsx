@@ -39,10 +39,7 @@ const CompilerPage = (): JSX.Element => {
                 )}
 
                 {appState.apiResponse instanceof CompilationResultSuccess && (
-                    <LatticeView
-                        compilationResult={appState.apiResponse}
-                        repeats={repeats} // defaults to 1 if not set
-                    />
+                    <LatticeView compilationResult={appState.apiResponse} />
                 )}
             </Stack>
         </>

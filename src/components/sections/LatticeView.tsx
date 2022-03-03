@@ -31,6 +31,7 @@ type SliceViewerProps = {
 const SliceViewer = ({ slice, cellDimensionPixels }: SliceViewerProps) => {
     const m_rows = slice.length
     const n_cols = slice[0].length
+
     return (
         <Grid
             templateRows={`repeat(${m_rows}, ${cellDimensionPixels}px)`}
@@ -71,10 +72,9 @@ const SliceViewer = ({ slice, cellDimensionPixels }: SliceViewerProps) => {
 
 interface LatticeViewProps {
     compilationResult: CompilationResult
-    repeats?: number
 }
 
-const LatticeView = ({ compilationResult, repeats = 1 }: LatticeViewProps): JSX.Element => {
+const LatticeView = ({ compilationResult }: LatticeViewProps): JSX.Element => {
     const [selectedSliceNumber, setSelectedSliceNumber] = React.useState<number>(0)
     const changeSlice = (delta: number) => {
         setSelectedSliceNumber(selectedSliceNumber + delta)
@@ -82,25 +82,18 @@ const LatticeView = ({ compilationResult, repeats = 1 }: LatticeViewProps): JSX.
     const [cellDimensionPixels, setCellDimensionPixels] = useState(130)
     // cell font size is cellDimensionPixels divided by 20.
     const { compilation_text, slices } = compilationResult
-    const slices_len = slices.length
+    const num_slices = slices.length
 
     const [latticePosition, setLatticePosition] = useState({ x: 0, y: 0 })
     const defaultLatticePosition = { x: 0, y: 0 }
 
     const nodeRef = React.useRef(null) // Add to <Draggable> element
-    const { innerWidth } = window
-    const largeLattice = () => {
-        if (slices_len * (repeats + 1) * cellDimensionPixels > innerWidth - 80) {
-            // 80 is width of zoombar
-            return true
-        } else return false
-    }
 
     const stages = parseCompilationText(compilation_text)
     // JS object that returns boolean when "previous" or "next" buttons need to be disabled
     const disable = {
         prev: selectedSliceNumber === 0,
-        next: selectedSliceNumber === slices_len - 1,
+        next: selectedSliceNumber === num_slices - 1,
     }
 
     // scroll into Lattice View Section, one time, after compilation is completed
@@ -131,6 +124,8 @@ const LatticeView = ({ compilationResult, repeats = 1 }: LatticeViewProps): JSX.
         a.click()
         document.body.removeChild(a)
     }
+
+    const m_rows = slices[selectedSliceNumber].length
 
     return (
         <>
@@ -193,7 +188,7 @@ const LatticeView = ({ compilationResult, repeats = 1 }: LatticeViewProps): JSX.
                             Select Time Slice
                         </Heading>
                         <Text ml="4" mt="1" fontSize="24px">
-                            N = {slices_len}
+                            N = {num_slices}
                         </Text>
                     </Flex>
                 </Center>
@@ -220,7 +215,7 @@ const LatticeView = ({ compilationResult, repeats = 1 }: LatticeViewProps): JSX.
                         </Box>
                         <Box>
                             <SliceIndexBar
-                                count={slices_len}
+                                count={num_slices}
                                 selected={selectedSliceNumber}
                                 setSlice={setSelectedSliceNumber}
                             />
@@ -242,17 +237,18 @@ const LatticeView = ({ compilationResult, repeats = 1 }: LatticeViewProps): JSX.
                             />
                         </VStack>
                     </Box>
-                    <Box h={slices_len * cellDimensionPixels * (repeats + 1)} overflow="hidden">
+                    <Box
+                        h={m_rows * cellDimensionPixels * 1.05}
+                        minH="600px"
+                        maxH="2000px"
+                        overflow="hidden"
+                    >
                         <Draggable
                             nodeRef={nodeRef}
                             position={latticePosition}
                             onStop={(e, data) => setLatticePosition({ x: data.x, y: data.y })}
                         >
-                            <Box
-                                ref={nodeRef}
-                                id="lattice-container"
-                                w={largeLattice() ? "fit-content" : "94vw"}
-                            >
+                            <Box ref={nodeRef} id="lattice-container" w="94vw">
                                 <SliceViewer
                                     slice={slices[selectedSliceNumber]}
                                     cellDimensionPixels={cellDimensionPixels}
@@ -265,7 +261,5 @@ const LatticeView = ({ compilationResult, repeats = 1 }: LatticeViewProps): JSX.
         </>
     )
 }
-
-// LatticeView.defaultProps = defaultProps
 
 export default LatticeView
