@@ -8,7 +8,8 @@ import CircuitSelect from "../components/sections/CircuitSelect"
 
 const CompilerPage = (): JSX.Element => {
     const [appState, setAppState] = useState(new AppState())
-
+    const [repeats, setRepeats] = useState(0)
+    console.log("REPEATS", repeats)
     return (
         <>
             {isDevMode() && (
@@ -22,7 +23,12 @@ const CompilerPage = (): JSX.Element => {
             )}
 
             <Box mt={10}>
-                <CircuitSelect appState={appState} setAppState={setAppState} />
+                <CircuitSelect
+                    appState={appState}
+                    setAppState={setAppState}
+                    repeats={repeats}
+                    setRepeats={setRepeats}
+                />
             </Box>
             <Stack mt={10} spacing={5}>
                 {appState.apiResponse instanceof ResponseError && (
@@ -36,7 +42,7 @@ const CompilerPage = (): JSX.Element => {
                 {appState.apiResponse instanceof CompilationResultSuccess && (
                     <LatticeView
                         compilationResult={appState.apiResponse}
-                        repeats={appState.repeats} // defaults to 1 if not set
+                        repeats={repeats} // defaults to 1 if not set
                     />
                 )}
             </Stack>
