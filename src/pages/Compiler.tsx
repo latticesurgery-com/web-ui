@@ -1,14 +1,31 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { AppState } from "../lib/appState"
 import isDevMode from "../lib/isDevMode"
 import LatticeView from "../components/sections/LatticeView"
 import { CompilationResultSuccess, ResponseError } from "../lib/apiResponses"
-import { Stack, Box, Alert, AlertIcon, AlertTitle, AlertDescription } from "@chakra-ui/react"
+import {
+    Stack,
+    Box,
+    Alert,
+    AlertIcon,
+    AlertTitle,
+    AlertDescription,
+    Button,
+    Center,
+} from "@chakra-ui/react"
 import CircuitSelect from "../components/sections/CircuitSelect"
 
 const CompilerPage = (): JSX.Element => {
     const [appState, setAppState] = useState(new AppState())
     const [repeats, setRepeats] = useState(0)
+    const [showCircuitSelect, setShowCircuitSelect] = useState(true)
+
+    useEffect(() => {
+        if (appState.apiResponse instanceof CompilationResultSuccess) {
+            setShowCircuitSelect(false)
+        }
+    }, [appState])
+
     return (
         <>
             {isDevMode() && (
@@ -22,12 +39,20 @@ const CompilerPage = (): JSX.Element => {
             )}
 
             <Box mt={10}>
-                <CircuitSelect
-                    appState={appState}
-                    setAppState={setAppState}
-                    repeats={repeats}
-                    setRepeats={setRepeats}
-                />
+                {showCircuitSelect ? (
+                    <CircuitSelect
+                        appState={appState}
+                        setAppState={setAppState}
+                        repeats={repeats}
+                        setRepeats={setRepeats}
+                    />
+                ) : (
+                    <Center>
+                        <Button size="lg" onClick={() => setShowCircuitSelect(true)}>
+                            New Circuit
+                        </Button>
+                    </Center>
+                )}
             </Box>
             <Stack mt={10} spacing={5}>
                 {appState.apiResponse instanceof ResponseError && (

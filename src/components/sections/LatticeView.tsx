@@ -103,10 +103,7 @@ const LatticeView = ({ compilationResult }: LatticeViewProps): JSX.Element => {
     }, [])
 
     // set state of checkbox switch
-    const [showCompilationText, setCompilationText] = useState(true)
-    const handleChange = () => {
-        setCompilationText(!showCompilationText)
-    }
+    const [showCompilationText, setCompilationText] = useState(false)
 
     // export slices to downloadable text JSON file
     const exportJson = (slices: Slices) => {
@@ -146,8 +143,10 @@ const LatticeView = ({ compilationResult }: LatticeViewProps): JSX.Element => {
                     <Switch
                         id="compilation-text"
                         size="lg"
-                        onChange={handleChange}
-                        defaultChecked={true}
+                        onChange={(e) => {
+                            setCompilationText(e.target.checked)
+                        }}
+                        checked={showCompilationText}
                     />
                 </Flex>
                 <Button borderWidth="2px" onClick={() => exportJson(slices)}>
