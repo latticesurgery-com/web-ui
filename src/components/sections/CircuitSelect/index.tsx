@@ -47,10 +47,11 @@ const CircuitSelect = ({ appState, setAppState, repeats, setRepeats }: CircuitSe
         if (file.name.slice(-5) == ".json") {
             const json_data = JSON.parse(data as string)
             if ((data as string).includes("compilation_text")) {
-                const slices = json_data.slices
-                const compilation_text = json_data.compilation_text
                 setAppState({
-                    apiResponse: new CompilationResultSuccess(slices, compilation_text),
+                    apiResponse: new CompilationResultSuccess(
+                        json_data.slices,
+                        json_data.compilation_text
+                    ),
                     compilationIsLoading: false,
                 })
             } else {
