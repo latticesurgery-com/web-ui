@@ -46,7 +46,7 @@ const CircuitSelect = ({ appState, setAppState, repeats, setRepeats }: CircuitSe
         const data = await readFile(file)
         if (file.name.slice(-5) == ".json") {
             const json_data = JSON.parse(data as string)
-            if ((data as string).includes("compilation_text")) {
+            if (Object.prototype.hasOwnProperty.call(json_data, "compilation_text")) {
                 setAppState({
                     apiResponse: new CompilationResultSuccess(
                         json_data.slices,
