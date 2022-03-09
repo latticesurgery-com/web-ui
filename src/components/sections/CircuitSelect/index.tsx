@@ -46,10 +46,20 @@ const CircuitSelect = ({ appState, setAppState, repeats, setRepeats }: CircuitSe
         const data = await readFile(file)
         if (file.name.slice(-5) == ".json") {
             const json_data = JSON.parse(data as string)
-            setAppState({
-                apiResponse: new CompilationResultSuccess(json_data, ""),
-                compilationIsLoading: false,
-            })
+            if (Object.prototype.hasOwnProperty.call(json_data, "compilation_text")) {
+                setAppState({
+                    apiResponse: new CompilationResultSuccess(
+                        json_data.slices,
+                        json_data.compilation_text
+                    ),
+                    compilationIsLoading: false,
+                })
+            } else {
+                setAppState({
+                    apiResponse: new CompilationResultSuccess(json_data, ""),
+                    compilationIsLoading: false,
+                })
+            }
         } else {
             submitCompileRequest(setAppState, data as string, doTransform, repeats)
         }

@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import React, { useRef } from "react"
 import { useState } from "react"
-import { CompilationResult, Slice, Slices } from "../../lib/slices"
+import { CompilationResult, Slice } from "../../lib/slices"
 import CellViewer from "../CellViewer"
 import "./LatticeView.css"
 import {
@@ -106,8 +106,8 @@ const LatticeView = ({ compilationResult }: LatticeViewProps): JSX.Element => {
     const [showCompilationText, setCompilationText] = useState(false)
 
     // export slices to downloadable text JSON file
-    const exportJson = (slices: Slices) => {
-        const stringJson = JSON.stringify(slices)
+    const exportJson = (compilationResult: CompilationResult) => {
+        const stringJson = JSON.stringify(compilationResult)
         const blob = new Blob([stringJson], { type: "text/plain;charset=utf-8" })
         const url = window.URL || window.webkitURL
         const link = url.createObjectURL(blob)
@@ -149,7 +149,7 @@ const LatticeView = ({ compilationResult }: LatticeViewProps): JSX.Element => {
                         checked={showCompilationText}
                     />
                 </Flex>
-                <Button borderWidth="2px" onClick={() => exportJson(slices)}>
+                <Button borderWidth="2px" onClick={() => exportJson(compilationResult)}>
                     <Flex gap="4">
                         <Text fontSize="xl" margin="auto">
                             Save JSON
