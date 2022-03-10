@@ -60,6 +60,26 @@ const CircuitSelect = ({ appState, setAppState, repeats, setRepeats }: CircuitSe
                     compilationIsLoading: false,
                 })
             }
+        }
+        if (file.name.slice(-4) == ".lsi") {
+            
+            setAppState({
+                apiResponse: null,
+                compilationIsLoading: true,
+            })
+            
+            LsqeccModule().then(({run_slicer_program_from_strings}) => 
+            {
+                const {exit_code, output, err} = JSON.parse(run_slicer_program_from_strings("slicer",data as string)))
+                console.log()
+                if (exit_code == 0) {
+                    setAppState({
+                        apiResponse: new CompilationResultSuccess([], output as string),
+                        compilationIsLoading: false,
+                    })
+                }
+                
+            })
         } else {
             submitCompileRequest(setAppState, data as string, doTransform, repeats)
         }
