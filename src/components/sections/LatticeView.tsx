@@ -1,6 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import React, { useRef } from "react"
-import { useState } from "react"
+import { useState, useRef } from "react"
 import { CompilationResult, Slice } from "../../lib/slices"
 import CellViewer from "../CellViewer"
 import "./LatticeView.css"
@@ -75,7 +74,7 @@ interface LatticeViewProps {
 }
 
 const LatticeView = ({ compilationResult }: LatticeViewProps): JSX.Element => {
-    const [selectedSliceNumber, setSelectedSliceNumber] = React.useState<number>(0)
+    const [selectedSliceNumber, setSelectedSliceNumber] = useState<number>(0)
     const changeSlice = (delta: number) => {
         setSelectedSliceNumber(selectedSliceNumber + delta)
     }
@@ -87,7 +86,7 @@ const LatticeView = ({ compilationResult }: LatticeViewProps): JSX.Element => {
     const [latticePosition, setLatticePosition] = useState({ x: 0, y: 0 })
     const defaultLatticePosition = { x: 0, y: 0 }
 
-    const nodeRef = React.useRef(null) // Add to <Draggable> element
+    const nodeRef = useRef(null) // Add to <Draggable> element
 
     const stages = parseCompilationText(compilation_text)
     // JS object that returns boolean when "previous" or "next" buttons need to be disabled
@@ -95,12 +94,6 @@ const LatticeView = ({ compilationResult }: LatticeViewProps): JSX.Element => {
         prev: selectedSliceNumber === 0,
         next: selectedSliceNumber === num_slices - 1,
     }
-
-    // scroll into Lattice View Section, one time, after compilation is completed
-    const latticeSection = useRef<HTMLInputElement>(null)
-    React.useEffect(() => {
-        latticeSection.current && latticeSection.current?.scrollIntoView()
-    }, [])
 
     // set state of checkbox switch
     const [showCompilationText, setCompilationText] = useState(false)
