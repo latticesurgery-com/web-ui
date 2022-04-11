@@ -50,7 +50,7 @@ jobs:
       run: npm run build 
       
     - name: Upload Build Artifact
-      uses: actions/upload-artifact@v2.3.1
+      uses: actions/upload-artifact@v3.0.0
       with:
         name: build-artifact
         path: build
