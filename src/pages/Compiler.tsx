@@ -12,6 +12,8 @@ import {
     AlertDescription,
     Button,
     Center,
+    Text,
+    Link,
 } from "@chakra-ui/react"
 import CircuitSelect from "../components/sections/CircuitSelect"
 
@@ -37,7 +39,6 @@ const CompilerPage = (): JSX.Element => {
                     </AlertDescription>
                 </Alert>
             )}
-
             <Box mt={10}>
                 {showCircuitSelect ? (
                     <CircuitSelect
@@ -62,7 +63,19 @@ const CompilerPage = (): JSX.Element => {
                         <AlertDescription>{appState.apiResponse.msg}</AlertDescription>
                     </Alert>
                 )}
-
+                <Center>
+                    <Text fontSize={"xl"}>
+                        You are trying a demo. For the full functionality check out our&nbsp;
+                        <Link
+                            color="teal.500"
+                            href="https://github.com/latticesurgery-com/"
+                            isExternal
+                        >
+                            GitHub
+                        </Link>
+                        .
+                    </Text>
+                </Center>
                 {appState.apiResponse instanceof CompilationResultSuccess && (
                     <LatticeView compilationResult={appState.apiResponse} />
                 )}
