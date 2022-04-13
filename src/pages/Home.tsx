@@ -42,7 +42,7 @@ const Home = (): JSX.Element => {
                         to={"/online-compiler"}
                         _hover={{ textDecoration: "none", color: "inherit" }}
                     >
-                        <Button size={"lg"}>Try out the compiler</Button>
+                        <Button size={"lg"}>Try out a demo</Button>
                     </Link>
                     <Link
                         _hover={{ textDecoration: "none", color: "inherit" }}
