@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import { AppState } from "../lib/appState"
 import isDevMode from "../lib/isDevMode"
 import LatticeView from "../components/sections/LatticeView"
@@ -10,7 +10,6 @@ import {
     AlertIcon,
     AlertTitle,
     AlertDescription,
-    Button,
     Center,
 } from "@chakra-ui/react"
 import CircuitSelect from "../components/sections/CircuitSelect"
@@ -18,13 +17,6 @@ import CircuitSelect from "../components/sections/CircuitSelect"
 const CompilerPage = (): JSX.Element => {
     const [appState, setAppState] = useState(new AppState())
     const [repeats, setRepeats] = useState(0)
-    const [showCircuitSelect, setShowCircuitSelect] = useState(true)
-
-    useEffect(() => {
-        if (appState.apiResponse instanceof CompilationResultSuccess) {
-            setShowCircuitSelect(false)
-        }
-    }, [appState])
 
     return (
         <>
@@ -39,20 +31,12 @@ const CompilerPage = (): JSX.Element => {
             )}
 
             <Box mt={10}>
-                {showCircuitSelect ? (
-                    <CircuitSelect
-                        appState={appState}
-                        setAppState={setAppState}
-                        repeats={repeats}
-                        setRepeats={setRepeats}
-                    />
-                ) : (
-                    <Center>
-                        <Button size="lg" onClick={() => setShowCircuitSelect(true)}>
-                            New Circuit
-                        </Button>
-                    </Center>
-                )}
+                <CircuitSelect
+                    appState={appState}
+                    setAppState={setAppState}
+                    repeats={repeats}
+                    setRepeats={setRepeats}
+                />
             </Box>
             <Stack mt={10} spacing={5}>
                 {appState.apiResponse instanceof ResponseError && (
