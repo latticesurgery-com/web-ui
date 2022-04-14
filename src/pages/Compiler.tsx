@@ -10,7 +10,6 @@ import {
     AlertIcon,
     AlertTitle,
     AlertDescription,
-    Button,
     Center,
     Text,
     Link,
