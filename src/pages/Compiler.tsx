@@ -10,7 +10,6 @@ import {
     AlertIcon,
     AlertTitle,
     AlertDescription,
-    Center,
 } from "@chakra-ui/react"
 import CircuitSelect from "../components/sections/CircuitSelect"
 
