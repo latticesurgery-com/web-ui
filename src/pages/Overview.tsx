@@ -30,7 +30,7 @@ const Overview = (): JSX.Element => {
                 <Text mb={8}>
                     A great deal of inspiration was taken from Daniel Litinski&apos;s Game of
                     Surface Codes{" "}
-                    <Link color="teal.500" href="https://arxiv.org/abs/1911.05759" isExternal>
+                    <Link color="teal.500" href="https://arxiv.org/abs/1808.02892" isExternal>
                         <Text as="sup">[1]</Text>
                     </Link>
                     . We follow Litinski&apos;s formulation of lattice surgery patch computation and
