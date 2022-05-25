@@ -5,7 +5,7 @@
   "dependencies": {
     "@chakra-ui/react": "^1.8.6",
     "@emotion/core": "^11.0.0",
-    "@emotion/react": "^11.7.1",
+    "@emotion/react": "^11.9.0",
     "@emotion/styled": "^11.6.0",
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^12.1.2",
@@ -19,11 +19,11 @@
     "emotion": "^11.0.0",
     "framer-motion": "^6.2.3",
     "lodash": "^4.17.21",
-    "query-string": "^7.0.1",
+    "query-string": "^7.1.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-draggable": "^4.4.4",
-    "react-dropzone": "^12.0.4",
+    "react-dropzone": "^14.2.1",
     "react-icons": "^4.3.1",
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.0",
@@ -53,9 +53,9 @@
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^5.13.0",
     "@typescript-eslint/parser": "^5.8.0",
-    "eslint-config-prettier": "8.3.0",
+    "eslint-config-prettier": "8.5.0",
     "eslint-plugin-prettier": "4.0.0",
-    "eslint-plugin-react": "^7.28.0",
-    "prettier": "2.5.1"
+    "eslint-plugin-react": "^7.30.0",
+    "prettier": "2.6.2"
   }
 }
