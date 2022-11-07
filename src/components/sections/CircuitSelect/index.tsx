@@ -14,7 +14,7 @@ import {
     NumberIncrementStepper,
     NumberInputField,
     NumberInputStepper,
-    NumberInput,
+    NumberInput, Select, HStack, VStack, Link,
 } from "@chakra-ui/react"
 import { IoChevronDownSharp } from "react-icons/io5"
 import { AppState } from "../../../lib/appState"
@@ -22,6 +22,106 @@ import FileUploader from "./FileUploader"
 import submitCompileRequest from "../../../lib/submitCompileRequest"
 import isDevMode from "../../../lib/isDevMode"
 import { CompilationResultSuccess } from "../../../lib/apiResponses"
+import {
+    CompilationOptions,
+    CorrectiveTermBehaviour,
+    defaultCompilationOptions,
+    FastSlicerOptions,
+    LayoutType,
+    LitinskiCompilationOptions,
+} from "../../../lib/compilationOptions"
+
+
+interface CompilationOptionsSelectorProps {
+    compilationOptions: CompilationOptions
+    setCompilationOptions: React.Dispatch<CompilationOptions>
+}
+
+const CompilationOptionsSelector = ({compilationOptions, setCompilationOptions} : CompilationOptionsSelectorProps) => {
+
+    const updateFastSlicerOptions = (fastSlicerOptions : FastSlicerOptions) =>
+        setCompilationOptions({...compilationOptions, fastSlicerOptions})
+    const updateLitinskiCompilationOptions= (litinskiCompilationOptions : LitinskiCompilationOptions) =>
+        setCompilationOptions({...compilationOptions, litinskiCompilationOptions})
+
+    return <VStack>
+        <Select>
+            <option
+                selected={true}
+                onClick={() => setCompilationOptions({ ...compilationOptions, kind: "FastSlicerOptions" })}>
+                Fast Slicer with direct compilation via ZX
+            </option>
+            <option
+                onClick={() => setCompilationOptions({ ...compilationOptions, kind: "LitinskiCompilationOptions" })}>
+                Litinski style compilation via Pauli Rotations
+            </option>
+        </Select>
+        {(compilationOptions.kind === "FastSlicerOptions")
+            ?
+            <>
+                <p>
+                    <b>Note:</b> If submitting .qasm, the fast slicer only supports
+                    {' '}
+                    <Link
+                        color="teal.500"
+                        href="https://github.com/latticesurgery-com/liblsqecc#qasm-support-highly-experimental/"
+                        target="_blank"
+                        isExternal
+                    >
+                        a very small subset
+                    </Link>.
+                </p>
+                <HStack>
+                    <Select>
+                        {Object.keys(LayoutType).filter((v) => isNaN(Number(v))).map((item) =>
+                            <option
+                                selected={LayoutType[compilationOptions.fastSlicerOptions.layoutType] === item}
+                                onClick={() => updateFastSlicerOptions({
+                                    ...compilationOptions.fastSlicerOptions, layoutType : LayoutType[item as keyof typeof LayoutType]
+                                })}>
+                                {item}
+                            </option>
+                        )
+                        }
+                    </Select>
+                    <Select>
+                        {Object.keys(CorrectiveTermBehaviour).filter((v) => isNaN(Number(v))).map((item) =>
+                            <option
+                                selected={CorrectiveTermBehaviour[compilationOptions.fastSlicerOptions.correctiveTermBehaviour] === item}
+                                onClick={() => updateFastSlicerOptions({
+                                    ...compilationOptions.fastSlicerOptions, correctiveTermBehaviour : CorrectiveTermBehaviour[item as keyof typeof CorrectiveTermBehaviour]
+                                })}>
+                                {item}
+                            </option>
+                        )
+                        }
+                    </Select>
+                </HStack>
+            </>
+            :
+            <Checkbox
+                isChecked={compilationOptions.litinskiCompilationOptions.doStabilizerCommutingTransform}
+                onChange={(e) => updateLitinskiCompilationOptions({
+                            ...compilationOptions.litinskiCompilationOptions,
+                            doStabilizerCommutingTransform: e.target.checked
+                        })}
+            >
+                <Text as={"span"}>Pi/4 removing transform</Text>
+            </Checkbox>
+        }
+    </VStack>
+}
+
+
+
+const runCompilation = async (setAppState:React.Dispatch<AppState>, data : string, compilationOptions:CompilationOptions, repeats: number) => {
+
+    if (compilationOptions.kind == "LitinskiCompilationOptions")
+        submitCompileRequest(setAppState, data, compilationOptions.litinskiCompilationOptions, repeats)
+    else {
+
+    }
+}
 
 type CircuitSelectProps = {
     appState: AppState
@@ -31,8 +131,7 @@ type CircuitSelectProps = {
 }
 
 const CircuitSelect = ({ appState, setAppState, repeats, setRepeats }: CircuitSelectProps) => {
-    const [doTransform, setDoTransform] = useState(true)
-
+    const [compilationOptions, setCompilationOptions] = useState<CompilationOptions>(defaultCompilationOptions)
     const readFile = (file: File) => {
         return new Promise((resolve, reject) => {
             const reader = new FileReader()
@@ -61,7 +160,7 @@ const CircuitSelect = ({ appState, setAppState, repeats, setRepeats }: CircuitSe
                 })
             }
         } else {
-            submitCompileRequest(setAppState, data as string, doTransform, repeats)
+            await runCompilation(setAppState, data as string, compilationOptions, repeats)
         }
     }
 
@@ -69,7 +168,7 @@ const CircuitSelect = ({ appState, setAppState, repeats, setRepeats }: CircuitSe
         const file_url = `${process.env.PUBLIC_URL}/assets/demo_circuits/${example}`
         const data = await fetch(file_url).then((response) => response.text())
         if (data) {
-            submitCompileRequest(setAppState, data as string, doTransform, repeats)
+            await runCompilation(setAppState, data as string, compilationOptions, repeats)
         }
     }
 
@@ -100,13 +199,7 @@ const CircuitSelect = ({ appState, setAppState, repeats, setRepeats }: CircuitSe
                 onFileAccepted={onFileAccepted}
                 isLoading={appState.compilationIsLoading}
             />
-            <Checkbox
-                isChecked={doTransform}
-                onChange={(e) => setDoTransform(e.target.checked)}
-                isDisabled={appState.compilationIsLoading}
-            >
-                <Text as={"span"}>Litinski Transform</Text>
-            </Checkbox>
+            <CompilationOptionsSelector compilationOptions={compilationOptions} setCompilationOptions={setCompilationOptions} />
             {isDevMode() && (
                 <Box p="3" rounded="lg" borderWidth="3px" borderColor="#98ff98">
                     <Flex gap="2">

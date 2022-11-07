@@ -3,13 +3,14 @@ import queryString from "query-string"
 import { CompilationResult } from "./slices"
 import axios from "axios"
 import { CompilationResultSuccess, ResponseError } from "./apiResponses"
+import { LitinskiCompilationOptions, SimulationMethod } from "./compilationOptions"
 
 const API_URL = "https://api.latticesurgery.com/compile"
 
 const submitCompileRequest = async (
     setAppState: React.Dispatch<AppState>,
     circuitStr: string,
-    doLitinskiTransform: boolean,
+    compilationOptions: LitinskiCompilationOptions,
     repeats: number
 ) => {
     const queryStringMap = queryString.parse(window.location.search)
@@ -28,7 +29,8 @@ const submitCompileRequest = async (
         const response = await axios.post(apiUrl, {
             circuit_source: "str",
             circuit: circuitStr,
-            apply_litinski_transform: doLitinskiTransform,
+            apply_litinski_transform: compilationOptions.doStabilizerCommutingTransform,
+            simulation_method: SimulationMethod[compilationOptions.simulationMethod],
         })
 
         if (response.data.errorMessage) {
