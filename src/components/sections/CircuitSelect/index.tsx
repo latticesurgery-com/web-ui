@@ -1,27 +1,30 @@
-import { useState } from "react"
-import React from "react"
+import React, { useState } from "react"
 import {
+    Box,
     Button,
     Checkbox,
     Flex,
+    HStack,
+    Link,
     Menu,
     MenuButton,
     MenuItem,
     MenuList,
-    Text,
-    Box,
     NumberDecrementStepper,
     NumberIncrementStepper,
+    NumberInput,
     NumberInputField,
     NumberInputStepper,
-    NumberInput, Select, HStack, VStack, Link,
+    Select,
+    Text,
+    VStack,
 } from "@chakra-ui/react"
 import { IoChevronDownSharp } from "react-icons/io5"
 import { AppState } from "../../../lib/appState"
 import FileUploader from "./FileUploader"
 import submitCompileRequest from "../../../lib/submitCompileRequest"
 import isDevMode from "../../../lib/isDevMode"
-import { CompilationResultSuccess } from "../../../lib/apiResponses"
+import { CompilationResultSuccess, ResponseError } from "../../../lib/apiResponses"
 import {
     CompilationOptions,
     CorrectiveTermBehaviour,
@@ -30,6 +33,7 @@ import {
     LayoutType,
     LitinskiCompilationOptions,
 } from "../../../lib/compilationOptions"
+import { Slices } from "../../../lib/slices"
 
 
 interface CompilationOptionsSelectorProps {
@@ -47,7 +51,6 @@ const CompilationOptionsSelector = ({compilationOptions, setCompilationOptions} 
     return <VStack>
         <Select>
             <option
-                selected={true}
                 onClick={() => setCompilationOptions({ ...compilationOptions, kind: "FastSlicerOptions" })}>
                 Fast Slicer with direct compilation via ZX
             </option>
@@ -59,7 +62,7 @@ const CompilationOptionsSelector = ({compilationOptions, setCompilationOptions} 
         {(compilationOptions.kind === "FastSlicerOptions")
             ?
             <>
-                <p>
+                <Text>
                     <b>Note:</b> If submitting .qasm, the fast slicer only supports
                     {' '}
                     <Link
@@ -70,12 +73,13 @@ const CompilationOptionsSelector = ({compilationOptions, setCompilationOptions} 
                     >
                         a very small subset
                     </Link>.
-                </p>
+                </Text>
                 <HStack>
-                    <Select>
+                    <Text>Layout:</Text>
+                    <Select defaultValue={LayoutType[compilationOptions.fastSlicerOptions.layoutType]}>
                         {Object.keys(LayoutType).filter((v) => isNaN(Number(v))).map((item) =>
                             <option
-                                selected={LayoutType[compilationOptions.fastSlicerOptions.layoutType] === item}
+                                key={item}
                                 onClick={() => updateFastSlicerOptions({
                                     ...compilationOptions.fastSlicerOptions, layoutType : LayoutType[item as keyof typeof LayoutType]
                                 })}>
@@ -84,10 +88,11 @@ const CompilationOptionsSelector = ({compilationOptions, setCompilationOptions} 
                         )
                         }
                     </Select>
-                    <Select>
+                    <Text>Apply corrective terms:</Text>
+                    <Select defaultValue={CorrectiveTermBehaviour[compilationOptions.fastSlicerOptions.correctiveTermBehaviour]}>
                         {Object.keys(CorrectiveTermBehaviour).filter((v) => isNaN(Number(v))).map((item) =>
                             <option
-                                selected={CorrectiveTermBehaviour[compilationOptions.fastSlicerOptions.correctiveTermBehaviour] === item}
+                                key={item}
                                 onClick={() => updateFastSlicerOptions({
                                     ...compilationOptions.fastSlicerOptions, correctiveTermBehaviour : CorrectiveTermBehaviour[item as keyof typeof CorrectiveTermBehaviour]
                                 })}>
@@ -112,13 +117,82 @@ const CompilationOptionsSelector = ({compilationOptions, setCompilationOptions} 
     </VStack>
 }
 
+interface EmscriptenSlicerResult {
+    err : string
+    exit_code: number
+    output : string
+}
 
 
-const runCompilation = async (setAppState:React.Dispatch<AppState>, data : string, compilationOptions:CompilationOptions, repeats: number) => {
+const runCompilation = async (
+    setAppState:React.Dispatch<AppState>,
+    fileContents : string,
+    compilationOptions:CompilationOptions,
+    extension: string,
+    repeats: number) => {
+
+    // Modify State on Compile Request Submit
+    setAppState({
+        compilationIsLoading: true,
+        apiResponse: null,
+    })
 
     if (compilationOptions.kind == "LitinskiCompilationOptions")
-        submitCompileRequest(setAppState, data, compilationOptions.litinskiCompilationOptions, repeats)
+        submitCompileRequest(setAppState, fileContents, compilationOptions.litinskiCompilationOptions, repeats)
     else {
+        const {fastSlicerOptions} = compilationOptions;
+
+        // Modify State on Compile Request Submit
+        setAppState({
+            compilationIsLoading: true,
+            apiResponse: null,
+        })
+
+        // Run the script
+        // @ts-ignore
+        const loadedModule = await LsqeccModule()
+
+        const commandLine = [
+            fastSlicerOptions.layoutType === LayoutType.Compact ? "--compactlayout" : "",
+            extension ==="qasm" ? "-q" : "",
+            "--cnotcorrections",
+            fastSlicerOptions.correctiveTermBehaviour === CorrectiveTermBehaviour.Allways ? "always" : "never"
+        ].join(" ")
+        if(isDevMode()) console.log(`Compiling in browser with args: ${commandLine}\ninput:\n${fileContents}`)
+        const emscriptenRawResult = loadedModule.run_slicer_program_from_strings(commandLine, fileContents)
+        if(isDevMode()) console.log(emscriptenRawResult);
+
+        const emscriptenResult : EmscriptenSlicerResult = JSON.parse(emscriptenRawResult);
+
+        try {
+            if (emscriptenResult.exit_code === 0) {
+                setAppState({
+                    compilationIsLoading: false,
+                    apiResponse: new CompilationResultSuccess(
+                        JSON.parse(emscriptenResult.output) as Slices,
+                        `Emscripten Success`
+                    )
+                })
+            } else {
+                setAppState({
+                    compilationIsLoading: false,
+                    apiResponse: new ResponseError(
+                        `Compiler returned non zero exit code ${emscriptenResult.exit_code}`,
+                        `Compiler Error: ${emscriptenResult.err}\n`
+                            + (isDevMode()?`Compiler Output: ${emscriptenResult.output}`:"")
+                    )
+                })
+            }
+        } catch (err) {
+            setAppState({
+                compilationIsLoading: false,
+                apiResponse: new ResponseError(
+                    `JS Exception`,
+                    `${err}\nCompiler Error: ${emscriptenResult.err}\nCompiler Output: ${emscriptenResult.output}`
+                )
+            })
+        }
+
 
     }
 }
@@ -143,7 +217,8 @@ const CircuitSelect = ({ appState, setAppState, repeats, setRepeats }: CircuitSe
 
     const onFileAccepted = async (file: File) => {
         const data = await readFile(file)
-        if (file.name.slice(-5) == ".json") {
+        const extension: string = file.name.split(".").pop() || ""
+        if (extension === "json") {
             const json_data = JSON.parse(data as string)
             if (Object.prototype.hasOwnProperty.call(json_data, "compilation_text")) {
                 setAppState({
@@ -160,7 +235,7 @@ const CircuitSelect = ({ appState, setAppState, repeats, setRepeats }: CircuitSe
                 })
             }
         } else {
-            await runCompilation(setAppState, data as string, compilationOptions, repeats)
+            await runCompilation(setAppState, data as string, compilationOptions, extension, repeats)
         }
     }
 
@@ -168,7 +243,7 @@ const CircuitSelect = ({ appState, setAppState, repeats, setRepeats }: CircuitSe
         const file_url = `${process.env.PUBLIC_URL}/assets/demo_circuits/${example}`
         const data = await fetch(file_url).then((response) => response.text())
         if (data) {
-            await runCompilation(setAppState, data as string, compilationOptions, repeats)
+            await runCompilation(setAppState, data as string, compilationOptions, "qasm", repeats)
         }
     }
 

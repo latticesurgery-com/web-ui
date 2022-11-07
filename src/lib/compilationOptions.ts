@@ -1,7 +1,7 @@
 export enum SimulationMethod {
-    None,
+    // None,
     StateVector,
-    LazilyTensoredStateVector,
+    // LazilyTensoredStateVector,
 }
 
 export interface LitinskiCompilationOptions {
@@ -10,14 +10,14 @@ export interface LitinskiCompilationOptions {
 }
 
 export enum LayoutType {
-    Fast,
+    //Fast,
     Compact,
 }
 
 export enum CorrectiveTermBehaviour {
     Never,
     Allways,
-    Random,
+    // Random,
 }
 
 export interface FastSlicerOptions {
@@ -39,6 +39,6 @@ export const defaultCompilationOptions: CompilationOptions = {
     },
     litinskiCompilationOptions: {
         doStabilizerCommutingTransform: true,
-        simulationMethod: SimulationMethod.LazilyTensoredStateVector,
+        simulationMethod: SimulationMethod.StateVector, // TODO change to LazilyTensoredStateVector once enabled
     },
 }

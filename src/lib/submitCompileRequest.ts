@@ -19,12 +19,6 @@ const submitCompileRequest = async (
         ? `http://localhost:${queryStringMap.port || 9876}/compile`
         : API_URL
 
-    // Modify State on Compile Request Submit
-    setAppState({
-        compilationIsLoading: true,
-        apiResponse: null,
-    })
-
     try {
         const response = await axios.post(apiUrl, {
             circuit_source: "str",

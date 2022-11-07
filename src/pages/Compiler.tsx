@@ -13,12 +13,8 @@ import {
     Center,
     Text,
     Link,
-    Button,
 } from "@chakra-ui/react"
 import CircuitSelect from "../components/sections/CircuitSelect"
-
-// Let ts know about this global variable> It is at some point defined in lsqecc_emscripten.js
-// var LsqeccModule: () => Promise<any>
 
 const CompilerPage = (): JSX.Element => {
     const [appState, setAppState] = useState(new AppState())
@@ -57,7 +53,14 @@ const CompilerPage = (): JSX.Element => {
                     <Alert w={{ base: "100%", sm: "80%", md: "65%" }} mx={"auto"} status="error">
                         <AlertIcon />
                         <AlertTitle mr={2}>{appState.apiResponse.title}</AlertTitle>
-                        <AlertDescription>{appState.apiResponse.msg}</AlertDescription>
+                        <AlertDescription>
+                            {appState.apiResponse.msg
+                                .split("\n")
+                                .flatMap((line, n) => [
+                                    <span key={`line-${n}`}>{line}</span>,
+                                    <br key={`br-${n}`} />,
+                                ])}
+                        </AlertDescription>
                     </Alert>
                 )}
                 <Center>
@@ -72,24 +75,6 @@ const CompilerPage = (): JSX.Element => {
                         </Link>
                         .
                     </Text>
-                    <Button
-                        onClick={() => {
-                            // @ts-ignore
-                            const p = LsqeccModule()
-                            p.then((loadedModule: any) => {
-                                console.log(
-                                    JSON.stringify(
-                                        loadedModule.run_slicer_program_from_strings(
-                                            "--compactlayout",
-                                            "DeclareLogicalQubitPatches 0,1\n"
-                                        )
-                                    )
-                                )
-                            })
-                        }}
-                    >
-                        Run Emscripten
-                    </Button>
                 </Center>
                 {appState.apiResponse instanceof CompilationResultSuccess && (
                     <LatticeView compilationResult={appState.apiResponse} />
