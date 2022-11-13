@@ -20,6 +20,12 @@ export enum CorrectiveTermBehaviour {
     // Random,
 }
 
+export enum InputType {
+    LLI,
+    QASM,
+    // Random,
+}
+
 export interface FastSlicerOptions {
     readonly layoutType: LayoutType
     readonly correctiveTermBehaviour: CorrectiveTermBehaviour
@@ -29,6 +35,7 @@ export interface CompilationOptions {
     kind: "FastSlicerOptions" | "LitinskiCompilationOptions"
     fastSlicerOptions: FastSlicerOptions
     litinskiCompilationOptions: LitinskiCompilationOptions
+    inputType: InputType
 }
 
 export const defaultCompilationOptions: CompilationOptions = {
@@ -41,4 +48,5 @@ export const defaultCompilationOptions: CompilationOptions = {
         doStabilizerCommutingTransform: true,
         simulationMethod: SimulationMethod.StateVector, // TODO change to LazilyTensoredStateVector once enabled
     },
+    inputType: InputType.LLI
 }

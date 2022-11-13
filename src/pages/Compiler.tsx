@@ -18,7 +18,6 @@ import CircuitSelect from "../components/sections/CircuitSelect"
 
 const CompilerPage = (): JSX.Element => {
     const [appState, setAppState] = useState(new AppState())
-    const [repeats, setRepeats] = useState(0)
 
     // Delicate section to load the emscripten module
     useEffect(() => {
@@ -44,8 +43,6 @@ const CompilerPage = (): JSX.Element => {
                 <CircuitSelect
                     appState={appState}
                     setAppState={setAppState}
-                    repeats={repeats}
-                    setRepeats={setRepeats}
                 />
             </Box>
             <Stack mt={10} spacing={5}>

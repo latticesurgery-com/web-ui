@@ -10,8 +10,7 @@ const API_URL = "https://api.latticesurgery.com/compile"
 const submitCompileRequest = async (
     setAppState: React.Dispatch<AppState>,
     circuitStr: string,
-    compilationOptions: LitinskiCompilationOptions,
-    repeats: number
+    compilationOptions: LitinskiCompilationOptions
 ) => {
     const queryStringMap = queryString.parse(window.location.search)
 
@@ -38,19 +37,6 @@ const submitCompileRequest = async (
         } else {
             try {
                 const responseJson = JSON.parse(response.data) as CompilationResult
-
-                responseJson.slices.forEach((slice, slice_idx) => {
-                    slice.forEach((row, row_idx) => {
-                        for (let i = 0; i < repeats; i++) {
-                            responseJson.slices[slice_idx][row_idx] =
-                                responseJson.slices[slice_idx][row_idx].concat(row)
-                        }
-                    })
-                    for (let i = 0; i < repeats; i++) {
-                        responseJson.slices[slice_idx] =
-                            responseJson.slices[slice_idx].concat(slice)
-                    }
-                })
 
                 setAppState({
                     apiResponse: new CompilationResultSuccess(
