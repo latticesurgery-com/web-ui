@@ -42,11 +42,7 @@ const CompilerPage = (): JSX.Element => {
             <Center>
                 <Text fontSize={"xl"} marginTop={"2em"}>
                     You are trying a demo. For the full functionality check out our&nbsp;
-                    <Link
-                        color="teal.500"
-                        href="https://github.com/latticesurgery-com/"
-                        isExternal
-                    >
+                    <Link color="teal.500" href="https://github.com/latticesurgery-com/" isExternal>
                         GitHub
                     </Link>
                     .
