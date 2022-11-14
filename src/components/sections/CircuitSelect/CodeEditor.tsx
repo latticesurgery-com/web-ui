@@ -9,7 +9,7 @@ interface CodeEditorProps {
 }
 
 const CodeEditor = ({code, onCodeChange}: CodeEditorProps) =>
-    <Box borderWidth='3px' borderRadius='lg' minWidth={"lg"} minHeight={"md"} maxHeight={"100%"} overflow={"hidden"} flex={1}>
+    <Box borderWidth='1px' borderRadius='lg' minWidth={"lg"} minHeight={"md"}>
         <SimpleCodeEditor
             value={code}
             onValueChange={onCodeChange}
