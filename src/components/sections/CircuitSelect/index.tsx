@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { Button, Flex, Menu, MenuButton, MenuItem, MenuList, Text } from "@chakra-ui/react"
+import { Box, Button, Flex, Grid, GridItem, HStack, Menu, MenuButton, MenuItem, MenuList, Text } from "@chakra-ui/react"
 import { IoChevronDownSharp } from "react-icons/io5"
 import { AppState } from "../../../lib/appState"
 import FileUploader from "./FileUploader"
@@ -14,6 +14,7 @@ import {
 } from "../../../lib/compilationOptions"
 import { Slices } from "../../../lib/slices"
 import CompilationOptionsSelector from "./CompilationOptionsSelector"
+import CodeEditor from "./CodeEditor"
 
 interface EmscriptenSlicerResult {
     err: string
@@ -101,6 +102,15 @@ const runCompilation = async (
     }
 }
 
+
+
+enum CircuitSelectMode {
+    Empty,
+    CodeEditor,
+    UploadFile,
+}
+
+
 type CircuitSelectProps = {
     appState: AppState
     setAppState: React.Dispatch<AppState>
@@ -109,6 +119,12 @@ type CircuitSelectProps = {
 const CircuitSelect = ({ appState, setAppState }: CircuitSelectProps) => {
     const [compilationOptions, setCompilationOptions] =
         useState<CompilationOptions>(defaultCompilationOptions)
+
+    const [circuitSelectMode, setCircuitSelectMode] = useState<CircuitSelectMode>(CircuitSelectMode.Empty);
+
+    const [code, setCode] = useState<string>("OPENQASM 2.0")
+
+
     const readFile = (file: File) => {
         return new Promise((resolve, reject) => {
             const reader = new FileReader()
@@ -150,6 +166,27 @@ const CircuitSelect = ({ appState, setAppState }: CircuitSelectProps) => {
         }
     }
 
+    const crenderCodeSection = () =>
+    {
+        if(circuitSelectMode == CircuitSelectMode.UploadFile)
+            return <FileUploader
+                onFileAccepted={onFileAccepted}
+                isLoading={appState.compilationIsLoading}
+            />
+        else if (circuitSelectMode == CircuitSelectMode.CodeEditor)
+            return <HStack>
+                    <CodeEditor code={code} onCodeChange={setCode}/>
+                    <Box>
+                        <CompilationOptionsSelector
+                            compilationOptions={compilationOptions}
+                            setCompilationOptions={setCompilationOptions}
+                        />
+                    </Box>
+            </HStack>
+        else
+            return <></>
+    }
+
     return (
         <Flex gap={5} direction={"column"} align={"center"}>
             <Menu>
@@ -159,28 +196,24 @@ const CircuitSelect = ({ appState, setAppState }: CircuitSelectProps) => {
                     rightIcon={<IoChevronDownSharp />}
                     isLoading={appState.compilationIsLoading}
                 >
-                    Choose an example circuit
+                    Start Compiling
                 </MenuButton>
                 <MenuList>
                     <MenuItem m={0} onClick={() => onExampleCircuitSelect("bell_pair.qasm")}>
-                        Bell Pair
+                        Example: Bell Pair
                     </MenuItem>
                     <MenuItem m={0} onClick={() => onExampleCircuitSelect("nontrivial_state.qasm")}>
-                        Non-trivial State
+                        Example: Non-Trivial State
+                    </MenuItem>
+                    <MenuItem m={0} onClick={() => setCircuitSelectMode(CircuitSelectMode.UploadFile)}>
+                        Upload File
+                    </MenuItem>
+                    <MenuItem m={0} onClick={() => setCircuitSelectMode(CircuitSelectMode.CodeEditor)}>
+                        Code Editor
                     </MenuItem>
                 </MenuList>
             </Menu>
-            <Text as={"h3"} fontSize={"lg"} fontWeight={600} letterSpacing={2}>
-                OR
-            </Text>
-            <FileUploader
-                onFileAccepted={onFileAccepted}
-                isLoading={appState.compilationIsLoading}
-            />
-            <CompilationOptionsSelector
-                compilationOptions={compilationOptions}
-                setCompilationOptions={setCompilationOptions}
-            />
+            { crenderCodeSection() }
         </Flex>
     )
 }
