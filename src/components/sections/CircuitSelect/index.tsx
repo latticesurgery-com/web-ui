@@ -1,5 +1,18 @@
 import React, { useState } from "react"
-import { Box, Button, Flex, Grid, GridItem, HStack, Menu, MenuButton, MenuItem, MenuList, Text } from "@chakra-ui/react"
+import {
+    Box,
+    Button,
+    Flex,
+    Grid,
+    GridItem,
+    HStack,
+    Menu,
+    MenuButton,
+    MenuItem,
+    MenuList, Spacer,
+    Text,
+    VStack,
+} from "@chakra-ui/react"
 import { IoChevronDownSharp } from "react-icons/io5"
 import { AppState } from "../../../lib/appState"
 import FileUploader from "./FileUploader"
@@ -15,6 +28,7 @@ import {
 import { Slices } from "../../../lib/slices"
 import CompilationOptionsSelector from "./CompilationOptionsSelector"
 import CodeEditor from "./CodeEditor"
+import { SIMPLE_QASM_CIRCUIT } from "./demoCircuits"
 
 interface EmscriptenSlicerResult {
     err: string
@@ -122,7 +136,7 @@ const CircuitSelect = ({ appState, setAppState }: CircuitSelectProps) => {
 
     const [circuitSelectMode, setCircuitSelectMode] = useState<CircuitSelectMode>(CircuitSelectMode.Empty);
 
-    const [code, setCode] = useState<string>("OPENQASM 2.0")
+    const [code, setCode] = useState<string>(SIMPLE_QASM_CIRCUIT)
 
 
     const readFile = (file: File) => {
@@ -174,14 +188,23 @@ const CircuitSelect = ({ appState, setAppState }: CircuitSelectProps) => {
                 isLoading={appState.compilationIsLoading}
             />
         else if (circuitSelectMode == CircuitSelectMode.CodeEditor)
-            return <HStack>
+            return<HStack>
                     <CodeEditor code={code} onCodeChange={setCode}/>
-                    <Box>
+                    <VStack w={"md"}>
                         <CompilationOptionsSelector
                             compilationOptions={compilationOptions}
                             setCompilationOptions={setCompilationOptions}
                         />
-                    </Box>
+                        <Flex w={"md"}>
+                            <Spacer/>
+                            <Button onClick={
+                                () => runCompilation(setAppState,
+                                    code,
+                                    compilationOptions,
+                                    code.split("\n")[0]?.includes("OPENQASM 2.0") ? "qasm" : "lli")
+                            }>Compile</Button>
+                        </Flex>
+                    </VStack>
             </HStack>
         else
             return <></>
