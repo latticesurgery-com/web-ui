@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { AppState } from "../lib/appState"
 import isDevMode from "../lib/isDevMode"
 import LatticeView from "../components/sections/LatticeView"
@@ -18,7 +18,15 @@ import CircuitSelect from "../components/sections/CircuitSelect"
 
 const CompilerPage = (): JSX.Element => {
     const [appState, setAppState] = useState(new AppState())
-    const [repeats, setRepeats] = useState(0)
+
+    // Delicate section to load the emscripten module
+    useEffect(() => {
+        console.log("Running setup code")
+        const scriptElement = document.createElement("script")
+        document.head.appendChild(scriptElement)
+        scriptElement.type = "text/javascript"
+        scriptElement.src = "lsqecc_emscripten.js"
+    }, [])
 
     return (
         <>
@@ -31,35 +39,33 @@ const CompilerPage = (): JSX.Element => {
                     </AlertDescription>
                 </Alert>
             )}
+            <Center>
+                <Text fontSize={"xl"} marginTop={"2em"}>
+                    You are trying a demo. For the full functionality check out our&nbsp;
+                    <Link color="teal.500" href="https://github.com/latticesurgery-com/" isExternal>
+                        GitHub
+                    </Link>
+                    .
+                </Text>
+            </Center>
             <Box mt={10}>
-                <CircuitSelect
-                    appState={appState}
-                    setAppState={setAppState}
-                    repeats={repeats}
-                    setRepeats={setRepeats}
-                />
+                <CircuitSelect appState={appState} setAppState={setAppState} />
             </Box>
             <Stack mt={10} spacing={5}>
                 {appState.apiResponse instanceof ResponseError && (
                     <Alert w={{ base: "100%", sm: "80%", md: "65%" }} mx={"auto"} status="error">
                         <AlertIcon />
                         <AlertTitle mr={2}>{appState.apiResponse.title}</AlertTitle>
-                        <AlertDescription>{appState.apiResponse.msg}</AlertDescription>
+                        <AlertDescription>
+                            {appState.apiResponse.msg
+                                .split("\n")
+                                .flatMap((line, n) => [
+                                    <span key={`line-${n}`}>{line}</span>,
+                                    <br key={`br-${n}`} />,
+                                ])}
+                        </AlertDescription>
                     </Alert>
                 )}
-                <Center>
-                    <Text fontSize={"xl"}>
-                        You are trying a demo. For the full functionality check out our&nbsp;
-                        <Link
-                            color="teal.500"
-                            href="https://github.com/latticesurgery-com/"
-                            isExternal
-                        >
-                            GitHub
-                        </Link>
-                        .
-                    </Text>
-                </Center>
                 {appState.apiResponse instanceof CompilationResultSuccess && (
                     <LatticeView compilationResult={appState.apiResponse} />
                 )}

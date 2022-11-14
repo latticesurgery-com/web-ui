@@ -36,3 +36,7 @@ To auto-format your code using ESLint and Prettier, run:
 ```sh
 $ npm run lint:fix
 ```
+
+#### Dev Mode
+Add the `dev=true` (E.g. http://localhost:3000/?dev=true) url parameter to enable some experimental features and additional debug logging. 
+

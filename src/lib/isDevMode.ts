@@ -1,9 +1,7 @@
-import { useSearchParams } from "react-router-dom"
+import queryString from "query-string"
 
 const isDevMode = (): boolean => {
-    const [searchParams] = useSearchParams()
-
-    return searchParams.get("dev") === "true"
+    return queryString.parse(window.location.search).port == "true"
 }
 
 export default isDevMode

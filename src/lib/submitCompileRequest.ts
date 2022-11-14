@@ -3,14 +3,14 @@ import queryString from "query-string"
 import { CompilationResult } from "./slices"
 import axios from "axios"
 import { CompilationResultSuccess, ResponseError } from "./apiResponses"
+import { LitinskiCompilationOptions, SimulationMethod } from "./compilationOptions"
 
 const API_URL = "https://api.latticesurgery.com/compile"
 
 const submitCompileRequest = async (
     setAppState: React.Dispatch<AppState>,
     circuitStr: string,
-    doLitinskiTransform: boolean,
-    repeats: number
+    compilationOptions: LitinskiCompilationOptions
 ) => {
     const queryStringMap = queryString.parse(window.location.search)
 
@@ -18,17 +18,12 @@ const submitCompileRequest = async (
         ? `http://localhost:${queryStringMap.port || 9876}/compile`
         : API_URL
 
-    // Modify State on Compile Request Submit
-    setAppState({
-        compilationIsLoading: true,
-        apiResponse: null,
-    })
-
     try {
         const response = await axios.post(apiUrl, {
             circuit_source: "str",
             circuit: circuitStr,
-            apply_litinski_transform: doLitinskiTransform,
+            apply_litinski_transform: compilationOptions.doStabilizerCommutingTransform,
+            simulation_method: SimulationMethod[compilationOptions.simulationMethod],
         })
 
         if (response.data.errorMessage) {
@@ -42,19 +37,6 @@ const submitCompileRequest = async (
         } else {
             try {
                 const responseJson = JSON.parse(response.data) as CompilationResult
-
-                responseJson.slices.forEach((slice, slice_idx) => {
-                    slice.forEach((row, row_idx) => {
-                        for (let i = 0; i < repeats; i++) {
-                            responseJson.slices[slice_idx][row_idx] =
-                                responseJson.slices[slice_idx][row_idx].concat(row)
-                        }
-                    })
-                    for (let i = 0; i < repeats; i++) {
-                        responseJson.slices[slice_idx] =
-                            responseJson.slices[slice_idx].concat(slice)
-                    }
-                })
 
                 setAppState({
                     apiResponse: new CompilationResultSuccess(
