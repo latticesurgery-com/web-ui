@@ -48,5 +48,5 @@ export const defaultCompilationOptions: CompilationOptions = {
         doStabilizerCommutingTransform: true,
         simulationMethod: SimulationMethod.StateVector, // TODO change to LazilyTensoredStateVector once enabled
     },
-    inputType: InputType.LLI
+    inputType: InputType.LLI,
 }

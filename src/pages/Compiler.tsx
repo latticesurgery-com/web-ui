@@ -40,10 +40,7 @@ const CompilerPage = (): JSX.Element => {
                 </Alert>
             )}
             <Box mt={10}>
-                <CircuitSelect
-                    appState={appState}
-                    setAppState={setAppState}
-                />
+                <CircuitSelect appState={appState} setAppState={setAppState} />
             </Box>
             <Stack mt={10} spacing={5}>
                 {appState.apiResponse instanceof ResponseError && (
