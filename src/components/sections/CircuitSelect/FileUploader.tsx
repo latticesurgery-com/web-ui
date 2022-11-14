@@ -53,7 +53,8 @@ const FileUploader = ({ onFileAccepted, isLoading }: FileUploaderProps): JSX.Ele
                     ? "Drop the file here"
                     : "Drop your circuit here, or click to select file."}
                 <br />
-                File can be Logical Lattice Instructions (.lli/.lsi) OpenQASM 2.0 (.qasm) or Slices (.json)
+                File can be Logical Lattice Instructions (.lli/.lsi) OpenQASM 2.0 (.qasm) or Slices
+                (.json)
             </Text>
             {isLoading && <Spinner ml={2} size="sm" />}
         </Center>

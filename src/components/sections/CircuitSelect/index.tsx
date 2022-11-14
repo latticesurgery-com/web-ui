@@ -1,24 +1,5 @@
 import React, { useState } from "react"
-import {
-    Box,
-    Button,
-    Checkbox,
-    Flex,
-    HStack,
-    Link,
-    Menu,
-    MenuButton,
-    MenuItem,
-    MenuList,
-    NumberDecrementStepper,
-    NumberIncrementStepper,
-    NumberInput,
-    NumberInputField,
-    NumberInputStepper,
-    Select,
-    Text,
-    VStack,
-} from "@chakra-ui/react"
+import { Button, Flex, Menu, MenuButton, MenuItem, MenuList, Text } from "@chakra-ui/react"
 import { IoChevronDownSharp } from "react-icons/io5"
 import { AppState } from "../../../lib/appState"
 import FileUploader from "./FileUploader"
@@ -29,29 +10,23 @@ import {
     CompilationOptions,
     CorrectiveTermBehaviour,
     defaultCompilationOptions,
-    FastSlicerOptions,
     LayoutType,
-    LitinskiCompilationOptions,
 } from "../../../lib/compilationOptions"
 import { Slices } from "../../../lib/slices"
 import CompilationOptionsSelector from "./CompilationOptionsSelector"
 
-
-
-
 interface EmscriptenSlicerResult {
-    err : string
+    err: string
     exit_code: number
-    output : string
+    output: string
 }
 
-
 const runCompilation = async (
-    setAppState:React.Dispatch<AppState>,
-    fileContents : string,
-    compilationOptions:CompilationOptions,
-    extension: string) => {
-
+    setAppState: React.Dispatch<AppState>,
+    fileContents: string,
+    compilationOptions: CompilationOptions,
+    extension: string
+) => {
     // Modify State on Compile Request Submit
     setAppState({
         compilationIsLoading: true,
@@ -59,9 +34,13 @@ const runCompilation = async (
     })
 
     if (compilationOptions.kind == "LitinskiCompilationOptions")
-        submitCompileRequest(setAppState, fileContents, compilationOptions.litinskiCompilationOptions)
+        submitCompileRequest(
+            setAppState,
+            fileContents,
+            compilationOptions.litinskiCompilationOptions
+        )
     else {
-        const {fastSlicerOptions} = compilationOptions;
+        const { fastSlicerOptions } = compilationOptions
 
         // Modify State on Compile Request Submit
         setAppState({
@@ -75,15 +54,21 @@ const runCompilation = async (
 
         const commandLine = [
             fastSlicerOptions.layoutType === LayoutType.Compact ? "--compactlayout" : "",
-            extension ==="qasm" ? "-q" : "",
+            extension === "qasm" ? "-q" : "",
             "--cnotcorrections",
-            fastSlicerOptions.correctiveTermBehaviour === CorrectiveTermBehaviour.Allways ? "always" : "never"
+            fastSlicerOptions.correctiveTermBehaviour === CorrectiveTermBehaviour.Allways
+                ? "always"
+                : "never",
         ].join(" ")
-        if(isDevMode()) console.log(`Compiling in browser with args: ${commandLine}\ninput:\n${fileContents}`)
-        const emscriptenRawResult = loadedModule.run_slicer_program_from_strings(commandLine, fileContents)
-        if(isDevMode()) console.log(emscriptenRawResult);
+        if (isDevMode())
+            console.log(`Compiling in browser with args: ${commandLine}\ninput:\n${fileContents}`)
+        const emscriptenRawResult = loadedModule.run_slicer_program_from_strings(
+            commandLine,
+            fileContents
+        )
+        if (isDevMode()) console.log(emscriptenRawResult)
 
-        const emscriptenResult : EmscriptenSlicerResult = JSON.parse(emscriptenRawResult);
+        const emscriptenResult: EmscriptenSlicerResult = JSON.parse(emscriptenRawResult)
 
         try {
             if (emscriptenResult.exit_code === 0) {
@@ -92,16 +77,16 @@ const runCompilation = async (
                     apiResponse: new CompilationResultSuccess(
                         JSON.parse(emscriptenResult.output) as Slices,
                         `Emscripten Success`
-                    )
+                    ),
                 })
             } else {
                 setAppState({
                     compilationIsLoading: false,
                     apiResponse: new ResponseError(
                         `Compiler returned non zero exit code ${emscriptenResult.exit_code}`,
-                        `Compiler Error: ${emscriptenResult.err}\n`
-                            + (isDevMode()?`Compiler Output: ${emscriptenResult.output}`:"")
-                    )
+                        `Compiler Error: ${emscriptenResult.err}\n` +
+                            (isDevMode() ? `Compiler Output: ${emscriptenResult.output}` : "")
+                    ),
                 })
             }
         } catch (err) {
@@ -110,11 +95,9 @@ const runCompilation = async (
                 apiResponse: new ResponseError(
                     `JS Exception`,
                     `${err}\nCompiler Error: ${emscriptenResult.err}\nCompiler Output: ${emscriptenResult.output}`
-                )
+                ),
             })
         }
-
-
     }
 }
 
@@ -126,7 +109,8 @@ type CircuitSelectProps = {
 }
 
 const CircuitSelect = ({ appState, setAppState }: CircuitSelectProps) => {
-    const [compilationOptions, setCompilationOptions] = useState<CompilationOptions>(defaultCompilationOptions)
+    const [compilationOptions, setCompilationOptions] =
+        useState<CompilationOptions>(defaultCompilationOptions)
     const readFile = (file: File) => {
         return new Promise((resolve, reject) => {
             const reader = new FileReader()
@@ -195,7 +179,10 @@ const CircuitSelect = ({ appState, setAppState }: CircuitSelectProps) => {
                 onFileAccepted={onFileAccepted}
                 isLoading={appState.compilationIsLoading}
             />
-            <CompilationOptionsSelector compilationOptions={compilationOptions} setCompilationOptions={setCompilationOptions} />
+            <CompilationOptionsSelector
+                compilationOptions={compilationOptions}
+                setCompilationOptions={setCompilationOptions}
+            />
         </Flex>
     )
 }
