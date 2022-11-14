@@ -104,8 +104,6 @@ const runCompilation = async (
 type CircuitSelectProps = {
     appState: AppState
     setAppState: React.Dispatch<AppState>
-    repeats: number
-    setRepeats: (value: number) => void
 }
 
 const CircuitSelect = ({ appState, setAppState }: CircuitSelectProps) => {
