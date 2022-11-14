@@ -1,21 +1,15 @@
 import SimpleCodeEditor from "react-simple-code-editor"
 import { Box } from "@chakra-ui/react"
 
+
+
 interface CodeEditorProps {
-    code: string
+    code : string
     onCodeChange: (value: string) => void
 }
 
-const CodeEditor = ({ code, onCodeChange }: CodeEditorProps) => (
-    <Box
-        borderWidth="3px"
-        borderRadius="lg"
-        minWidth={"lg"}
-        minHeight={"md"}
-        maxHeight={"100%"}
-        overflow={"hidden"}
-        flex={1}
-    >
+const CodeEditor = ({code, onCodeChange}: CodeEditorProps) =>
+    <Box borderWidth='3px' borderRadius='lg' minWidth={"lg"} minHeight={"md"} maxHeight={"100%"} overflow={"hidden"} flex={1}>
         <SimpleCodeEditor
             value={code}
             onValueChange={onCodeChange}
@@ -24,10 +18,11 @@ const CodeEditor = ({ code, onCodeChange }: CodeEditorProps) => (
             style={{
                 fontFamily: '"Fira code", "Fira Mono", monospace',
                 fontSize: 12,
-                border: "black",
+                border: "black"
             }}
         />
     </Box>
-)
+
+
 
 export default CodeEditor

@@ -1,13 +1,16 @@
 import React, { useState } from "react"
 import {
+    Box,
     Button,
     Flex,
+    Grid,
+    GridItem,
     HStack,
     Menu,
     MenuButton,
     MenuItem,
-    MenuList,
-    Spacer,
+    MenuList, Spacer,
+    Text,
     VStack,
 } from "@chakra-ui/react"
 import { IoChevronDownSharp } from "react-icons/io5"
@@ -113,11 +116,14 @@ const runCompilation = async (
     }
 }
 
+
+
 enum CircuitSelectMode {
     Empty,
     CodeEditor,
     UploadFile,
 }
+
 
 type CircuitSelectProps = {
     appState: AppState
@@ -128,11 +134,10 @@ const CircuitSelect = ({ appState, setAppState }: CircuitSelectProps) => {
     const [compilationOptions, setCompilationOptions] =
         useState<CompilationOptions>(defaultCompilationOptions)
 
-    const [circuitSelectMode, setCircuitSelectMode] = useState<CircuitSelectMode>(
-        CircuitSelectMode.Empty
-    )
+    const [circuitSelectMode, setCircuitSelectMode] = useState<CircuitSelectMode>(CircuitSelectMode.Empty);
 
     const [code, setCode] = useState<string>(SIMPLE_QASM_CIRCUIT)
+
 
     const readFile = (file: File) => {
         return new Promise((resolve, reject) => {
@@ -175,44 +180,34 @@ const CircuitSelect = ({ appState, setAppState }: CircuitSelectProps) => {
         }
     }
 
-    const crenderCodeSection = () => {
-        if (circuitSelectMode == CircuitSelectMode.UploadFile)
-            return (
-                <FileUploader
-                    onFileAccepted={onFileAccepted}
-                    isLoading={appState.compilationIsLoading}
-                />
-            )
+    const crenderCodeSection = () =>
+    {
+        if(circuitSelectMode == CircuitSelectMode.UploadFile)
+            return <FileUploader
+                onFileAccepted={onFileAccepted}
+                isLoading={appState.compilationIsLoading}
+            />
         else if (circuitSelectMode == CircuitSelectMode.CodeEditor)
-            return (
-                <HStack>
-                    <CodeEditor code={code} onCodeChange={setCode} />
+            return<HStack>
+                    <CodeEditor code={code} onCodeChange={setCode}/>
                     <VStack w={"md"}>
                         <CompilationOptionsSelector
                             compilationOptions={compilationOptions}
                             setCompilationOptions={setCompilationOptions}
                         />
                         <Flex w={"md"}>
-                            <Spacer />
-                            <Button
-                                onClick={() =>
-                                    runCompilation(
-                                        setAppState,
-                                        code,
-                                        compilationOptions,
-                                        code.split("\n")[0]?.includes("OPENQASM 2.0")
-                                            ? "qasm"
-                                            : "lli"
-                                    )
-                                }
-                            >
-                                Compile
-                            </Button>
+                            <Spacer/>
+                            <Button onClick={
+                                () => runCompilation(setAppState,
+                                    code,
+                                    compilationOptions,
+                                    code.split("\n")[0]?.includes("OPENQASM 2.0") ? "qasm" : "lli")
+                            }>Compile</Button>
                         </Flex>
                     </VStack>
-                </HStack>
-            )
-        else return <></>
+            </HStack>
+        else
+            return <></>
     }
 
     return (
@@ -233,21 +228,15 @@ const CircuitSelect = ({ appState, setAppState }: CircuitSelectProps) => {
                     <MenuItem m={0} onClick={() => onExampleCircuitSelect("nontrivial_state.qasm")}>
                         Example: Non-Trivial State
                     </MenuItem>
-                    <MenuItem
-                        m={0}
-                        onClick={() => setCircuitSelectMode(CircuitSelectMode.UploadFile)}
-                    >
+                    <MenuItem m={0} onClick={() => setCircuitSelectMode(CircuitSelectMode.UploadFile)}>
                         Upload File
                     </MenuItem>
-                    <MenuItem
-                        m={0}
-                        onClick={() => setCircuitSelectMode(CircuitSelectMode.CodeEditor)}
-                    >
+                    <MenuItem m={0} onClick={() => setCircuitSelectMode(CircuitSelectMode.CodeEditor)}>
                         Code Editor
                     </MenuItem>
                 </MenuList>
             </Menu>
-            {crenderCodeSection()}
+            { crenderCodeSection() }
         </Flex>
     )
 }
