@@ -36,3 +36,6 @@ To auto-format your code using ESLint and Prettier, run:
 ```sh
 $ npm run lint:fix
 ```
+
+## License
+The copyright holders for this project are its contributors Alex Nguyen, Keelan Watkins and George Watkins. It is released under the terms of the [GNU Affero General Public License](https://www.gnu.org/licenses/agpl-3.0.en.html). A copy of the license should be included with the project in the `LICENSE` file.
