@@ -66,7 +66,7 @@ const CircuitSelect = ({ appState, setAppState, repeats, setRepeats }: CircuitSe
     }
 
     const onExampleCircuitSelect = async (example: string) => {
-        const file_url = `${process.env.PUBLIC_URL}/assets/demo_circuits/${example}`
+        const file_url = `/assets/demo_circuits/${example}`
         const data = await fetch(file_url).then((response) => response.text())
         if (data) {
             submitCompileRequest(setAppState, data as string, doTransform, repeats)
