@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { AppState } from "../lib/appState"
-import isDevMode from "../lib/isDevMode"
+import { useSearchParams } from "react-router-dom"
+
 import LatticeView from "../components/sections/LatticeView"
 import { CompilationResultSuccess, ResponseError } from "../lib/apiResponses"
 import {
@@ -17,12 +18,15 @@ import {
 import CircuitSelect from "../components/sections/CircuitSelect"
 
 const CompilerPage = (): JSX.Element => {
+    const [searchParams] = useSearchParams()
     const [appState, setAppState] = useState(new AppState())
     const [repeats, setRepeats] = useState(0)
 
+    const isDevMode = searchParams.get("dev") === "true"
+
     return (
         <>
-            {isDevMode() && (
+            {isDevMode && (
                 <Alert mt={10} status="warning">
                     <AlertIcon />
                     <AlertTitle>Dev Mode enabled!</AlertTitle>

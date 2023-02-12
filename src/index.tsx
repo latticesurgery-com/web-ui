@@ -14,8 +14,8 @@ const AboutUs = React.lazy(() => import("./pages/AboutUs"))
 const Overview = React.lazy(() => import("./pages/Overview"))
 const NotFound = React.lazy(() => import("./pages/NotFound"))
 
-const container = document.getElementById("root")
-const root = createRoot(container!)
+const container = document.getElementById("root") as Element
+const root = createRoot(container)
 
 root.render(
     <React.StrictMode>
