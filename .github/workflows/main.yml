@@ -73,7 +73,7 @@ jobs:
         node-version: '16'
     
     - name: Download Build Artifact
-      uses: actions/download-artifact@v3.0.1
+      uses: actions/download-artifact@v3.0.2
       with:
         name: build-artifact
     
@@ -123,7 +123,7 @@ jobs:
         aws-region: ${{ secrets.AWS_REGION }}
 
     - name: Download Build Artifact
-      uses: actions/download-artifact@v3.0.1
+      uses: actions/download-artifact@v3.0.2
       with:
         name: build-artifact
     
@@ -151,7 +151,7 @@ jobs:
         aws-region: ${{ secrets.AWS_REGION }}
 
     - name: Download Build Artifact
-      uses: actions/download-artifact@v3.0.1
+      uses: actions/download-artifact@v3.0.2
       with:
         name: build-artifact
     
