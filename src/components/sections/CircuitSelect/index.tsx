@@ -17,10 +17,11 @@ import {
     NumberInput,
 } from "@chakra-ui/react"
 import { IoChevronDownSharp } from "react-icons/io5"
+import { useSearchParams } from "react-router-dom"
+
 import { AppState } from "../../../lib/appState"
 import FileUploader from "./FileUploader"
 import submitCompileRequest from "../../../lib/submitCompileRequest"
-import isDevMode from "../../../lib/isDevMode"
 import { CompilationResultSuccess } from "../../../lib/apiResponses"
 
 type CircuitSelectProps = {
@@ -31,7 +32,10 @@ type CircuitSelectProps = {
 }
 
 const CircuitSelect = ({ appState, setAppState, repeats, setRepeats }: CircuitSelectProps) => {
+    const [searchParams] = useSearchParams()
     const [doTransform, setDoTransform] = useState(true)
+
+    const isDevMode = searchParams.get("dev") === "true"
 
     const readFile = (file: File) => {
         return new Promise((resolve, reject) => {
@@ -107,7 +111,7 @@ const CircuitSelect = ({ appState, setAppState, repeats, setRepeats }: CircuitSe
             >
                 <Text as={"span"}>Litinski Transform</Text>
             </Checkbox>
-            {isDevMode() && (
+            {isDevMode && (
                 <Box p="3" rounded="lg" borderWidth="3px" borderColor="#98ff98">
                     <Flex gap="2">
                         <Text margin="auto">Repeats</Text>

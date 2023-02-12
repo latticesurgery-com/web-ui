@@ -9,8 +9,8 @@
     "start": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "lint": "eslint --no-error-on-unmatched-pattern src/**/*.{js,jsx,ts,tsx}",
-    "lint:fix": "eslint --no-error-on-unmatched-pattern --fix src/**/*.{js,jsx,ts,tsx}"
+    "lint": "prettier src/**/*.{js,jsx,ts,tsx} --check & eslint --no-error-on-unmatched-pattern src/**/*.{js,jsx,ts,tsx}",
+    "lint:fix": "prettier src/**/*.{js,jsx,ts,tsx} --write & eslint --fix --no-error-on-unmatched-pattern src/**/*.{js,jsx,ts,tsx}"
   },
   "browserslist": {
     "production": [
@@ -46,13 +46,14 @@
     "@types/node": "^18.13.0",
     "@types/react": "^18.0.28",
     "@types/react-dom": "^18.0.10",
-    "@typescript-eslint/eslint-plugin": "^5.13.0",
-    "@typescript-eslint/parser": "^5.8.0",
+    "@typescript-eslint/eslint-plugin": "^5.51.0",
+    "@typescript-eslint/parser": "^5.51.0",
     "@vitejs/plugin-react": "^3.1.0",
-    "eslint-config-prettier": "8.5.0",
-    "eslint-plugin-prettier": "4.0.0",
-    "eslint-plugin-react": "^7.30.0",
-    "prettier": "2.6.2",
+    "eslint": "^8.34.0",
+    "eslint-config-prettier": "^8.6.0",
+    "eslint-plugin-react": "^7.32.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "prettier": "^2.8.4",
     "vite": "^4.1.1",
     "vite-plugin-svgr": "^2.4.0",
     "vite-tsconfig-paths": "^4.0.5"
