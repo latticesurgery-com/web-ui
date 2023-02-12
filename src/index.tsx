@@ -1,5 +1,6 @@
 import React from "react"
-import ReactDOM from "react-dom"
+import { createRoot } from "react-dom/client"
+
 import { ChakraProvider, ColorModeScript } from "@chakra-ui/react"
 import { BrowserRouter, Route, Routes } from "react-router-dom"
 
@@ -13,7 +14,10 @@ const AboutUs = React.lazy(() => import("./pages/AboutUs"))
 const Overview = React.lazy(() => import("./pages/Overview"))
 const NotFound = React.lazy(() => import("./pages/NotFound"))
 
-ReactDOM.render(
+const container = document.getElementById("root")
+const root = createRoot(container!)
+
+root.render(
     <React.StrictMode>
         <ChakraProvider theme={theme}>
             <ColorModeScript initialColorMode={theme.config.initialColorMode} />
@@ -31,8 +35,7 @@ ReactDOM.render(
                 </Base>
             </BrowserRouter>
         </ChakraProvider>
-    </React.StrictMode>,
-    document.getElementById("root")
+    </React.StrictMode>
 )
 
 // If you want to start measuring performance in your app, pass a function
