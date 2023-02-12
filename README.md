@@ -7,8 +7,7 @@
 [![Lattice Surgery Compiler-fin-01](https://user-images.githubusercontent.com/46719079/150657000-8e83c649-84a8-431b-aab0-d44d847e5a24.png)](https://latticesurgery.com)
 
 Source code for [latticesurgery.com](https://latticesurgery.com). 
-This website is built using React (bootstrapped with [Create React App](https://github.com/facebook/create-react-app))
-and [Chakra UI](https://github.com/chakra-ui/chakra-ui).
+Built using [React](https://reactjs.org/) and [Vite](https://vitejs.dev/).
 
 ## Running locally 
 ```sh
@@ -17,10 +16,9 @@ $ cd web-ui
 $ npm ci 
 $ npm start
 ```
-The development server will be served at `localhost:3000`
 
 ### Run against a local compiler library
-Start lsqecc's local development server, then go to: `http://localhost:3000/?localapi=true`. To set the port: `http://localhost:3000/?localapi=true&port=8888`, otherwise it defaults to 9876 (lsqecc's default).
+Start lsqecc's local development server, then go to: `/?localapi=true`. To set the port: `/?localapi=true&port=8888`, otherwise it defaults to 9876 (lsqecc's default).
 
 
 ## Development
