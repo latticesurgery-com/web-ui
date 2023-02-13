@@ -2,6 +2,7 @@
 
 [![CI + CD](https://github.com/latticesurgery-com/web-ui/actions/workflows/main.yml/badge.svg)](https://github.com/latticesurgery-com/web-ui/actions/workflows/main.yml)
 ![ts](https://badgen.net/badge/-/TypeScript/blue?icon=typescript&label)
+[![arXiv](https://img.shields.io/badge/arXiv-2302.02459-b31b1b.svg)](https://arxiv.org/abs/2302.02459)
 [![Unitary Fund](https://img.shields.io/badge/Supported%20By-Unitary%20Fund-FFFF00.svg)](https://unitary.fund)
 
 [![Lattice Surgery Compiler-fin-01](https://user-images.githubusercontent.com/46719079/150657000-8e83c649-84a8-431b-aab0-d44d847e5a24.png)](https://latticesurgery.com)
