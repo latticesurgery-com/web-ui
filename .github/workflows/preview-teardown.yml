@@ -5,8 +5,6 @@ on:
     types: [ closed ]
     paths-ignore:
       - '**.md'
-    permissions:
-      pull-requests: write
 
 jobs:
   teardown:
@@ -16,6 +14,9 @@ jobs:
     env:
       SURGE_DOMAIN: ${{ format('https://{0}-{1}-pr{2}-preview.surge.sh', github.repository_owner, 
         github.event.repository.name, github.event.pull_request.number) }}
+    permissions:
+      pull-requests: write
+      issues: write
 
     steps:
     - name: Setup Node JS
