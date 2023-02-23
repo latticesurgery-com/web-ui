@@ -1,39 +1,105 @@
 import { useState } from "react"
-import React from "react"
-import {
-    Button,
-    Checkbox,
-    Flex,
-    Menu,
-    MenuButton,
-    MenuItem,
-    MenuList,
-    Text,
-    Box,
-    NumberDecrementStepper,
-    NumberIncrementStepper,
-    NumberInputField,
-    NumberInputStepper,
-    NumberInput,
-} from "@chakra-ui/react"
+import { Button, Flex, Menu, MenuButton, MenuItem, MenuList, Text } from "@chakra-ui/react"
 import { IoChevronDownSharp } from "react-icons/io5"
 import { useSearchParams } from "react-router-dom"
+import Slicer from "@lattice-surgery/liblsqecc"
 
-import { AppState } from "../../../lib/appState"
 import FileUploader from "./FileUploader"
 import submitCompileRequest from "../../../lib/submitCompileRequest"
-import { CompilationResultSuccess } from "../../../lib/apiResponses"
+import { Slices } from "../../../lib/slices"
+import CompilationOptionsSelector from "./CompilationOptionsSelector"
+import { CompilationResultSuccess, ResponseError } from "../../../lib/apiResponses"
+import {
+    CompilationOptions,
+    CorrectiveTermBehaviour,
+    defaultCompilationOptions,
+    LayoutType,
+} from "../../../lib/compilationOptions"
+
+import type { AppState } from "../../../lib/appState"
 
 type CircuitSelectProps = {
     appState: AppState
     setAppState: React.Dispatch<AppState>
-    repeats: number
-    setRepeats: (value: number) => void
 }
 
-const CircuitSelect = ({ appState, setAppState, repeats, setRepeats }: CircuitSelectProps) => {
+const runCompilation = async (
+    setAppState: React.Dispatch<AppState>,
+    fileContents: string,
+    compilationOptions: CompilationOptions,
+    extension: string,
+    isDevMode: boolean
+) => {
+    // Modify State on Compile Request Submit
+    setAppState({
+        compilationIsLoading: true,
+        apiResponse: null,
+    })
+
+    if (compilationOptions.kind == "LitinskiCompilationOptions")
+        submitCompileRequest(
+            setAppState,
+            fileContents,
+            compilationOptions.litinskiCompilationOptions
+        )
+    else {
+        const { fastSlicerOptions } = compilationOptions
+
+        // Modify State on Compile Request Submit
+        setAppState({
+            compilationIsLoading: true,
+            apiResponse: null,
+        })
+
+        // Run the script
+        const loadedModule = await Slicer.load()
+
+        if (isDevMode) console.log(`Compiling in browser with input:\n${fileContents}`)
+        const emscriptenResult = loadedModule.run(
+            fileContents,
+            extension === "qasm" ? "qasm" : "lli",
+            fastSlicerOptions.layoutType === LayoutType.Compact ? "compact" : "",
+            fastSlicerOptions.correctiveTermBehaviour === CorrectiveTermBehaviour.Always
+                ? "always"
+                : "never"
+        )
+
+        if (isDevMode) console.log(emscriptenResult)
+
+        try {
+            if (emscriptenResult.exit_code === 0) {
+                setAppState({
+                    compilationIsLoading: false,
+                    apiResponse: new CompilationResultSuccess(
+                        JSON.parse(emscriptenResult.output) as Slices,
+                        `Emscripten Success`
+                    ),
+                })
+            } else {
+                setAppState({
+                    compilationIsLoading: false,
+                    apiResponse: new ResponseError(
+                        `Compiler returned non zero exit code ${emscriptenResult.exit_code}`,
+                        `Compiler Error: ${emscriptenResult.err}\n` +
+                            (isDevMode ? `Compiler Output: ${emscriptenResult.output}` : "")
+                    ),
+                })
+            }
+        } catch (err) {
+            setAppState({
+                compilationIsLoading: false,
+                apiResponse: new ResponseError(
+                    `JS Exception`,
+                    `${err}\nCompiler Error: ${emscriptenResult.err}\nCompiler Output: ${emscriptenResult.output}`
+                ),
+            })
+        }
+    }
+}
+
+const CircuitSelect = ({ appState, setAppState }: CircuitSelectProps) => {
     const [searchParams] = useSearchParams()
-    const [doTransform, setDoTransform] = useState(true)
+    const [compilationOptions, setCompilationOptions] = useState(defaultCompilationOptions)
 
     const isDevMode = searchParams.get("dev") === "true"
 
@@ -48,7 +114,8 @@ const CircuitSelect = ({ appState, setAppState, repeats, setRepeats }: CircuitSe
 
     const onFileAccepted = async (file: File) => {
         const data = await readFile(file)
-        if (file.name.slice(-5) == ".json") {
+        const extension: string = file.name.split(".").pop() || ""
+        if (extension === "json") {
             const json_data = JSON.parse(data as string)
             if (Object.prototype.hasOwnProperty.call(json_data, "compilation_text")) {
                 setAppState({
@@ -65,7 +132,13 @@ const CircuitSelect = ({ appState, setAppState, repeats, setRepeats }: CircuitSe
                 })
             }
         } else {
-            submitCompileRequest(setAppState, data as string, doTransform, repeats)
+            await runCompilation(
+                setAppState,
+                data as string,
+                compilationOptions,
+                extension,
+                isDevMode
+            )
         }
     }
 
@@ -73,7 +146,7 @@ const CircuitSelect = ({ appState, setAppState, repeats, setRepeats }: CircuitSe
         const file_url = `/assets/demo_circuits/${example}`
         const data = await fetch(file_url).then((response) => response.text())
         if (data) {
-            submitCompileRequest(setAppState, data as string, doTransform, repeats)
+            await runCompilation(setAppState, data as string, compilationOptions, "qasm", isDevMode)
         }
     }
 
@@ -104,34 +177,10 @@ const CircuitSelect = ({ appState, setAppState, repeats, setRepeats }: CircuitSe
                 onFileAccepted={onFileAccepted}
                 isLoading={appState.compilationIsLoading}
             />
-            <Checkbox
-                isChecked={doTransform}
-                onChange={(e) => setDoTransform(e.target.checked)}
-                isDisabled={appState.compilationIsLoading}
-            >
-                <Text as={"span"}>Litinski Transform</Text>
-            </Checkbox>
-            {isDevMode && (
-                <Box p="3" rounded="lg" borderWidth="3px" borderColor="#98ff98">
-                    <Flex gap="2">
-                        <Text margin="auto">Repeats</Text>
-                        <NumberInput
-                            w="120px"
-                            defaultValue={repeats}
-                            onChange={(value) => {
-                                setRepeats(parseInt(value))
-                            }}
-                            isDisabled={appState.compilationIsLoading}
-                        >
-                            <NumberInputField />
-                            <NumberInputStepper>
-                                <NumberIncrementStepper />
-                                <NumberDecrementStepper />
-                            </NumberInputStepper>
-                        </NumberInput>
-                    </Flex>
-                </Box>
-            )}
+            <CompilationOptionsSelector
+                compilationOptions={compilationOptions}
+                setCompilationOptions={setCompilationOptions}
+            />
         </Flex>
     )
 }

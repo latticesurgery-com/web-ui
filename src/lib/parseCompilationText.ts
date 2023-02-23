@@ -29,6 +29,10 @@ const parseCompilationText = (compilation_text: string): Array<CompilationStage>
         stages.push(new CompilationStage("Resource Estimation", circuit_after_resource))
     }
 
+    if (compilation_text.includes("Emscripten Success")) {
+        return [new CompilationStage("Compiled in browser:", "Success")]
+    }
+
     return stages
 }
 

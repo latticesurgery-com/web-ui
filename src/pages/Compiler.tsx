@@ -20,7 +20,6 @@ import CircuitSelect from "../components/sections/CircuitSelect"
 const CompilerPage = (): JSX.Element => {
     const [searchParams] = useSearchParams()
     const [appState, setAppState] = useState(new AppState())
-    const [repeats, setRepeats] = useState(0)
 
     const isDevMode = searchParams.get("dev") === "true"
 
@@ -36,19 +35,21 @@ const CompilerPage = (): JSX.Element => {
                 </Alert>
             )}
             <Box mt={10}>
-                <CircuitSelect
-                    appState={appState}
-                    setAppState={setAppState}
-                    repeats={repeats}
-                    setRepeats={setRepeats}
-                />
+                <CircuitSelect appState={appState} setAppState={setAppState} />
             </Box>
             <Stack mt={10} spacing={5}>
                 {appState.apiResponse instanceof ResponseError && (
                     <Alert w={{ base: "100%", sm: "80%", md: "65%" }} mx={"auto"} status="error">
                         <AlertIcon />
                         <AlertTitle mr={2}>{appState.apiResponse.title}</AlertTitle>
-                        <AlertDescription>{appState.apiResponse.msg}</AlertDescription>
+                        <AlertDescription>
+                            {appState.apiResponse.msg
+                                .split("\n")
+                                .flatMap((line, n) => [
+                                    <span key={`line-${n}`}>{line}</span>,
+                                    <br key={`br-${n}`} />,
+                                ])}
+                        </AlertDescription>
                     </Alert>
                 )}
                 <Center>
