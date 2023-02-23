@@ -2,7 +2,7 @@ import { Avatar, Flex, Box, Heading, Text, Icon, Link, Button } from "@chakra-ui
 import { BiLinkExternal } from "react-icons/bi"
 import { FaGithub, FaCode, FaLinkedin } from "react-icons/fa"
 
-import Article from "../components/UI/Article"
+import Article from "components/UI/Article"
 
 interface ProfileProps {
     name: string

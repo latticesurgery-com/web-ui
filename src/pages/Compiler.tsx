@@ -1,9 +1,9 @@
 import { useState } from "react"
-import { AppState } from "../lib/appState"
+import { AppState } from "lib/appState"
 import { useSearchParams } from "react-router-dom"
 
-import LatticeView from "../components/sections/LatticeView"
-import { CompilationResultSuccess, ResponseError } from "../lib/apiResponses"
+import LatticeView from "components/sections/LatticeView"
+import { CompilationResultSuccess, ResponseError } from "lib/apiResponses"
 import {
     Stack,
     Box,
@@ -15,7 +15,7 @@ import {
     Text,
     Link,
 } from "@chakra-ui/react"
-import CircuitSelect from "../components/sections/CircuitSelect"
+import CircuitSelect from "components/sections/CircuitSelect"
 
 const CompilerPage = (): JSX.Element => {
     const [searchParams] = useSearchParams()

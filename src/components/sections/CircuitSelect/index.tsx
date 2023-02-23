@@ -5,18 +5,18 @@ import { useSearchParams } from "react-router-dom"
 import Slicer from "@lattice-surgery/liblsqecc"
 
 import FileUploader from "./FileUploader"
-import submitCompileRequest from "../../../lib/submitCompileRequest"
+import submitCompileRequest from "lib/submitCompileRequest"
 import CompilationOptionsSelector from "./CompilationOptionsSelector"
-import { CompilationResultSuccess, ResponseError } from "../../../lib/apiResponses"
+import { CompilationResultSuccess, ResponseError } from "lib/apiResponses"
 import {
     CorrectiveTermBehaviour,
     defaultCompilationOptions,
     LayoutType,
-} from "../../../lib/compilationOptions"
+} from "lib/compilationOptions"
 
-import type { AppState } from "../../../lib/appState"
-import type { CompilationOptions } from "../../../lib/compilationOptions"
-import type { Slices } from "../../../lib/slices"
+import type { AppState } from "lib/appState"
+import type { CompilationOptions } from "lib/compilationOptions"
+import type { Slices } from "lib/slices"
 
 type CircuitSelectProps = {
     appState: AppState

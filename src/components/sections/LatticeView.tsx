@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { useState, useRef } from "react"
-import CellViewer from "../CellViewer"
+import CellViewer from "components/CellViewer"
 import "./LatticeView.css"
 import {
     VStack,
@@ -15,14 +15,14 @@ import {
     Grid,
     GridItem,
 } from "@chakra-ui/react"
-import parseCompilationText from "../../lib/parseCompilationText"
-import SliceIndexBar from "../SliceIndexBar"
+import parseCompilationText from "lib/parseCompilationText"
+import SliceIndexBar from "components/SliceIndexBar"
 import { IoSaveOutline } from "react-icons/io5"
 import { MdCenterFocusStrong } from "react-icons/md"
-import ZoomBar from "../Zoombar"
+import ZoomBar from "components/Zoombar"
 import Draggable from "react-draggable"
 
-import type { CompilationResult, Slice } from "../../lib/slices"
+import type { CompilationResult, Slice } from "lib/slices"
 
 type SliceViewerProps = {
     slice: Slice

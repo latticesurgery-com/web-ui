@@ -3,9 +3,9 @@ import {
     CorrectiveTermBehaviour,
     LayoutType,
     LitinskiCompilationOptions,
-} from "../../../lib/compilationOptions"
+} from "lib/compilationOptions"
 
-import type { CompilationOptions, FastSlicerOptions } from "../../../lib/compilationOptions"
+import type { CompilationOptions, FastSlicerOptions } from "lib/compilationOptions"
 
 interface CompilationOptionsSelectorProps {
     compilationOptions: CompilationOptions
