@@ -6,17 +6,17 @@ import Slicer from "@lattice-surgery/liblsqecc"
 
 import FileUploader from "./FileUploader"
 import submitCompileRequest from "../../../lib/submitCompileRequest"
-import { Slices } from "../../../lib/slices"
 import CompilationOptionsSelector from "./CompilationOptionsSelector"
 import { CompilationResultSuccess, ResponseError } from "../../../lib/apiResponses"
 import {
-    CompilationOptions,
     CorrectiveTermBehaviour,
     defaultCompilationOptions,
     LayoutType,
 } from "../../../lib/compilationOptions"
 
 import type { AppState } from "../../../lib/appState"
+import type { CompilationOptions } from "../../../lib/compilationOptions"
+import type { Slices } from "../../../lib/slices"
 
 type CircuitSelectProps = {
     appState: AppState

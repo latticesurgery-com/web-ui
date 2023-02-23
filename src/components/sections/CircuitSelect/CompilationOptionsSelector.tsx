@@ -1,12 +1,11 @@
+import { Checkbox, HStack, Link, Select, Text, VStack } from "@chakra-ui/react"
 import {
-    CompilationOptions,
     CorrectiveTermBehaviour,
-    FastSlicerOptions,
     LayoutType,
     LitinskiCompilationOptions,
 } from "../../../lib/compilationOptions"
-import React from "react"
-import { Checkbox, HStack, Link, Select, Text, VStack } from "@chakra-ui/react"
+
+import type { CompilationOptions, FastSlicerOptions } from "../../../lib/compilationOptions"
 
 interface CompilationOptionsSelectorProps {
     compilationOptions: CompilationOptions

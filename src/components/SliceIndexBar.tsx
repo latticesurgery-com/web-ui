@@ -1,6 +1,7 @@
 import { Box, Flex, NumberInput, NumberInputField } from "@chakra-ui/react"
-import { StringOrNumber } from "@chakra-ui/utils"
 import { useEffect, useState } from "react"
+
+import type { StringOrNumber } from "@chakra-ui/utils"
 
 type SliceIndexBarProps = {
     count: number

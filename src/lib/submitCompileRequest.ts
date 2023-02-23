@@ -1,9 +1,11 @@
 import { AppState } from "./appState"
 import queryString from "query-string"
-import { CompilationResult } from "./slices"
 import axios from "axios"
 import { CompilationResultSuccess, ResponseError } from "./apiResponses"
-import { LitinskiCompilationOptions, SimulationMethod } from "./compilationOptions"
+import { SimulationMethod } from "./compilationOptions"
+
+import type { CompilationResult } from "./slices"
+import type { LitinskiCompilationOptions } from "./compilationOptions"
 
 const API_URL = "https://api.latticesurgery.com/compile"
 

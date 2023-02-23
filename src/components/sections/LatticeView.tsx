@@ -1,6 +1,5 @@
 /** @jsxImportSource @emotion/react */
 import { useState, useRef } from "react"
-import { CompilationResult, Slice } from "../../lib/slices"
 import CellViewer from "../CellViewer"
 import "./LatticeView.css"
 import {
@@ -22,6 +21,8 @@ import { IoSaveOutline } from "react-icons/io5"
 import { MdCenterFocusStrong } from "react-icons/md"
 import ZoomBar from "../Zoombar"
 import Draggable from "react-draggable"
+
+import type { CompilationResult, Slice } from "../../lib/slices"
 
 type SliceViewerProps = {
     slice: Slice
