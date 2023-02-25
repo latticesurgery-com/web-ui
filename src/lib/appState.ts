@@ -1,5 +1,5 @@
 import React from "react"
-import { ApiResponse } from "./apiResponses"
+import type { ApiResponse } from "./apiResponses"
 
 export class AppState {
     compilationIsLoading: boolean = false

@@ -20,7 +20,7 @@ const FileUploader = ({ onFileAccepted, isLoading }: FileUploaderProps): JSX.Ele
 
     const { getRootProps, getInputProps, isDragActive } = useDropzone({
         onDrop,
-        accept: [".qasm", ".json"],
+        accept: [".qasm", ".json", ".lli", ".lsi"],
         maxFiles: 1,
         multiple: false,
         disabled: isLoading,
@@ -51,9 +51,10 @@ const FileUploader = ({ onFileAccepted, isLoading }: FileUploaderProps): JSX.Ele
             <Text>
                 {isDragActive
                     ? "Drop the file here"
-                    : "Drop your .qasm circuit here, or click to select file."}
+                    : "Drop your circuit here, or click to select file."}
                 <br />
-                Alternatively, upload Json Compilation Result as .json
+                File can be Logical Lattice Instructions (.lli/.lsi) OpenQASM 2.0 (.qasm) or Slices
+                (.json)
             </Text>
             {isLoading && <Spinner ml={2} size="sm" />}
         </Center>

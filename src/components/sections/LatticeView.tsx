@@ -1,7 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { useState, useRef } from "react"
-import { CompilationResult, Slice } from "../../lib/slices"
-import CellViewer from "../CellViewer"
+import CellViewer from "components/CellViewer"
 import "./LatticeView.css"
 import {
     VStack,
@@ -16,12 +15,14 @@ import {
     Grid,
     GridItem,
 } from "@chakra-ui/react"
-import parseCompilationText from "../../lib/parseCompilationText"
-import SliceIndexBar from "../SliceIndexBar"
+import parseCompilationText from "lib/parseCompilationText"
+import SliceIndexBar from "components/SliceIndexBar"
 import { IoSaveOutline } from "react-icons/io5"
 import { MdCenterFocusStrong } from "react-icons/md"
-import ZoomBar from "../Zoombar"
+import ZoomBar from "components/Zoombar"
 import Draggable from "react-draggable"
+
+import type { CompilationResult, Slice } from "lib/slices"
 
 type SliceViewerProps = {
     slice: Slice
@@ -191,14 +192,14 @@ const LatticeView = ({ compilationResult }: LatticeViewProps): JSX.Element => {
                             <Flex mr={3}>
                                 <Button
                                     fontSize="xl"
-                                    disabled={disable["prev"]}
+                                    isDisabled={disable["prev"]}
                                     onClick={() => changeSlice(-1)}
                                 >
                                     Prev
                                 </Button>
                                 <Button
                                     fontSize="xl"
-                                    disabled={disable["next"]}
+                                    isDisabled={disable["next"]}
                                     onClick={() => changeSlice(+1)}
                                 >
                                     Next

@@ -11,10 +11,10 @@ import {
 import { FaGithub } from "react-icons/fa"
 import { Link as RouterLink } from "react-router-dom"
 
-import SFULogo from "../assets/backers/SFU_horizontal_logo_rgb.png"
-import SFULogoReversed from "../assets/backers/SFU_horizontal_reversed_colour_rgb.png"
-import AaltoLogo from "../assets/backers/AaltoLogo.png"
-import UnitaryFundLogo from "../assets/backers/UnitaryFundLogo.png"
+import SFULogo from "assets/backers/SFU_horizontal_logo_rgb.png"
+import SFULogoReversed from "assets/backers/SFU_horizontal_reversed_colour_rgb.png"
+import AaltoLogo from "assets/backers/AaltoLogo.png"
+import UnitaryFundLogo from "assets/backers/UnitaryFundLogo.png"
 
 const Home = (): JSX.Element => {
     return (

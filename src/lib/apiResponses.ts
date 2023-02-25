@@ -1,4 +1,4 @@
-import { Slices } from "./slices"
+import type { Slices } from "./slices"
 
 // Different classes representing possible Api Response outcomes
 export class ResponseError {

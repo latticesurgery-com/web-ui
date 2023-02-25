@@ -7,6 +7,11 @@ const parseCompilationText = (compilation_text: string): Array<CompilationStage>
     if (compilation_text == "") {
         return [new CompilationStage("User Uploaded Json", "")]
     }
+
+    if (compilation_text.includes("Emscripten Success")) {
+        return [new CompilationStage("Compiled in browser:", "Success")]
+    }
+
     const compilation_text_split = compilation_text.split("Circuit")
     const input_circuit = compilation_text_split[1].slice(2)
 

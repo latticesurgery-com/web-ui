@@ -15,8 +15,8 @@ import { Link as RouterLink, LinkProps as RouterLinkProps, useLocation } from "r
 import { IoMenu, IoClose, IoSunny, IoMoon } from "react-icons/io5"
 import { BiLinkExternal } from "react-icons/bi"
 
-import logo from "../../assets/logo.svg"
-import logoDark from "../../assets/logo-dark.svg"
+import logo from "assets/logo.svg"
+import logoDark from "assets/logo-dark.svg"
 
 interface LinkItem {
     readonly name: string
