@@ -10,14 +10,13 @@ export interface LitinskiCompilationOptions {
 }
 
 export enum LayoutType {
-    //Fast,
-    Compact,
+    Compact = "compact",
+    EDPC = "edpc",
 }
 
 export enum CorrectiveTermBehaviour {
-    Never,
-    Always,
-    // Random,
+    Never = "never",
+    Always = "always",
 }
 
 export enum InputType {

@@ -8,11 +8,7 @@ import FileUploader from "./FileUploader"
 import submitCompileRequest from "lib/submitCompileRequest"
 import CompilationOptionsSelector from "./CompilationOptionsSelector"
 import { CompilationResultSuccess, ResponseError } from "lib/apiResponses"
-import {
-    CorrectiveTermBehaviour,
-    defaultCompilationOptions,
-    LayoutType,
-} from "lib/compilationOptions"
+import { defaultCompilationOptions } from "lib/compilationOptions"
 
 import type { AppState } from "lib/appState"
 import type { CompilationOptions } from "lib/compilationOptions"
@@ -58,10 +54,8 @@ const runCompilation = async (
         const emscriptenResult = loadedModule.run(
             fileContents,
             extension === "qasm" ? "qasm" : "lli",
-            fastSlicerOptions.layoutType === LayoutType.Compact ? "compact" : "",
-            fastSlicerOptions.correctiveTermBehaviour === CorrectiveTermBehaviour.Always
-                ? "always"
-                : "never"
+            fastSlicerOptions.layoutType,
+            fastSlicerOptions.correctiveTermBehaviour
         )
 
         if (isDevMode) console.log(emscriptenResult)

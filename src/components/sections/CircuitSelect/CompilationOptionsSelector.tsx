@@ -61,7 +61,7 @@ const CompilationOptionsSelector = ({
                         <Text>Layout:</Text>
                         <Select
                             defaultValue={
-                                LayoutType[compilationOptions.fastSlicerOptions.layoutType]
+                                compilationOptions.fastSlicerOptions.layoutType
                             }
                         >
                             {Object.keys(LayoutType)
@@ -84,9 +84,7 @@ const CompilationOptionsSelector = ({
                         <Text>Apply corrective terms:</Text>
                         <Select
                             defaultValue={
-                                CorrectiveTermBehaviour[
-                                    compilationOptions.fastSlicerOptions.correctiveTermBehaviour
-                                ]
+                                compilationOptions.fastSlicerOptions.correctiveTermBehaviour
                             }
                         >
                             {Object.keys(CorrectiveTermBehaviour)
