@@ -59,11 +59,7 @@ const CompilationOptionsSelector = ({
                     </Text>
                     <HStack>
                         <Text>Layout:</Text>
-                        <Select
-                            defaultValue={
-                                compilationOptions.fastSlicerOptions.layoutType
-                            }
-                        >
+                        <Select defaultValue={compilationOptions.fastSlicerOptions.layoutType}>
                             {Object.keys(LayoutType)
                                 .filter((v) => isNaN(Number(v)))
                                 .map((item) => (
