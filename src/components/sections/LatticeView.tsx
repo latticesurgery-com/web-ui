@@ -192,14 +192,14 @@ const LatticeView = ({ compilationResult }: LatticeViewProps): JSX.Element => {
                             <Flex mr={3}>
                                 <Button
                                     fontSize="xl"
-                                    disabled={disable["prev"]}
+                                    isDisabled={disable["prev"]}
                                     onClick={() => changeSlice(-1)}
                                 >
                                     Prev
                                 </Button>
                                 <Button
                                     fontSize="xl"
-                                    disabled={disable["next"]}
+                                    isDisabled={disable["next"]}
                                     onClick={() => changeSlice(+1)}
                                 >
                                     Next
