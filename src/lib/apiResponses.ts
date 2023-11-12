@@ -1,4 +1,4 @@
-import type { Slices } from "./slices"
+import type { CompilationResult } from "./slices"
 
 // Different classes representing possible Api Response outcomes
 export class ResponseError {
@@ -12,12 +12,10 @@ export class ResponseError {
 }
 
 export class CompilationResultSuccess {
-    slices: Slices
-    compilation_text: string
+    compilation_result: CompilationResult
 
-    constructor(slices: Slices, compilation_text: string) {
-        this.slices = slices
-        this.compilation_text = compilation_text
+    constructor(compilation_result: CompilationResult) {
+        this.compilation_result = compilation_result
     }
 }
 

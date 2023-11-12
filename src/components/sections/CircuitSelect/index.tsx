@@ -64,10 +64,10 @@ const runCompilation = async (
             if (emscriptenResult.exit_code === 0) {
                 setAppState({
                     compilationIsLoading: false,
-                    apiResponse: new CompilationResultSuccess(
-                        JSON.parse(emscriptenResult.output) as Slices,
-                        `Emscripten Success`
-                    ),
+                    apiResponse: new CompilationResultSuccess({
+                        slices: JSON.parse(emscriptenResult.output) as Slices,
+                        compilation_text:"Emscripten Success"
+                }),
                 })
             } else {
                 setAppState({
@@ -107,21 +107,18 @@ const CircuitSelect = ({ appState, setAppState }: CircuitSelectProps) => {
     }
 
     const onFileAccepted = async (file: File) => {
-        const data = await readFile(file)
+        const data = (await readFile(file)) as string
         const extension: string = file.name.split(".").pop() || ""
-        if (extension === "json") {
-            const json_data = JSON.parse(data as string)
+        if (extension === "json" || "[{".includes(data[0])) {
+            const json_data = JSON.parse(data)
             if (Object.prototype.hasOwnProperty.call(json_data, "compilation_text")) {
                 setAppState({
-                    apiResponse: new CompilationResultSuccess(
-                        json_data.slices,
-                        json_data.compilation_text
-                    ),
+                    apiResponse: new CompilationResultSuccess(json_data),
                     compilationIsLoading: false,
                 })
             } else {
                 setAppState({
-                    apiResponse: new CompilationResultSuccess(json_data, ""),
+                    apiResponse: new CompilationResultSuccess({compilation_text: "", slices: json_data}),
                     compilationIsLoading: false,
                 })
             }

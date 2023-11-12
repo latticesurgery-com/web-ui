@@ -41,10 +41,7 @@ const submitCompileRequest = async (
                 const responseJson = JSON.parse(response.data) as CompilationResult
 
                 setAppState({
-                    apiResponse: new CompilationResultSuccess(
-                        responseJson.slices,
-                        responseJson.compilation_text
-                    ),
+                    apiResponse: new CompilationResultSuccess(responseJson),
                     compilationIsLoading: false,
                 })
             } catch (err) {
