@@ -66,7 +66,7 @@ const CompilerPage = (): JSX.Element => {
                     </Text>
                 </Center>
                 {appState.apiResponse instanceof CompilationResultSuccess && (
-                    <LatticeView compilationResult={appState.apiResponse} />
+                    <LatticeView compilationResult={appState.apiResponse.compilation_result} />
                 )}
             </Stack>
         </>

@@ -12,6 +12,11 @@ const parseCompilationText = (compilation_text: string): Array<CompilationStage>
         return [new CompilationStage("Compiled in browser:", "Success")]
     }
 
+    if (!compilation_text.includes("Circuit"))
+    {
+        return [new CompilationStage(compilation_text, "")]
+    }
+
     const compilation_text_split = compilation_text.split("Circuit")
     const input_circuit = compilation_text_split[1].slice(2)
 

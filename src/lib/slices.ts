@@ -1,3 +1,5 @@
+import {SliceAnnotations} from './sliceAnnotations'
+
 // These types mirror the ones used by lsqecc.lattice_array and are used to interpret the calls to
 // lsqecc.pipeline.json_pipeline (i.e. what you get by calling api.latticesurgery.com/compile).
 // The reason for this exact mirroring is so that the output json can be generated directly from the internal python
@@ -68,6 +70,7 @@ type Slices = Array<Slice>
 
 type CompilationResult = {
     slices: Slices
+    slice_annotations?: SliceAnnotations
     compilation_text: string
 }
 

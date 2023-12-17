@@ -81,7 +81,7 @@ const LatticeView = ({ compilationResult }: LatticeViewProps): JSX.Element => {
     }
     const [cellDimensionPixels, setCellDimensionPixels] = useState(130)
     // cell font size is cellDimensionPixels divided by 20.
-    const { compilation_text, slices } = compilationResult
+    const { compilation_text, slices, slice_annotations } = compilationResult
     const num_slices = slices.length
 
     const [latticePosition, setLatticePosition] = useState({ x: 0, y: 0 })
@@ -98,6 +98,7 @@ const LatticeView = ({ compilationResult }: LatticeViewProps): JSX.Element => {
 
     // set state of checkbox switch
     const [showCompilationText, setCompilationText] = useState(false)
+    const [showAnnotations, setShowAnnotations] = useState(false)
 
     // export slices to downloadable text JSON file
     const exportJson = (compilationResult: CompilationResult) => {
@@ -143,6 +144,20 @@ const LatticeView = ({ compilationResult }: LatticeViewProps): JSX.Element => {
                         checked={showCompilationText}
                     />
                 </Flex>
+                <Flex alignItems="center">
+                    <FormLabel htmlFor="slice-annotations" fontSize="xl" mb="0">
+                        Show Slice Annotations
+                    </FormLabel>
+                    <Switch
+                        id="slice-annotations"
+                        size="lg"
+                        onChange={(e) => {
+                            setShowAnnotations(e.target.checked)
+                        }}
+                        checked={showAnnotations}
+                        // disabled={!slice_annotations}
+                    />
+                </Flex>
                 <Button borderWidth="2px" onClick={() => exportJson(compilationResult)}>
                     <Flex gap="4">
                         <Text fontSize="xl" margin="auto">
@@ -172,6 +187,17 @@ const LatticeView = ({ compilationResult }: LatticeViewProps): JSX.Element => {
                         </Box>
                     ))}
                 </Flex>
+            )}
+
+            {showAnnotations && slice_annotations && slice_annotations[selectedSliceNumber] && (
+                <>
+                    <Text className="line-1" fontSize="24px">
+                        Instructions for this slice:
+                    </Text>
+                    <pre>
+                        {slice_annotations[selectedSliceNumber].instuction_annotations.map(i => i.instruction_text).join("\n")}
+                    </pre>
+                </>
             )}
 
             <Box pt="3" pb="3">
